@@ -1,0 +1,28 @@
+{
+    "name": "graphly",
+    "version": "0.0.1",
+    "description": "Graphly is a utility for TypeScript schema generation to GraphQL schema",
+    "main": "index.js",
+    "repository": "graphly",
+    "author": "izatop@gmail.com",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "watch": "tsc -b packages -w",
+        "test": "jest --config jest.json",
+        "test:watch": "jest --watch --config jest.json"
+    },
+    "workspaces": [
+        "packages/*"
+    ],
+    "devDependencies": {
+        "lerna": "^3.16.4"
+    },
+    "dependencies": {
+        "@types/jest": "^24.0.18",
+        "jest": "^24.9.0",
+        "jest-serializer-path": "^0.1.15",
+        "ts-jest": "^24.0.2",
+        "tslint": "^5.19.0"
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "files": [],
+    "include": [],
+    "references": [
+        {
+            "path": "./type"
+        },
+        {
+            "path": "./composer"
+        },
+        {
+            "path": "./cli"
+        }
+    ]
+}

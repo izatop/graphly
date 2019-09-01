@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "esnext",
+        "declaration": true,
+        "lib": [
+            "esnext"
+        ],
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "strictPropertyInitialization": false,
+        "strictFunctionTypes": true,
+        "resolveJsonModule": true,
+        "experimentalDecorators": true,
+        "noEmit": true
+    },
+    "exclude": ["node_modules"]
+}

@@ -1,0 +1,19 @@
+{
+    "name": "@graphly/composer",
+    "version": "0.0.0-development",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "clean": "yarn build:clean",
+        "watch": "yarn build:watch",
+        "build": "yarn build:clean && tsc",
+        "build:clean": "rimraf dist tsconfig.tsbuildinfo",
+        "build:watch": "yarn build --watch"
+    },
+    "dependencies": {
+        "@sirian/clone": "^1.4.20",
+        "@types/graphql": "^14.5.0",
+        "graphql": "^14.5.4",
+        "typedoc": "^0.15.0"
+    }
+}

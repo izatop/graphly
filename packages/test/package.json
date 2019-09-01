@@ -1,0 +1,18 @@
+{
+    "name": "@graphly/test",
+    "version": "0.0.0-development",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "clean": "yarn build:clean",
+        "watch": "yarn build:watch",
+        "build:clean": "rimraf dist tsconfig.tsbuildinfo",
+        "build:watch": "yarn build --watch"
+    },
+    "dependencies": {
+        "@graphly/composer": "0.0.0-development",
+        "@graphly/type": "0.0.0-development",
+        "@graphly/cli": "0.0.0-development"
+    },
+    "private": true
+}
