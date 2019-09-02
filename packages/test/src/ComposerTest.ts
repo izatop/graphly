@@ -1,14 +1,27 @@
 import {Composer, Project} from "@graphly/composer";
+import {graphql} from "graphql";
 
-test("Composer", async () => {
+describe("Composer", () => {
     const composer = new Composer({
         basePath: __dirname,
         schemaPath: "Schema/TestSchema.ts",
         verbose: true,
     });
 
-    const project = composer.createProject();
-    expect(project).toBeInstanceOf(Project);
-    expect(await project.toGraphQL())
-        .not.toBeUndefined();
+    const project = composer.compose();
+
+    test("createProject", () => {
+        expect(project).toBeInstanceOf(Project);
+    });
+
+    test("toGraphQL", () => {
+        expect(project.toGraphQL()).toMatchSnapshot();
+    });
+
+    test("query on schema", async () => {
+        const schema = project.toSchema();
+        const query = `query {optional random timestamp hello}`;
+        const data = await graphql(schema, query);
+        expect(data).toBe({data: null});
+    });
 });

@@ -1,9 +1,9 @@
 import {existsSync} from "fs";
 import {dirname, resolve} from "path";
-import {Application, ProjectReflection} from "typedoc";
+import {Application} from "typedoc";
 import {Project} from "../Project";
 import {ProjectSerializer} from "../Serialization";
-import {TraceEvent} from "../Serialization/TraceEvent";
+import {TraceEvent} from "../util/TraceEvent";
 
 export interface IComposerOptions {
     name?: string;
@@ -16,7 +16,7 @@ export interface IComposerOptions {
 export class Composer {
     private readonly application: Application;
 
-    private readonly reflection: ProjectReflection;
+    private readonly project: Project;
 
     constructor(options: IComposerOptions) {
         if (!options.tsconfig) {
@@ -40,12 +40,11 @@ export class Composer {
             throw new Error(`Cannot convert source to reflection at ${schemaPath}`);
         }
 
-        this.reflection = reflection;
+        this.project = new Project(dirname(schemaPath), new ProjectSerializer(reflection));
     }
 
-    public createProject() {
-        const serializer = new ProjectSerializer(this.reflection);
-        return new Project(serializer.serialize());
+    public compose() {
+        return this.project;
     }
 
     protected resolveTSConfigFile(basePath: string, original?: string): string {

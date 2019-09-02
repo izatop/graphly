@@ -42,7 +42,7 @@ export class GQLPropertyTransform extends TransformAbstract<[GQLTypeTransform, I
         }
 
         if (this.typeTransform.has(type)) {
-            return this.typeTransform.transform(type);
+            return this.typeTransform.transform(type).name;
         }
 
         return type;

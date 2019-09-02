@@ -1,5 +1,5 @@
-import {inspect} from "../util/inspect";
-import {SerializeError} from "./SerializeError";
+import {inspect} from "./inspect";
+import {SerializeError} from "../Serialization/SerializeError";
 
 export class TraceEvent {
     public static verbose = false;
@@ -30,10 +30,6 @@ export class TraceEvent {
     }
 
     public warning<E extends Error>(error: E) {
-        if (!TraceEvent.verbose) {
-            return ;
-        }
-
         if (error instanceof SerializeError) {
             const {diagnostic} = error;
             // tslint:disable-next-line:no-console
@@ -45,10 +41,6 @@ export class TraceEvent {
     }
 
     public error<E extends Error>(error: E) {
-        if (!TraceEvent.verbose) {
-            return ;
-        }
-
         if (error instanceof SerializeError) {
             const {diagnostic} = error;
             // tslint:disable-next-line:no-console
@@ -58,6 +50,6 @@ export class TraceEvent {
             console.error(error);
         }
 
-        throw error;
+        return error;
     }
 }

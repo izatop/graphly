@@ -1,5 +1,5 @@
 import {QueryType, TypeInt} from "@graphly/type";
-import {TodoCheckList} from "./TodoCheckList";
+import {TodoChecklist} from "./TodoChecklist";
 import {TodoFlag} from "./TodoFlag";
 
 /**
@@ -12,7 +12,7 @@ export class Todo extends QueryType {
 
     public readonly description?: string;
 
-    public readonly list: TodoCheckList[] = [];
+    public readonly checklist: TodoChecklist[] = [];
 
     public readonly solved: boolean = false;
 

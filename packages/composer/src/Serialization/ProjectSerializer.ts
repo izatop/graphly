@@ -4,7 +4,7 @@ import {ClassSerializer} from "./Class/ClassSerializer";
 import {EnumSerializer} from "./Enum/EnumSerializer";
 import {IType, TypeBaseClass} from "./interfaces";
 import {SerializeError} from "./SerializeError";
-import {TraceEvent} from "./TraceEvent";
+import {TraceEvent} from "../util/TraceEvent";
 
 export class ProjectSerializer {
     public types = new Map<string, IType>();

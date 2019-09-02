@@ -28,4 +28,15 @@ export class TodoQuery extends QueryType {
             node: todosQuery.slice(offset, offset + limit),
         };
     }
+
+    public async count(context: TestContext, solved: boolean = true): Promise<TypeInt> {
+        const {todos} = context;
+        let todosQuery = await todos.find();
+
+        if (typeof solved === "boolean") {
+            todosQuery = todosQuery.filter((item) => item.solved === solved);
+        }
+
+        return todosQuery.length;
+    }
 }

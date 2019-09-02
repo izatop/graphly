@@ -1,5 +1,5 @@
 import {IType, TypeBaseClass} from "../../../Serialization/interfaces";
-import {TraceEvent} from "../../../Serialization/TraceEvent";
+import {TraceEvent} from "../../../util/TraceEvent";
 import {TransformAbstract} from "../TransformAbstract";
 import {GQLEnumTypeTransform} from "./GQLEnumTypeTransform";
 import {GQLInputTypeTransform} from "./GQLInputTypeTransform";
@@ -56,7 +56,6 @@ export class GQLTransform extends TransformAbstract<[Map<string, IType>], string
             this.emit(type);
         }
 
-        console.log(this.segments.join("\n\n"));
         return this.segments.join("\n\n");
     }
 }

@@ -39,8 +39,8 @@ export class ObjectTypeSerializer extends SerializerAbstract<IType, ISchemaTypeS
         const reference = this.getReference();
         for (const child of this.declaration.children || []) {
             const valid = !child.flags.isPrivate
-                || !child.flags.isProtected
-                || !child.flags.isStatic;
+                && !child.flags.isProtected
+                && !child.flags.isStatic;
 
             if (!valid) {
                 continue; // skip protected or static properties

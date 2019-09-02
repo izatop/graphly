@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Composer toGraphQL 1`] = `
+"input TodoChecklistInput {
+  solved: Boolean
+  text: String!
+}
+
+input TodoInput {
+  checklist: [TodoChecklistInput!]!
+  deadlineAt: DateTime
+  description: String
+  solved: Boolean
+  title: String
+}
+
+input TodoSearchInput {
+  limit: Int
+  offset: Int
+  solved: Boolean
+}
+
+type TodoMutation {
+  add(todo: TodoInput!): Todo!
+  delete(id: [Int!]!): [Boolean!]!
+  update(id: Int!, todo: TodoInput!): Boolean!
+}
+
+type Todo {
+  checklist: [TodoChecklist!]!
+  description: String
+  flag: TodoFlag!
+  id: Int!
+  solved: Boolean
+  title: String!
+}
+
+type TodoChecklist {
+  solved: Boolean
+  text: String!
+}
+
+enum TodoFlag {
+  NONE
+  PRIVATE
+  PUBLIC
+}
+
+type TodoQuerySearch {
+  count: Int!
+  limit: Int!
+  node: [Todo!]!
+  offset: Int!
+}
+
+type TodoQuery {
+  count(solved: Boolean = true): Int!
+  search(filter: TodoSearchInput): TodoQuerySearch!
+  todo(id: Int!): Todo!
+}
+
+type TestMutation {
+  todo: TodoMutation!
+}
+
+type TestQuery {
+  optional: Float
+  random: Float
+  todo: TodoQuery!
+  timestamp(): Float!
+  hello(): String!
+}
+
+schema {
+  mutation: TestMutation
+  query: TestQuery
+  subscription: TestSubscription
+}
+
+type TestSubscription {
+  onTodoAdded(): Todo!
+  onTodoDelete(): Todo!
+  onTodoUpdate(): Todo!
+}"
+`;

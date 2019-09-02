@@ -1,9 +1,11 @@
 import {ok} from "assert";
 import * as GQL from "graphql";
+import {DateTimeType} from "../../Type/DateTimeType";
+import {ObjectScalarType} from "../../Type/ObjectScalarType";
 import {TransformAbstract} from "./TransformAbstract";
 
-export class TypeTransform extends TransformAbstract<[], string, [string]> {
-    public map = new Map<string, string | { name: string }>([
+export class TypeTransform extends TransformAbstract<[], GQL.GraphQLScalarType, [string]> {
+    public map = new Map<string, GQL.GraphQLScalarType>([
         ["symbol", GQL.GraphQLID],
         ["TypeID", GQL.GraphQLID],
         ["string", GQL.GraphQLString],
@@ -13,24 +15,18 @@ export class TypeTransform extends TransformAbstract<[], string, [string]> {
         ["number", GQL.GraphQLFloat],
         ["TypeFloat", GQL.GraphQLFloat],
         ["TypeInt", GQL.GraphQLInt],
-        ["Date", "DateTime"],
-        ["TypeDate", "DateTime"],
-        ["TypeObject", "Object"],
-        ["object", "Object"],
+        ["Date", DateTimeType],
+        ["TypeDate", DateTimeType],
+        ["TypeObject", ObjectScalarType],
+        ["object", ObjectScalarType],
     ]);
 
-    public has(input: string) {
-        return this.map.has(input);
+    public has(type: string) {
+        return this.map.has(type);
     }
 
-    public transform(input: string) {
-        ok(this.map.has(input));
-        const type = this.map.get(input)!;
-
-        if (typeof type === "string") {
-            return type;
-        }
-
-        return type.name;
+    public transform(type: string) {
+        ok(this.map.has(type));
+        return this.map.get(type)!;
     }
 }

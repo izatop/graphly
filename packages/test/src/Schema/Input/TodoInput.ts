@@ -1,5 +1,5 @@
 import {InputType} from "@graphly/type";
-import {TodoCheckListInput} from "./TodoCheckListInput";
+import {TodoChecklistInput} from "./TodoChecklistInput";
 
 export class TodoInput extends InputType {
     public title: string = "New todo";
@@ -10,5 +10,5 @@ export class TodoInput extends InputType {
 
     public deadlineAt?: Date;
 
-    public list: TodoCheckListInput[] = [];
+    public checklist: TodoChecklistInput[] = [];
 }
