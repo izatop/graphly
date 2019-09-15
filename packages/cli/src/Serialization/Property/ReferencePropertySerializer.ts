@@ -32,6 +32,7 @@ export class ReferencePropertySerializer extends PropertySerializer<ReferenceTyp
                 name: this.name,
                 kind: PropertyKind.REFERENCE,
                 reference: this.data.type.name,
+                nullable: parameters.some((item) => item.nullable),
             };
         }
 

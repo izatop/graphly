@@ -7,10 +7,10 @@ import {
     PropertyKind,
     PropertyType,
     ReturnType,
+    TYPE,
     TypeKind,
     TypeMap,
 } from "../../../Type";
-import {TYPE} from "../../../Type/const";
 import {ScalarTypeTransform} from "../ScalarTypeTransform";
 import {GQLTransform} from "./GQLTransform";
 

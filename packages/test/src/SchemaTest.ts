@@ -20,6 +20,14 @@ query TodoQuery ($id: Int!) {
 ${todoFragment}
 `;
 
+const todoCountQuery = `
+query TodoCountQuery {
+    todo {
+        count
+    }
+}
+`;
+
 const addTodoQuery = `
 mutation addTodo($todo: TodoInput!) {
     todo { add(todo: $todo) { ...TodoFragment } }
@@ -118,5 +126,13 @@ describe("Composer", () => {
                 },
             },
         });
+
+        const nullableQueryTest = await runQuery(todoTodoQuery, {id: 999});
+        expect(nullableQueryTest.errors).toBeUndefined();
+        expect(nullableQueryTest.data).toMatchObject({todo: {todo: null}});
+
+        const todoCount = await runQuery(todoCountQuery);
+        expect(todoCount.errors).toBeUndefined();
+        expect(todoCount.data).toMatchObject({todo: {count: 1}});
     });
 });
