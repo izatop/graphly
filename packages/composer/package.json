@@ -1,8 +1,21 @@
 {
     "name": "@graphly/composer",
     "version": "0.0.0-development",
+    "keywords": [
+        "graphql",
+        "typescript"
+    ],
+    "author": {
+        "name": "Artur Bier",
+        "email": "izatop@gmail.com"
+    },
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "description": "Compose GraphQL schema with TypeScript reflection",
+    "repository": "https://github.com/graphly/graphly",
     "scripts": {
         "clean": "yarn build:clean",
         "watch": "yarn build:watch",
@@ -16,5 +29,8 @@
         "@types/graphql": "^14.5.0",
         "graphql": "^14.5.5",
         "typedoc": "^0.15.0"
+    },
+    "publishConfig": {
+        "access": "public"
     }
 }

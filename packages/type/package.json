@@ -1,8 +1,21 @@
 {
     "name": "@graphly/type",
     "version": "0.0.0-development",
+    "keywords": [
+        "graphql",
+        "typescript"
+    ],
+    "author": {
+        "name": "Artur Bier",
+        "email": "izatop@gmail.com"
+    },
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "description": "A type library for GraphQL schema generation with TypeScript",
+    "repository": "https://github.com/graphly/graphly",
     "scripts": {
         "clean": "yarn build:clean",
         "watch": "yarn build:watch",
@@ -14,5 +27,8 @@
         "@graphly/composer": "0.0.0-development",
         "@sirian/common": "^5.5.0",
         "graphql": "^14.5.5"
+    },
+    "publishConfig": {
+        "access": "public"
     }
 }

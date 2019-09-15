@@ -37,11 +37,6 @@ export class Composer {
 
         const reflection = this.application.convert([schemaPath]);
         if (!reflection) {
-            console.log({
-                name: options.name || "GraphQL",
-                tsconfig: options.tsconfig,
-                exclude: `!${dirname(schemaPath)}/**/*`,
-            });
             throw new Error(`Cannot convert source to reflection at ${schemaPath}`);
         }
 

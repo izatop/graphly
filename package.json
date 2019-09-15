@@ -1,15 +1,16 @@
 {
     "name": "graphly",
     "version": "0.0.1",
-    "description": "Graphly is a utility for TypeScript schema generation to GraphQL schema",
+    "description": "GraphQL schema generation based on TypeScript reflection.",
     "main": "index.js",
-    "repository": "graphly",
+    "repository": "https://github.com/graphly/graphly",
     "author": "izatop@gmail.com",
     "license": "MIT",
     "private": true,
     "scripts": {
         "clean": "lerna run clean",
-        "build": "tsc -b packages",
+        "lint": "tslint 'packages/*/src/**/*.ts'",
+        "build": "yarn run clean && tsc -b packages",
         "build:watch": "tsc -b packages -w",
         "test": "jest --config jest.json",
         "test:watch": "jest --watch --config jest.json"

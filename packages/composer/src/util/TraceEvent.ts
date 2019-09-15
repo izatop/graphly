@@ -1,6 +1,6 @@
 import {TransformError} from "../Project/Transform/TransformError";
-import {inspect} from "./inspect";
 import {SerializeError} from "../Serialization/SerializeError";
+import {inspect} from "./inspect";
 
 export class TraceEvent {
     public static verbose = false;
@@ -23,7 +23,7 @@ export class TraceEvent {
 
     public emit(...args: any[]) {
         if (!TraceEvent.verbose) {
-            return ;
+            return;
         }
 
         // tslint:disable-next-line:no-console

@@ -1,6 +1,6 @@
 # graphly
 
-Compose a great GraphQL apps on the fly with pure TypeScript and power of TypeDoc.
+Compose a great GraphQL apps on the fly with TypeScript and power of TypeDoc.
 No more hell of decorators and pain with unreadable the GraphQLXXXType spaghetti! 
 
 ## Features
@@ -10,6 +10,8 @@ No more hell of decorators and pain with unreadable the GraphQLXXXType spaghetti
 3. Auto passing a service container and a context to resolvers.
 4. Schemas can be separated in independent scopes.
 5. Auto-generated return types with generics and interfaces.
+
+See packages/test to meet a full schema example.
 
 ### Tree of schema types
 
@@ -83,6 +85,30 @@ class TodoInput extends InputObjectType {
 }
 ```
 
+Sometimes TypeScript can resolve an incorrect return type like this:
+
+```typescript
+class MyQuery {
+    public async session(context: MyContext) {
+        if (context.isAuthorized) { // Promise<UserSession> | Promise<undefined>
+            return context.userSession;
+        }
+
+        return undefined;
+    }
+}
+```
+
+Just force a return type declaration for the resolver:
+
+```typescript
+class MyQuery {
+    public async session(context: MyContext): Promise<UserSession | undefined> {
+        // ...
+    }
+}
+```
+
 ### Context and service Container
 
 You can pass any of Context or Container as argument to 
@@ -111,7 +137,7 @@ class MyContainer extends Container<IConfig> {
 }
 ```
 
-### Auto generation a return type
+### Auto generation object types
 
 ```typescript
 import {ObjectType, IObject, TypeInt} from "@graphly/type";
@@ -180,32 +206,6 @@ some limitations for syntax that can be used.
 2. Use Promise, AsyncIterator and IObject only as a return type.
 3. Don't use nearby resolvers.
 4. Be careful to use initial values of class members.
-
-### Force return type
-
-Sometimes TypeScript can resolve an incorrect return type like this:
-
-```typescript
-class MyQuery {
-    public async session(context: MyContext) {
-        if (context.isAuthorized) { // Promise<UserSession> | Promise<undefined>
-            return context.userSession;
-        }
-
-        return undefined;
-    }
-}
-```
-
-Just force a return type declaration for resolvers:
-
-```typescript
-class MyQuery {
-    public async session(context: MyContext): Promise<UserSession | undefined> {
-        // ...
-    }
-}
-```
 
 ## Notice
 Be notice that it's an experimental library, unstable for production and

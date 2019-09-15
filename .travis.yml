@@ -1,0 +1,47 @@
+language: node_js
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+notifications:
+  email: false
+
+node_js:
+  - "12"
+
+before_install:
+  - npm i -g yarn
+  - export PATH=`yarn global bin`:$PATH
+  - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+  - yarn global add greenkeeper-lockfile@2
+  - yarn global add lerna
+
+install:
+  - yarn run bootstrap
+
+before_script:
+  - greenkeeper-lockfile-update
+  - git config --global push.default simple
+  - git config --global user.email "travis@travis-ci.org"
+  - git config --global user.name "Travis CI"
+  - git remote set-url origin https://${GH_TOKEN}@github.com:graphly/graphly.git
+  - git checkout master
+
+script:
+  - yarn lint
+  - yarn build
+  - yarn test
+  - git status
+  - lerna publish --conventional-commits --yes
+
+after_script:
+  - greenkeeper-lockfile-upload
+
+after_success:
+  - yarn ci:coveralls
+
+branches:
+  only:
+    - master
