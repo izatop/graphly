@@ -22,6 +22,10 @@ import {ObjectType, Schema} from "@graphly/type";
 
 export class MySchema extends Schema {
     public readonly query: MyQuery;
+
+    public static getSchemaLocation() {
+        return __filename;
+    }
 }
 
 export class MyQuery extends ObjectType {
