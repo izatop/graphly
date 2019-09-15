@@ -1,4 +1,4 @@
-# graphly
+# graphly [![Build Status](https://travis-ci.org/graphly/graphly.svg?branch=master)](https://travis-ci.org/graphly/graphly)
 
 Compose a great GraphQL apps on the fly with TypeScript and power of TypeDoc.
 No more hell of decorators and pain with unreadable the GraphQLXXXType spaghetti! 
