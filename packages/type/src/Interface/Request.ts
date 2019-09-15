@@ -1,15 +1,15 @@
 import {IncomingMessage} from "http";
 import {Container} from "../Scope";
-import {KeyValue} from "./index";
+import {KeyValue, Lookup} from "./index";
 
-export type RequestLifecycleHooks<TState extends KeyValue, C extends Container = Container> = {
+export type RequestLifecycleHooks<TState extends KeyValue, C extends Container> = {
     /**
      * Validate a request payload.
      *
      * @throws RequestValidationError
      * @param payload
      */
-    validateRequest?: (container: C, payload: Request) => Promise<boolean>;
+    validateRequest?: (container: Lookup<C>, payload: Request) => Promise<boolean>;
 
     /**
      * Validate authorization.
@@ -18,7 +18,7 @@ export type RequestLifecycleHooks<TState extends KeyValue, C extends Container =
      * @throws AccessDenied
      * @param payload
      */
-    validateAuthorization?: (container: C, payload: Request) => Promise<boolean>;
+    validateAuthorization?: (container: Lookup<C>, payload: Request) => Promise<boolean>;
 
     /**
      * Create session state. You also can validate a request payload
@@ -28,7 +28,7 @@ export type RequestLifecycleHooks<TState extends KeyValue, C extends Container =
      * @param payload
      * @returns Promise<TState>
      */
-    createSessionState?: (container: C, payload: Request) => Promise<TState>;
+    createSessionState?: (container: Lookup<C>, payload: Request) => Promise<TState>;
 };
 
 export type AuthorizationContext = Readonly<{

@@ -40,7 +40,7 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
         };
     }
 
-    public async createServerConfig(hooks: RequestLifecycleHooks<TState>) {
+    public async createServerConfig(hooks: RequestLifecycleHooks<TState, TContainer>) {
         const schema = this.createSchema();
         const container = await this.createContainer();
         const createContextState = RequestContext.createContextState(hooks, container);

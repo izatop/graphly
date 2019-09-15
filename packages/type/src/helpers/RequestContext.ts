@@ -5,8 +5,8 @@ import {AuthorizationContext, Lookup, RequestLifecycleHooks} from "../Interface"
 import {Container} from "../Scope";
 
 export class RequestContext {
-    public static createContextState<TState, C extends Container>(hooks: RequestLifecycleHooks<TState>,
-                                                                  container: C | Lookup<C>) {
+    public static createContextState<TState, C extends Container>(hooks: RequestLifecycleHooks<TState, C>,
+                                                                  container: Lookup<C>) {
         return async (request: IncomingMessage): Promise<TState> => {
             const authorization = this.createAuthorizationContext(request);
             const payload = {authorization, request};
