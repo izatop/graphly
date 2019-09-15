@@ -191,7 +191,7 @@ const server = new ApolloServer(myScope.createServerConfig({
     validateRequest,
     validateAuthorization,
     createSessionState(container, payload) {
-        // check authorization and return context
+        // check authorization and return context state
         return state;
     }
 }));
