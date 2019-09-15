@@ -18,7 +18,7 @@ See packages/test to meet a full schema example.
 Usage example
 
 ```typescript
-import {ObjectType, Schema} from "@graphly/type";
+import {ObjectType, Schema, TypeInt} from "@graphly/type";
 
 export class MySchema extends Schema {
     public readonly query: MyQuery;
@@ -33,13 +33,13 @@ export class MyQuery extends ObjectType {
 }
 
 export class TodoQuery extends ObjectType {
-    public find(id: number): Promise<Todo> {
+    public find(id: TypeInt): Promise<Todo> {
         // ...
     }
 }
 
 export class Todo extends ObjectType {
-    public readonly id: number;
+    public readonly id: TypeInt;
     public readonly title: string;
     public readonly status: TodoStatus;
     public get statusText() {
@@ -85,7 +85,7 @@ class TotoMutation extends ObjectType {
 }
 
 class TodoInput extends InputObjectType {
-    public readonly id: number;
+    public readonly id: TypeInt;
     public readonly title: string = "New Todo";
     public readonly status: TodoStatus = TodoStatus.OPEN;
 }
@@ -150,15 +150,17 @@ import {ObjectType, IObject, TypeInt} from "@graphly/type";
 
 class TodoQuery extends ObjectType {
     public async search(offset: TypeInt = 0, limit: TypeInt = 10, context: MyContext): Promise<IPageable<Todo>> {
+        const count = await context.rodos.count();
         const node = await context.rodos.find()
             .offset(offset)
             .limit(limit);
 
-        return {limit, offset, node}
+        return {count, limit, offset, node}
     }
 }
 
 interface IPageable<T extends ObjectType> extends IObject {
+    readonly count: TypeInt;
     readonly offset: TypeInt;
     readonly limit: TypeInt;
     readonly node: T[];
@@ -171,6 +173,7 @@ In this case `TodoQuery.search` will return a new type:
 type TodoQuerySearch {
     offset: Int!
     limit: Int!
+    count: Int!
     node: [Todo!]!
 }
 ```
