@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/graphly/graphly/compare/v0.1.2...v0.1.3) (2019-09-15)
+
+
+### Bug Fixes
+
+* TypeID should be string or number ([e85b327](https://github.com/graphly/graphly/commit/e85b327))
+* update README.md ([36d096f](https://github.com/graphly/graphly/commit/36d096f))
+
+
+
+
+
 ## [0.1.2](https://github.com/graphly/graphly/compare/v0.1.1...v0.1.2) (2019-09-15)
 
 
