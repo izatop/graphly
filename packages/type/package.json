@@ -14,7 +14,7 @@
     "files": [
         "dist/"
     ],
-    "description": "A type library for GraphQL schema generation with TypeScript",
+    "description": "A type library for GraphQL schema generation by TypeScript",
     "repository": "https://github.com/graphly/graphly",
     "scripts": {
         "clean": "yarn build:clean",
