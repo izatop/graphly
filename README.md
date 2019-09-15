@@ -187,23 +187,31 @@ import {MyContext} from "./MyContext";
 import {MyContainer} from "./MyContainer";
 import {config} from "./config";
 
-const myScope = new Scope({
-    schema: MySchema,
-    context: MyContext,
-    container: MyContainer,
-    config,
-});
-
-const server = new ApolloServer(myScope.createServerConfig({
-    validateRequest,
-    validateAuthorization,
-    createSessionState(container, payload) {
-        // check authorization and return context state
-        return state;
-    }
-}));
-
-// ...
+async function main() {
+    const myScope = new Scope({
+        schema: MySchema,
+        context: MyContext,
+        container: MyContainer,
+        config,
+    });
+    
+    const {schema, context, rootValue} = await myScope.createServerConfig({
+        validateRequest,
+        validateAuthorization,
+        createSessionState(container, payload) {
+            // check authorization and return context state
+            return state;
+        }
+    });
+    
+    const server = new ApolloServer({
+        schema,
+        rootValue,
+        context: ({req}) => context(req),
+    });
+    
+    // ... run apollo server
+}
 ```
 
 ## Limitations

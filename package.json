@@ -12,7 +12,7 @@
         "lint": "tslint 'packages/*/src/**/*.ts'",
         "build": "yarn run clean && tsc -b packages",
         "build:watch": "tsc -b packages -w",
-        "test": "jest --config jest.json",
+        "test": "lerna run compose --scope=@graphly/test && jest --config jest.json",
         "test:watch": "jest --watch --config jest.json",
         "bootstrap": "lerna bootstrap && lerna link"
     },

@@ -3,10 +3,13 @@
     "include": [],
     "references": [
         {
+            "path": "./cli"
+        },
+        {
             "path": "./type"
         },
         {
-            "path": "./composer"
+            "path": "./schema"
         }
     ]
 }

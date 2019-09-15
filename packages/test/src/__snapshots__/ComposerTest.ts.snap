@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Composer Project.toGraphQL() 1`] = `
+exports[`Composer 1`] = `
 "input TodoChecklistInput {
   solved: Boolean
   text: String!

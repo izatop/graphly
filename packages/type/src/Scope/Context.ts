@@ -10,9 +10,9 @@ export class Context<TContainer extends Container<TConfig>,
     TConfig extends KeyValue = {},
     TState extends KeyValue = {}> {
 
-    protected readonly state: TState;
+    public readonly state: TState;
 
-    protected readonly container: Lookup<TContainer>;
+    public readonly container: Lookup<TContainer>;
 
     constructor(container: Lookup<TContainer>, state: TState) {
         this.state = state;

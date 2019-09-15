@@ -34,7 +34,7 @@ export class RequestContext {
 
     public static createAuthorizationContext(request: IncomingMessage): AuthorizationContext | undefined {
         const {headers} = request;
-        if (headers.authorization) {
+        if (headers && headers.authorization) {
             const [type, ...credentials] = headers.authorization.split(" ");
             return {
                 type,

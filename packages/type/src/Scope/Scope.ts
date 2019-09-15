@@ -1,7 +1,7 @@
-import {Composer, IComposerOptions} from "@graphly/composer";
+import {Project} from "@graphly/schema";
 import {Var} from "@sirian/common";
+import {memoize} from "@sirian/decorators";
 import {IncomingMessage} from "http";
-import * as path from "path";
 import {RequestContext, resolve} from "../helpers";
 import {KeyValue, RequestLifecycleHooks} from "../Interface";
 import {Schema, SchemaCtor} from "../Schema";
@@ -29,7 +29,7 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
     }
 
     public async createConfig(state: TState) {
-        const schema = this.createSchema();
+        const schema = await this.createSchema();
         const container = await this.createContainer();
         const contextCtor = this.options.context;
 
@@ -41,7 +41,7 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
     }
 
     public async createServerConfig(hooks: RequestLifecycleHooks<TState, TContainer>) {
-        const schema = this.createSchema();
+        const schema = await this.createSchema();
         const container = await this.createContainer();
         const createContextState = RequestContext.createContextState(hooks, container);
         const contextCtor = this.options.context;
@@ -57,28 +57,20 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
         };
     }
 
-    protected getComposerConfiguration(): IComposerOptions {
+    @memoize
+    public createContainer() {
+        return resolve(new this.options.container(this.options.config));
+    }
+
+    @memoize
+    protected async createSchema() {
         const {schema} = this.options;
         const location = schema.getSchemaLocation();
         const filename = Var.isObject(location)
             ? location.filename
             : location;
 
-        return {
-            basePath: path.dirname(filename),
-            schemaPath: filename,
-            name: schema.name,
-        };
-    }
-
-    protected createContainer() {
-        return resolve(new this.options.container(this.options.config));
-    }
-
-    protected createSchema() {
-        const options = this.getComposerConfiguration();
-        return new Composer(options)
-            .compose()
-            .toSchema();
+        const project = await Project.from(filename);
+        return project.toSchema();
     }
 }
