@@ -36,9 +36,20 @@ export class Composer {
 
         const tsconfigRelativePath = path.dirname(options.tsconfig);
         const tsconfig = require(options.tsconfig);
-        this.targetBasePath = tsconfig.compilerOptions && tsconfig.compilerOptions.outDir
-            ? path.resolve(tsconfigRelativePath, tsconfig.compilerOptions.outDir)
-            : this.basePath;
+        this.targetBasePath = this.basePath;
+        if (tsconfig.compilerOptions && tsconfig.compilerOptions.outDir && tsconfig.compilerOptions.rootDir) {
+            this.targetBasePath = path.join(
+                tsconfigRelativePath,
+                tsconfig.compilerOptions.outDir,
+                path.relative(
+                    tsconfig.compilerOptions.rootDir,
+                    path.relative(
+                        tsconfigRelativePath,
+                        this.basePath,
+                    ),
+                ),
+            );
+        }
 
         if (!existsSync(this.schemaPath)) {
             throw new Error(`Cannot resolve schema path at ${this.schemaPath}`);
