@@ -1,17 +1,18 @@
 // tslint:disable-next-line:no-submodule-imports
-import {DeclarationReflection, UnionType} from "typedoc/dist/lib/models";
-import {PropertyBox} from "../interfaces";
+import {UnionType} from "typedoc/dist/lib/models";
+import {IPropertyScalar, PropertyKind, PropertyType} from "../../Type";
 import {createPropertySerializer} from "./index";
 import {PropertySerializer} from "./PropertySerializer";
 
 export class UnionPropertySerializer extends PropertySerializer<UnionType> {
     public serialize() {
-        let types: Array<PropertyBox | string> = [];
+        const properties: PropertyType[] = [];
         for (const type of this.data.type.types) {
             const delegateReflection = {
                 type,
                 name: this.name,
                 flags: this.data.flags,
+                defaultValue: this.data.defaultValue,
             };
 
             const serializer = createPropertySerializer(this.project, delegateReflection)!;
@@ -21,33 +22,56 @@ export class UnionPropertySerializer extends PropertySerializer<UnionType> {
                 () => type.toObject(),
             );
 
-            const nextType = serializer.serialize().type;
-            if (Array.isArray(nextType)) {
-                types.push(...nextType);
-            } else {
-                types.push(nextType);
-            }
+            properties.push(serializer.serialize());
         }
 
-        if (types.includes("true") && types.includes("false")) {
-            types = types.filter((type) => !(type === "true" || type === "false"));
-            types.push("boolean");
-        }
+        return this.suggest(properties);
+    }
 
-        // clear undefined value and treat it as value is optional
-        const clearTypes = types.filter((value) => value !== "undefined");
-        if (clearTypes.length === 1) {
+    protected suggest(properties: PropertyType[]): PropertyType {
+        const defaultValue = this.optional.defaultValue;
+        const nullable = properties.some((p) => (p.kind === PropertyKind.SCALAR && p.type === "undefined"))
+            || this.optional.nullable;
+
+        properties = properties.filter((p) => !(p.kind === PropertyKind.SCALAR && p.type === "undefined"));
+
+        if (this.isScalarOnly(properties) && properties.length === 1) {
             return {
-                ...this.optional,
+                nullable,
+                defaultValue,
+                kind: PropertyKind.SCALAR,
                 name: this.name,
-                type: clearTypes[0],
+                type: properties[0].type,
             };
         }
 
+        if (this.isScalarOnly(properties)) {
+            const values = properties.map((p) => p.type);
+            this.assert(
+                properties.length === 2 && values.sort().join("") === ["false", "true"].join(""),
+                `A property union type should be one of "true | false" or a list of references.`,
+                () => ({properties}),
+            );
+
+            return {
+                nullable,
+                defaultValue,
+                kind: PropertyKind.SCALAR,
+                name: this.name,
+                type: "boolean",
+            };
+        }
+
+        this.assert(properties.length === 1, "Cannot resolve union type", () => ({properties}));
         return {
-            ...this.optional,
-            name: this.name,
-            type: clearTypes,
+            ...properties.pop()!,
+            nullable,
+            defaultValue,
         };
+    }
+
+    protected isScalarOnly(properties: PropertyType[]): properties is IPropertyScalar[] {
+        const kinds = new Set(properties.map((p) => p.kind));
+        return kinds.size === 1 && kinds.has(PropertyKind.SCALAR);
     }
 }

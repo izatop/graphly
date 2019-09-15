@@ -1,6 +1,6 @@
-import {MutationType} from "@graphly/type";
+import {ObjectType} from "@graphly/type";
 import {TodoMutation} from "./Mutation/TodoMutation";
 
-export class TestMutation extends MutationType {
+export class TestMutation extends ObjectType {
     public todo: TodoMutation;
 }

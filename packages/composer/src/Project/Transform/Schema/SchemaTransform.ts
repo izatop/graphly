@@ -1,19 +1,19 @@
 import {ok} from "assert";
-import {GraphQLInputType, GraphQLObjectType, GraphQLSchema, GraphQLSchemaConfig} from "graphql";
-import {IProperty, IType, TypeBaseClass} from "../../../Serialization/interfaces";
+import {GraphQLObjectType, GraphQLSchema, GraphQLSchemaConfig} from "graphql";
+import {IPropertyReference, PropertyKind, TypeKind} from "../../../Type";
+import {TYPE} from "../../../Type/const";
 import {Project} from "../../Project";
 import {TransformAbstract} from "../TransformAbstract";
-import {TypeTransform} from "../TypeTransform";
+import {ArgumentPropertyResolver} from "./ArgumentPropertyResolver";
+import {ObjectPropertyResolver} from "./ObjectPropertyResolver";
 import {SchemaObjectTypeTransform} from "./SchemaObjectTypeTransform";
 
 type Args = [Project];
 
 export class SchemaTransform extends TransformAbstract<Args, GraphQLSchema> {
-    public typeTransform = new TypeTransform();
+    public readonly output = new ObjectPropertyResolver(this);
 
-    protected readonly objectType = new Map<string, GraphQLObjectType>();
-
-    protected readonly inputType = new Map<string, GraphQLInputType>();
+    public readonly input = new ArgumentPropertyResolver(this);
 
     public get project() {
         return this.args[0];
@@ -27,50 +27,37 @@ export class SchemaTransform extends TransformAbstract<Args, GraphQLSchema> {
         return new GraphQLSchema(this.transformSchemaType());
     }
 
-    public hasInputType(name: string) {
-        return this.inputType.has(name);
-    }
-
-    public getInputType(name: string) {
-        return this.inputType.get(name)!;
-    }
-
-    public setInputType(name: string, type: GraphQLInputType) {
-        this.inputType.set(name, type);
-    }
-
-    public hasObjectType(name: string) {
-        return this.objectType.has(name);
-    }
-
-    public getObjectType(name: string) {
-        return this.objectType.get(name)!;
-    }
-
-    public setObjectType(name: string, type: GraphQLObjectType) {
-        this.objectType.set(name, type);
+    protected getSchemaType() {
+        for (const type of this.types.values()) {
+            if (type.kind === TypeKind.CLASS && type.base === TYPE.SCHEMA) {
+                return type;
+            }
+        }
     }
 
     protected transformSchemaType(): GraphQLSchemaConfig {
-        const schema = [...this.types.values()]
-            .find(({base}) => base === TypeBaseClass.Schema)!;
-        ok(schema, "Schema not found");
+        const schema = this.getSchemaType()!;
+        ok(schema, "The Schema should be defined");
 
         const config: Partial<GraphQLSchemaConfig> = {};
         for (const property of schema.property) {
-            Reflect.set(config, property.name, this.transformSchemaRoot(property));
+            if (property.kind === PropertyKind.REFERENCE) {
+                Reflect.set(config, property.name, this.transformSchemaRoot(property));
+            }
         }
 
-        ok(config.query, "The query field should be defined in a schema");
+        ok(config.query, `The query field should be defined in the ${schema.name}`);
         return config as GraphQLSchemaConfig;
     }
 
-    protected transformSchemaRoot(property: IProperty): GraphQLObjectType {
-        ok(typeof property.type === "string");
-        ok(this.types.has(property.type as string));
+    protected transformSchemaRoot(property: IPropertyReference): GraphQLObjectType | undefined {
+        ok(this.types.has(property.reference));
+        const type = this.types.ensure(property.reference);
 
-        const declaration = this.types.get(property.type as string)!;
-        return new SchemaObjectTypeTransform(this, declaration)
-            .transform();
+        ok(type.kind === TypeKind.CLASS, `Wrong type ${type.name} of ${property.name}`);
+        if (type.kind === TypeKind.CLASS) {
+            return new SchemaObjectTypeTransform(this, type)
+                .transform();
+        }
     }
 }

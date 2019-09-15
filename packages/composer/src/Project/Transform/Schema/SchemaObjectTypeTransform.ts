@@ -1,22 +1,22 @@
-import {GraphQLFieldConfigMap, GraphQLObjectType, GraphQLString, Thunk} from "graphql";
-import {IType} from "../../../Serialization/interfaces";
+import {ok} from "assert";
+import {GraphQLFieldConfigMap, GraphQLObjectType, Thunk} from "graphql";
+import {ITypeObject, OutputType} from "../../../Type";
+import {TraceEvent} from "../../../util/TraceEvent";
 import {TransformAbstract} from "../TransformAbstract";
-import {SchemaFieldTransform} from "./SchemaFieldTransform";
+import {SchemaObjectFieldTransform} from "./SchemaObjectFieldTransform";
 import {SchemaTransform} from "./SchemaTransform";
 
-type Args = [SchemaTransform, IType];
+type Args = [SchemaTransform, ITypeObject];
 
 export class SchemaObjectTypeTransform extends TransformAbstract<Args, GraphQLObjectType> {
+    protected traceEvent = TraceEvent.create(this);
+
     public get context() {
         return this.args[0];
     }
 
-    public get declaration() {
+    public get type() {
         return this.args[1];
-    }
-
-    public get types() {
-        return this.context.types;
     }
 
     public get project() {
@@ -24,38 +24,25 @@ export class SchemaObjectTypeTransform extends TransformAbstract<Args, GraphQLOb
     }
 
     public transform() {
-        const name = this.declaration.name;
-        if (this.context.hasObjectType(name)) {
-            return this.context.getObjectType(name);
-        }
+        ok(
+            OutputType.has(this.type.base),
+            `Wrong object base type ${this.type.base} of ${this.type.name}`,
+        );
 
-        const objectType = new GraphQLObjectType({
-            name,
+        return new GraphQLObjectType({
+            name: this.type.name,
+            fields: () => this.fields(),
             // @todo Pick a description from comments
-            description: `Description of ${this.declaration.name}`,
-            fields: this.transformFields(),
+            description: `Description of ${this.type.name}`,
         });
-
-        this.context.setObjectType(name, objectType);
-        return objectType;
     }
 
-    protected transformFields(): Thunk<GraphQLFieldConfigMap<any, any, any>> {
-        const fields: Thunk<GraphQLFieldConfigMap<any, any, any>> = {
-            _: {type: GraphQLString},
-        };
-
-        for (const property of this.declaration.property) {
-            const fieldTransform = new SchemaFieldTransform(
-                this.context,
-                this.declaration,
-                property,
-            );
-
-            fields[property.name] = fieldTransform.transform();
+    protected fields(): GraphQLFieldConfigMap<any, any, any> {
+        const fields: Thunk<GraphQLFieldConfigMap<any, any, any>> = {};
+        for (const property of this.type.property) {
+            fields[property.name] = new SchemaObjectFieldTransform(this.context, this, property)
+                .transform();
         }
-
-        console.log({fields});
 
         return fields;
     }

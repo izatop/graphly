@@ -1,7 +1,7 @@
-import {InputType} from "@graphly/type";
+import {InputObjectType} from "@graphly/type";
 
-export class TodoChecklistInput extends InputType {
-    public text: string;
+export class TodoChecklistInput extends InputObjectType {
+    public readonly text: string;
 
-    public solved?: boolean;
+    public readonly solved?: boolean;
 }

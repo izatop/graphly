@@ -1,14 +1,17 @@
-import {InputType} from "@graphly/type";
+import {InputObjectType} from "@graphly/type";
+import {TodoFlag} from "../Query/TodoFlag";
 import {TodoChecklistInput} from "./TodoChecklistInput";
 
-export class TodoInput extends InputType {
-    public title: string = "New todo";
+export class TodoInput extends InputObjectType {
+    public readonly title: string = "New todo";
 
-    public description?: string;
+    public readonly description?: string;
 
-    public solved: boolean = false;
+    public readonly solved: boolean = false;
 
-    public deadlineAt?: Date;
+    public readonly deadlineAt?: Date;
 
-    public checklist: TodoChecklistInput[] = [];
+    public readonly checklist: TodoChecklistInput[] = [];
+
+    public readonly flag?: TodoFlag;
 }

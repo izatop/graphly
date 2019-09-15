@@ -1,13 +1,12 @@
+import {XMap} from "@sirian/common";
 import {DeclarationReflection, ProjectReflection, ReflectionKind} from "typedoc";
-import {inspect} from "../util/inspect";
-import {ClassSerializer} from "./Class/ClassSerializer";
-import {EnumSerializer} from "./Enum/EnumSerializer";
-import {IType, TypeBaseClass} from "./interfaces";
-import {SerializeError} from "./SerializeError";
+import {ITypeObject, TypeBase, TypeKind, TypeMap} from "../Type";
+import {TYPE} from "../Type/const";
 import {TraceEvent} from "../util/TraceEvent";
+import {TypeSerializer} from "./Type";
 
 export class ProjectSerializer {
-    public types = new Map<string, IType>();
+    public types = new XMap<string, TypeMap>();
 
     protected reflection: ProjectReflection;
 
@@ -27,31 +26,37 @@ export class ProjectSerializer {
         return this.types;
     }
 
-    public getSerializableType(type: string): TypeBaseClass {
-        if (type in TypeBaseClass) {
-            return Reflect.get(TypeBaseClass, type);
+    public getBaseType(type: string): string {
+        if (TypeBase.has(type)) {
+            return type;
         }
 
         if (this.types.has(type)) {
-            const chain = this.types.get(type)!;
-            return this.getSerializableType(chain.reference);
+            const chain = this.types.ensure(type);
+            if (chain.kind === TypeKind.ENUM) {
+                return TYPE.ENUM;
+            }
+
+            if (this.isTypeObject(chain) && chain.reference) {
+                return this.getBaseType(chain.reference);
+            }
         }
 
-        return TypeBaseClass.None;
+        return TYPE.UNKNOWN;
+    }
+
+    protected isTypeObject(type: TypeMap): type is ITypeObject {
+        const {kind} = type;
+        return kind === TypeKind.ABSTRACT
+            || kind === TypeKind.INTERFACE
+            || kind === TypeKind.CLASS;
     }
 
     protected applyExternalModule(declaration: DeclarationReflection) {
         for (const child of declaration.children || []) {
-            if (child.kind === ReflectionKind.Enum) {
-                const serializer = new EnumSerializer(this, child);
-                const description = serializer.serialize();
-                this.types.set(serializer.name, description);
-                this.traceEvent.emit("enum", serializer.name, description);
-            }
-
-            if ([ReflectionKind.Class, ReflectionKind.Interface].includes(child.kind)) {
+            if ([ReflectionKind.Class, ReflectionKind.Interface, ReflectionKind.Enum].includes(child.kind)) {
                 try {
-                    const serializer = new ClassSerializer(this, child);
+                    const serializer = new TypeSerializer(this, child);
                     const description = serializer.serialize();
                     this.types.set(serializer.name, description);
                     this.traceEvent.emit("type", serializer.name, description);

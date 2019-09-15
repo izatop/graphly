@@ -1,14 +1,10 @@
-import {IProperty, IPropertyResolver, IType} from "../../../Serialization/interfaces";
+import {InputType, ITypeObject, PropertyKind, PropertyType, TypeKind} from "../../../Type";
 import {TransformAbstract} from "../TransformAbstract";
-import {TypeTransform} from "../TypeTransform";
-import {GQLPropertyTransform} from "./GQLPropertyTransform";
+import {GQLResolveFunctionTransform} from "./GQLResolveFunctionTransform";
 import {GQLTransform} from "./GQLTransform";
-import {GQLTransformResolverArgs} from "./GQLTransformResolverArgs";
 
-export abstract class GQLTypeTransform extends TransformAbstract<[GQLTransform, IType], string> {
+export abstract class GQLTypeTransform extends TransformAbstract<[GQLTransform, ITypeObject], string> {
     public abstract readonly declaration: string;
-
-    public typeTransform = new TypeTransform();
 
     public get context() {
         return this.args[0];
@@ -18,23 +14,37 @@ export abstract class GQLTypeTransform extends TransformAbstract<[GQLTransform, 
         return this.args[1];
     }
 
+    public get resolver() {
+        return this.context.resolver;
+    }
+
     public transform(): string {
         return `${this.declaration} ${this.type.name} {\n${this.transformBody()}\n}`;
     }
 
     public transformBody() {
         const segments = [];
+        const isInputType = this.type.kind === TypeKind.CLASS && InputType.has(this.type.base);
         for (const property of this.type.property) {
-            const type = new GQLPropertyTransform(this, property).transform();
-            segments.push(`  ${this.transformName(property)}: ${this.nullable(type, property.nullable)}`);
+            const type = this.resolver.resolve(this.type, property);
+            if (type) {
+                const nullable = isInputType
+                    ? !!property.defaultValue || property.nullable
+                    : property.nullable;
+
+                segments.push(`  ${this.transformName(property)}: ${this.nullable(type, nullable)}`);
+                continue;
+            }
+
+            this.context.traceEvent.warning(new Error(`Skip ${this.type.name}.${property.name}`));
         }
 
         return segments.join("\n");
     }
 
-    public transformName(property: IProperty | IPropertyResolver) {
-        if ("resolver" in property) {
-            return new GQLTransformResolverArgs(this, property)
+    public transformName(property: PropertyType) {
+        if (property.kind === PropertyKind.FUNCTION) {
+            return new GQLResolveFunctionTransform(this, property)
                 .transform();
         }
 

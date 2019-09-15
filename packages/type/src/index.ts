@@ -1,5 +1,5 @@
-export * from "./Interface/Lookup";
-export * from "./Interface/SchemaType";
+export * from "./helpers";
+export * from "./Interface";
 export * from "./Schema";
 export * from "./Scope";
 export * from "./Type";

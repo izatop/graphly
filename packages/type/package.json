@@ -9,5 +9,10 @@
         "build": "yarn build:clean && tsc",
         "build:clean": "rimraf dist tsconfig.tsbuildinfo",
         "build:watch": "yarn build --watch"
+    },
+    "dependencies": {
+        "@graphly/composer": "0.0.0-development",
+        "@sirian/common": "^5.5.0",
+        "graphql": "^14.5.5"
     }
 }

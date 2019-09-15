@@ -1,9 +1,9 @@
-import {InterfaceType, QueryType, TypeInt} from "@graphly/type";
+import {IObject, ObjectType, TypeInt} from "@graphly/type";
 
 /**
- * Pagination Result interface
+ * Pagination result interface
  */
-export interface IPageable<T extends QueryType> extends InterfaceType {
+export interface IPageable<T extends ObjectType> extends IObject {
     readonly offset: TypeInt;
     readonly limit: TypeInt;
     readonly count: TypeInt;

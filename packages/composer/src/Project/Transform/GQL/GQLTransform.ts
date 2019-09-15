@@ -1,61 +1,100 @@
-import {IType, TypeBaseClass} from "../../../Serialization/interfaces";
+import {XMap} from "@sirian/common";
+import {memoize} from "@sirian/decorators";
+import {InputType, IPropertyReference, ITypeEnum, ITypeObject, OutputType, PropertyType, TypeKind, TypeMap} from "../../../Type";
+import {TYPE} from "../../../Type/const";
 import {TraceEvent} from "../../../util/TraceEvent";
+import {ucfirst} from "../../../util/ucfirst";
+import {Project} from "../../Project";
+import {InterfaceType} from "../InterfaceType";
 import {TransformAbstract} from "../TransformAbstract";
 import {GQLEnumTypeTransform} from "./GQLEnumTypeTransform";
 import {GQLInputTypeTransform} from "./GQLInputTypeTransform";
-import {GQLMutationTypeTransform} from "./GQLMutationTypeTransform";
 import {GQLQueryTypeTransform} from "./GQLQueryTypeTransform";
 import {GQLSchemaTransform} from "./GQLSchemaTransform";
-import {GQLSubscriptionTypeTransform} from "./GQLSubscriptionTypeTransform";
+import {GQLTypeResolve} from "./GQLTypeResolve";
 
-export class GQLTransform extends TransformAbstract<[Map<string, IType>], string> {
+export class GQLTransform extends TransformAbstract<[Project], string> {
     public traceEvent = TraceEvent.create(this);
-
-    public transformers = new Map([
-        [TypeBaseClass.Enum, GQLEnumTypeTransform],
-        [TypeBaseClass.InputType, GQLInputTypeTransform],
-        [TypeBaseClass.MutationType, GQLMutationTypeTransform],
-        [TypeBaseClass.QueryType, GQLQueryTypeTransform],
-        [TypeBaseClass.SubscriptionType, GQLSubscriptionTypeTransform],
-        [TypeBaseClass.Schema, GQLSchemaTransform],
-    ]);
 
     protected segments: string[] = [];
 
-    public get types() {
-        return this.args[0];
+    @memoize
+    public get resolver() {
+        return new GQLTypeResolve(this, this.types);
     }
 
-    public emit(type: IType) {
-        const transformerCtor = this.transformers.get(type.base)!;
-        this.segments.push(
-            new transformerCtor(this, type)
-                .transform(),
-        );
+    public get types() {
+        return this.args[0].types;
+    }
+
+    public emit(type: ITypeObject | ITypeEnum) {
+        const ctor = this.getTransformClass(type);
+        if (ctor) {
+            return this.segments.push(ctor.transform());
+        }
+
+        this.traceEvent.warning(new Error(`Cannot transform type ${type.name}`));
+    }
+
+    public getTransformClass(type: ITypeObject | ITypeEnum) {
+        if (type.kind === TypeKind.ENUM) {
+            return new GQLEnumTypeTransform(type);
+        }
+
+        if (type.kind === TypeKind.CLASS && type.base === TYPE.SCHEMA) {
+            return new GQLSchemaTransform(this, type);
+        }
+
+        if (type.kind === TypeKind.CLASS && OutputType.has(type.base)) {
+            return new GQLQueryTypeTransform(this, type);
+        }
+
+        if (type.kind === TypeKind.CLASS && InputType.has(type.base)) {
+            return new GQLInputTypeTransform(this, type);
+        }
+    }
+
+    public isTransformable(type: TypeMap): type is ITypeObject | ITypeEnum {
+        return type.kind === TypeKind.CLASS
+            || type.kind === TypeKind.ENUM;
     }
 
     public transform() {
-        const skip = [
-            TypeBaseClass.InterfaceType,
-            TypeBaseClass.Context,
-            TypeBaseClass.Container,
-        ];
-
         for (const type of this.types.values()) {
-            if (type.abstract) {
-                continue;
+            if (this.isTransformable(type)) {
+                this.emit(type);
             }
-
-            if (!this.transformers.has(type.base)) {
-                if (!skip.includes(type.base)) {
-                    this.traceEvent.warning(new Error(`Transformer not found for type ${type.base}`));
-                }
-                continue;
-            }
-
-            this.emit(type);
         }
 
         return this.segments.join("\n\n");
+    }
+
+    public createTypeByInterface(parent: ITypeObject, property: IPropertyReference, interfaceType: ITypeObject) {
+        const map = new XMap<string, PropertyType>();
+        if (interfaceType.parameter) {
+            for (const [index, parameter] of interfaceType.parameter.entries()) {
+                map.set(parameter, property.parameters[index]);
+            }
+        }
+
+        const nextProperty: PropertyType[] = [];
+        for (const p of interfaceType.property) {
+            nextProperty.push(InterfaceType.replaceTypeParameter(map, p));
+        }
+
+        const nextType: ITypeObject = {
+            kind: TypeKind.CLASS,
+            file: interfaceType.file,
+            base: interfaceType.base,
+            reference: interfaceType.base,
+            name: `${ucfirst(parent.name)}${ucfirst(property.name)}`,
+            property: nextProperty,
+            parameter: interfaceType.parameter,
+        };
+
+        this.types.set(nextType.name, nextType);
+        this.emit(nextType);
+
+        return nextType.name;
     }
 }

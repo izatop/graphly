@@ -1,11 +1,11 @@
-import {QueryType, TypeInt} from "@graphly/type";
+import {ObjectType, TypeInt} from "@graphly/type";
 import {TodoChecklist} from "./TodoChecklist";
 import {TodoFlag} from "./TodoFlag";
 
 /**
  * Todo type description
  */
-export class Todo extends QueryType {
+export class Todo extends ObjectType {
     public readonly id: TypeInt;
 
     public readonly title: string;
@@ -16,5 +16,7 @@ export class Todo extends QueryType {
 
     public readonly solved: boolean = false;
 
-    public readonly flag: TodoFlag;
+    public readonly deadlineAt?: Date;
+
+    public readonly flag?: TodoFlag;
 }

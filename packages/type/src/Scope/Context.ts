@@ -1,23 +1,25 @@
-import {Lookup} from "../Interface";
+import {KeyValue, Lookup} from "../Interface";
 import {Container} from "./Container";
 
-export class Context<C extends Container = never> {
-    public readonly container!: Lookup<C>;
+export type ContextCtor<TContext extends Context<TContainer, TConfig, TState>,
+    TContainer extends Container<TConfig>,
+    TConfig extends KeyValue = {},
+    TState extends KeyValue = {}> = new (container: Lookup<TContainer>, state: TState) => TContext;
 
-    public async resolve<A extends object>(source: A) {
-        const destination = Object.create(source);
-        const operations: Array<Promise<[string, any]>> = [];
-        for (const [property, value] of Object.entries(source)) {
-            if ("then" in value) {
-                operations.push(value.then((solved: any) => [property, solved]));
-            }
-        }
+export class Context<TContainer extends Container<TConfig>,
+    TConfig extends KeyValue = {},
+    TState extends KeyValue = {}> {
 
-        const entries = await Promise.all(operations);
-        for (const [property, value] of entries) {
-            Reflect.set(destination, property, value);
-        }
+    protected readonly state: TState;
 
-        return Object.seal(destination) as Lookup<C>;
+    protected readonly container: Lookup<TContainer>;
+
+    constructor(container: Lookup<TContainer>, state: TState) {
+        this.state = state;
+        this.container = container;
+    }
+
+    protected get config() {
+        return this.container.config;
     }
 }

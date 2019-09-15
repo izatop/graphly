@@ -1,9 +1,12 @@
-export * from "./ContainerCtor";
-export * from "./ContextCtor";
-export * from "./ContextPayload";
+import {ResolverFunction} from "./Resolver";
+
 export * from "./Lookup";
+export * from "./Request";
 export * from "./Resolver";
-export * from "./ResolverArgs";
-export * from "./SchemaCtor";
-export * from "./SchemaType";
-export * from "./ScopeOptions";
+export * from "./Schema";
+export * from "./IObject";
+
+export type KeyValue<V = any> = { [key: string]: V };
+export type Arrayable<T> = T | T[];
+export type Resolvable<T> = T | ResolverFunction<T>;
+export type Promisable<T> = T | Promise<T>;

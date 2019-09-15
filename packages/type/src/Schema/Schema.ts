@@ -1,9 +1,14 @@
-import {MutationType, QueryType} from "../Type";
+import {ObjectType, SubscriptionType} from "../Type";
+
+export type SchemaCtor<T extends Schema = Schema> = {
+    new(): T;
+    getSchemaLocation(): NodeModule | string;
+};
 
 export abstract class Schema {
-    public abstract readonly query: QueryType;
+    public abstract readonly query: ObjectType;
 
-    public abstract readonly mutation?: MutationType;
+    public readonly mutation?: ObjectType;
 
-    public abstract readonly subscription?: MutationType;
+    public readonly subscription?: SubscriptionType;
 }

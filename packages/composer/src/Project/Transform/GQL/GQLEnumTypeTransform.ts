@@ -1,14 +1,17 @@
-import {GQLTypeTransform} from "./GQLTypeTransform";
+import {ITypeEnum} from "../../../Type";
+import {TransformAbstract} from "../TransformAbstract";
 
-export class GQLEnumTypeTransform extends GQLTypeTransform {
-    public readonly declaration: string = "enum";
+export class GQLEnumTypeTransform extends TransformAbstract<[ITypeEnum], string> {
+    public get type() {
+        return this.args[0];
+    }
 
-    public transformBody() {
+    public transform() {
         const segments = [];
-        for (const property of this.type.property) {
-            segments.push(`  ${property.name}`);
+        for (const [name] of Object.entries(this.type.property)) {
+            segments.push(name);
         }
 
-        return segments.join("\n");
+        return `enum ${this.type.name} {\n  ${segments.join("\n  ")}\n}`;
     }
 }

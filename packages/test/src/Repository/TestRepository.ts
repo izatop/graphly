@@ -45,14 +45,13 @@ export class TestRepository {
                 return Promise.resolve(map.get(id)! as T);
             },
             update(id: number, data: Omit<T, "id">) {
-                const todo = this.findOne(id);
+                const todo = map.get(id);
                 if (todo) {
-                    Object.assign(todo, data);
-                    return Promise.resolve(true);
+                    map.set(id, {...todo, ...data});
+                    dispatcher.emit("update", map.get(id));
                 }
 
-                dispatcher.emit("update", map.get(id));
-                return Promise.resolve(false);
+                return Promise.resolve(map.get(id) as T | undefined);
             },
             delete(id: number) {
                 if (map.has(id)) {

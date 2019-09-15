@@ -10,11 +10,10 @@
         "build:watch": "yarn build --watch"
     },
     "dependencies": {
-        "@graphly/cli": "0.0.0-development",
         "@graphly/composer": "0.0.0-development",
         "@graphly/type": "0.0.0-development",
         "@types/graphql": "^14.5.0",
-        "graphql": "^14.5.4"
+        "graphql": "^14.5.5"
     },
     "private": true
 }

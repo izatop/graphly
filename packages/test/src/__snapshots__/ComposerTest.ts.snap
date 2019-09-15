@@ -1,15 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Composer toGraphQL 1`] = `
+exports[`Composer Project.toGraphQL() 1`] = `
 "input TodoChecklistInput {
   solved: Boolean
   text: String!
 }
 
 input TodoInput {
-  checklist: [TodoChecklistInput!]!
+  checklist: [TodoChecklistInput!]
   deadlineAt: DateTime
   description: String
+  flag: TodoFlag
   solved: Boolean
   title: String
 }
@@ -23,15 +24,16 @@ input TodoSearchInput {
 type TodoMutation {
   add(todo: TodoInput!): Todo!
   delete(id: [Int!]!): [Boolean!]!
-  update(id: Int!, todo: TodoInput!): Boolean!
+  update(id: Int!, todo: TodoInput!): Todo!
 }
 
 type Todo {
   checklist: [TodoChecklist!]!
+  deadlineAt: DateTime
   description: String
-  flag: TodoFlag!
+  flag: TodoFlag
   id: Int!
-  solved: Boolean
+  solved: Boolean!
   title: String!
 }
 
@@ -65,10 +67,10 @@ type TestMutation {
 
 type TestQuery {
   optional: Float
-  random: Float
+  random: Float!
   todo: TodoQuery!
-  timestamp(): Float!
-  hello(): String!
+  timestamp: Float!
+  hello: String!
 }
 
 schema {
@@ -81,5 +83,12 @@ type TestSubscription {
   onTodoAdded(): Todo!
   onTodoDelete(): Todo!
   onTodoUpdate(): Todo!
+}
+
+type TodoQuerySearch {
+  count: Int!
+  limit: Int!
+  node: [Todo!]!
+  offset: Int!
 }"
 `;

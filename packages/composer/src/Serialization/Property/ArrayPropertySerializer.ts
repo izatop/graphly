@@ -1,11 +1,12 @@
 // tslint:disable-next-line:no-submodule-imports
 import {ArrayType} from "typedoc/dist/lib/models";
-import {PropertyBox} from "../interfaces";
+import {IPropertyReference, PropertyKind} from "../../Type";
+import {TYPE} from "../../Type/const";
 import {createPropertySerializer} from "./index";
 import {PropertySerializer} from "./PropertySerializer";
 
 export class ArrayPropertySerializer extends PropertySerializer<ArrayType> {
-    public serialize() {
+    public serialize(): IPropertyReference {
         const delegateReflection = {
             type: this.data.type.elementType,
             name: this.name,
@@ -19,11 +20,13 @@ export class ArrayPropertySerializer extends PropertySerializer<ArrayType> {
             () => this.data.type.elementType.toObject(),
         );
 
-        const {type, ...params} = serializer.serialize();
+        const reference = serializer.serialize();
         return {
-            ...params,
+            ...this.optional,
             name: this.name,
-            type: new PropertyBox("Array", type),
+            kind: PropertyKind.REFERENCE,
+            reference: TYPE.ARRAY,
+            parameters: [reference],
         };
     }
 }

@@ -1,9 +1,9 @@
 import {DeclarationReflection, ReflectionKind} from "typedoc";
-import {IProperty} from "../interfaces";
+import {IPropertyFunction, PropertyKind} from "../../Type";
 import {createPropertySerializer} from "../Property";
 import {SerializerAbstract} from "../SerializerAbstract";
 
-export class CallableTypeSerializer extends SerializerAbstract<IProperty, DeclarationReflection> {
+export class CallableTypeSerializer extends SerializerAbstract<IPropertyFunction, DeclarationReflection> {
     get name(): string {
         return this.data.name;
     }
@@ -15,7 +15,7 @@ export class CallableTypeSerializer extends SerializerAbstract<IProperty, Declar
             () => this.data.toObject(),
         );
 
-        const property = [];
+        const args = [];
         const signature = this.data.signatures![0];
         for (const parameter of signature.parameters || []) {
             if (parameter.kind !== ReflectionKind.Parameter) {
@@ -42,7 +42,7 @@ export class CallableTypeSerializer extends SerializerAbstract<IProperty, Declar
                 () => ({name: parameter.name, type: parameter.type!.toObject()}),
             );
 
-            property.push(serializer.serialize());
+            args.push(serializer.serialize());
         }
 
         const returnsSerializer = createPropertySerializer(this.project, {
@@ -58,11 +58,14 @@ export class CallableTypeSerializer extends SerializerAbstract<IProperty, Declar
         );
 
         const returns = returnsSerializer.serialize();
-        return {
-            type: returns.type,
-            nullable: false,
+        const property: IPropertyFunction = {
+            args,
+            returns,
             name: this.name,
-            resolver: property,
+            nullable: returns.nullable,
+            kind: PropertyKind.FUNCTION,
         };
+
+        return property;
     }
 }

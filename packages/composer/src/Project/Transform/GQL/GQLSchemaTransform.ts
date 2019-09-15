@@ -1,22 +1,20 @@
-import {IType} from "../../../Serialization/interfaces";
-import {TransformAbstract} from "../TransformAbstract";
-import {GQLTransform} from "./GQLTransform";
+import {GQLTypeTransform} from "./GQLTypeTransform";
 
-export class GQLSchemaTransform extends TransformAbstract<[GQLTransform, IType], string> {
-    public get context() {
-        return this.args[0];
-    }
-
-    public get type() {
-        return this.args[1];
-    }
+export class GQLSchemaTransform extends GQLTypeTransform {
+    public readonly declaration = "schema";
 
     public transform(): string {
         const segments: string[] = [];
         for (const property of this.type.property) {
-            segments.push(`${property.name}: ${property.type}`);
+            const type = this.context.resolver.resolve(this.type, property);
+            if (type) {
+                segments.push(`${property.name}: ${type}`);
+                continue;
+            }
+
+            this.context.traceEvent.warning(new Error(`Skip schema property ${property.name}`));
         }
 
-        return `schema {\n  ${segments.join("\n  ")}\n}`;
+        return `${this.declaration} {\n  ${segments.join("\n  ")}\n}`;
     }
 }

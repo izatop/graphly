@@ -8,7 +8,9 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "watch": "tsc -b packages -w",
+        "clean": "lerna run clean",
+        "build": "tsc -b packages",
+        "build:watch": "tsc -b packages -w",
         "test": "jest --config jest.json",
         "test:watch": "jest --watch --config jest.json"
     },
@@ -22,7 +24,7 @@
         "@types/jest": "^24.0.18",
         "jest": "^24.9.0",
         "jest-serializer-path": "^0.1.15",
-        "ts-jest": "^24.0.2",
-        "tslint": "^5.19.0"
+        "ts-jest": "^24.1.0",
+        "tslint": "^5.20.0"
     }
 }

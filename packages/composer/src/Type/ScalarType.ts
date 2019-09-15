@@ -1,0 +1,15 @@
+export const ScalarType = new Set([
+    "TypeID",
+    "TypeInt",
+    "TypeFloat",
+    "TypeString",
+    "TypeBoolean",
+    "TypeObject",
+    "TypeDate",
+    "Date",
+    "string",
+    "number",
+    "boolean",
+    "symbol",
+    "undefined",
+]);

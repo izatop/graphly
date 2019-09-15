@@ -1,7 +1,7 @@
-import {InputType, TypeInt} from "@graphly/type";
+import {InputObjectType, TypeInt} from "@graphly/type";
 
-export abstract class PaginationInput extends InputType {
-    public offset: TypeInt = 0;
+export abstract class PaginationInput extends InputObjectType {
+    public readonly offset: TypeInt = 0;
 
-    public limit: TypeInt = 10;
+    public readonly limit: TypeInt = 10;
 }

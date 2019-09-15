@@ -1,3 +1,4 @@
+import {TransformError} from "../Project/Transform/TransformError";
 import {inspect} from "./inspect";
 import {SerializeError} from "../Serialization/SerializeError";
 
@@ -30,7 +31,7 @@ export class TraceEvent {
     }
 
     public warning<E extends Error>(error: E) {
-        if (error instanceof SerializeError) {
+        if (error instanceof SerializeError || error instanceof TransformError) {
             const {diagnostic} = error;
             // tslint:disable-next-line:no-console
             console.error(error, inspect({diagnostic}));
@@ -41,7 +42,7 @@ export class TraceEvent {
     }
 
     public error<E extends Error>(error: E) {
-        if (error instanceof SerializeError) {
+        if (error instanceof SerializeError || error instanceof TransformError) {
             const {diagnostic} = error;
             // tslint:disable-next-line:no-console
             console.error(error, inspect({diagnostic}));

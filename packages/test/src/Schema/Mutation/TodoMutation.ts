@@ -1,16 +1,15 @@
-import {Lookup, MutationType, TypeInt} from "@graphly/type";
+import {Lookup, ObjectType, TypeInt} from "@graphly/type";
 import {TodoInput} from "../Input/TodoInput";
 import {TestContainer} from "../TestContainer";
 import {TestContext} from "../TestContext";
 
-export class TodoMutation extends MutationType {
-    public add(todo: TodoInput, context: Lookup<TestContext>) {
+export class TodoMutation extends ObjectType {
+    public add(todo: TodoInput, context: TestContext) {
         return context.todos.add(todo);
     }
 
     public update(id: TypeInt, todo: TodoInput, context: TestContext) {
-        const {todos} = context;
-        return todos.update(id, todo);
+        return context.todos.update(id, todo);
     }
 
     public delete(id: TypeInt[], container: Lookup<TestContainer>) {

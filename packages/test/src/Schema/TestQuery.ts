@@ -1,7 +1,7 @@
-import {QueryType} from "@graphly/type";
+import {ObjectType} from "@graphly/type";
 import {TodoQuery} from "./Query/TodoQuery";
 
-export class TestQuery extends QueryType {
+export class TestQuery extends ObjectType {
     /**
      * Empty optional field without a resolver
      */

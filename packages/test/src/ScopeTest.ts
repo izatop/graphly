@@ -5,8 +5,12 @@ import {TestSchema} from "./Schema/TestSchema";
 
 test("Scope", async () => {
     const scope = new Scope({
-        schema: new TestSchema(),
-        container: TestContainer,
+        schema: TestSchema,
         context: TestContext,
+        container: TestContainer,
+        config: {},
     });
+
+    const config = await scope.createConfig({});
+    expect(config).toBeDefined();
 });

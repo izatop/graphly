@@ -1,11 +1,11 @@
-import {Lookup, QueryType, TypeInt} from "@graphly/type";
+import {Lookup, ObjectType, TypeInt} from "@graphly/type";
 import {TodoSearchInput} from "../Input/TodoSearchInput";
 import {TestContainer} from "../TestContainer";
 import {TestContext} from "../TestContext";
 import {IPageable} from "./IPageable";
 import {Todo} from "./Todo";
 
-export class TodoQuery extends QueryType {
+export class TodoQuery extends ObjectType {
     public todo(id: TypeInt, container: Lookup<TestContainer>) {
         const {repository} = container;
         return repository.get<Todo>("todos")
@@ -33,9 +33,7 @@ export class TodoQuery extends QueryType {
         const {todos} = context;
         let todosQuery = await todos.find();
 
-        if (typeof solved === "boolean") {
-            todosQuery = todosQuery.filter((item) => item.solved === solved);
-        }
+        todosQuery = todosQuery.filter((item) => item.solved === solved);
 
         return todosQuery.length;
     }

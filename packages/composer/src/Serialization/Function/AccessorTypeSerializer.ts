@@ -1,9 +1,9 @@
 import {DeclarationReflection} from "typedoc";
-import {IProperty} from "../interfaces";
+import {IPropertyFunction, PropertyKind} from "../../Type";
 import {createPropertySerializer} from "../Property";
 import {SerializerAbstract} from "../SerializerAbstract";
 
-export class AccessorTypeSerializer extends SerializerAbstract<IProperty, DeclarationReflection> {
+export class AccessorTypeSerializer extends SerializerAbstract<IPropertyFunction, DeclarationReflection> {
     get name(): string {
         return this.data.name;
     }
@@ -29,11 +29,14 @@ export class AccessorTypeSerializer extends SerializerAbstract<IProperty, Declar
         );
 
         const returns = returnsSerializer.serialize();
-        return {
-            type: returns.type,
-            nullable: false,
+        const property: IPropertyFunction = {
+            returns,
             name: this.name,
-            resolver: [],
+            kind: PropertyKind.FUNCTION,
+            nullable: returns.nullable,
+            args: [],
         };
+
+        return property;
     }
 }

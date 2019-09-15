@@ -2,7 +2,7 @@
 import {Type} from "typedoc/dist/lib/models";
 // tslint:disable-next-line:no-submodule-imports
 import {ReflectionFlags} from "typedoc/dist/lib/models/reflections/abstract";
-import {IProperty} from "../interfaces";
+import {PropertyType} from "../../Type";
 import {SerializerAbstract} from "../SerializerAbstract";
 
 export interface IPropertySerializer<T extends Type> {
@@ -13,7 +13,7 @@ export interface IPropertySerializer<T extends Type> {
 }
 
 export abstract class PropertySerializer<T extends Type>
-    extends SerializerAbstract<IProperty, IPropertySerializer<T>> {
+    extends SerializerAbstract<PropertyType, IPropertySerializer<T>> {
     public get name() {
         return this.data.name;
     }
@@ -21,7 +21,7 @@ export abstract class PropertySerializer<T extends Type>
     public get optional() {
         if (this.data.defaultValue) {
             return {
-                nullable: true,
+                nullable: this.data.flags.isOptional,
                 defaultValue: this.data.defaultValue,
             };
         }

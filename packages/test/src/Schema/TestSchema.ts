@@ -5,6 +5,12 @@ import {TestSubscription} from "./TestSubscription";
 
 export class TestSchema extends Schema {
     public readonly query: TestQuery;
+
     public readonly mutation: TestMutation;
+
     public readonly subscription: TestSubscription;
+
+    public static getSchemaLocation() {
+        return __filename;
+    }
 }

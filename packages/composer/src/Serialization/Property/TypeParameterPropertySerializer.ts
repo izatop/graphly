@@ -1,5 +1,6 @@
 // tslint:disable-next-line:no-submodule-imports
 import {TypeParameterType} from "typedoc/dist/lib/models";
+import {IPropertyParameter, PropertyKind} from "../../Type";
 import {PropertySerializer} from "./PropertySerializer";
 
 /**
@@ -7,10 +8,13 @@ import {PropertySerializer} from "./PropertySerializer";
  */
 export class TypeParameterPropertySerializer extends PropertySerializer<TypeParameterType> {
     public serialize() {
-        return {
+        const property: IPropertyParameter = {
             ...this.optional,
+            kind: PropertyKind.PARAMETER,
             name: this.name,
-            type: this.data.type.name,
+            parameter: this.data.type.name,
         };
+
+        return property;
     }
 }

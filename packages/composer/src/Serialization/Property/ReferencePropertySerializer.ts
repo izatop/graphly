@@ -1,13 +1,13 @@
 // tslint:disable-next-line:no-submodule-imports
 import {ReferenceType} from "typedoc/dist/lib/models";
-import {PropertyBox, PropertyType} from "../interfaces";
+import {IPropertyReference, PropertyKind} from "../../Type";
 import {createPropertySerializer} from "./index";
 import {PropertySerializer} from "./PropertySerializer";
 
 export class ReferencePropertySerializer extends PropertySerializer<ReferenceType> {
-    public serialize() {
+    public serialize(): IPropertyReference {
         if (this.data.type.typeArguments && this.data.type.typeArguments.length > 0) {
-            const args: [PropertyType, ...PropertyType[]] = [] as any;
+            const parameters = [];
             for (const argument of this.data.type.typeArguments) {
                 const typeSerializer = createPropertySerializer(this.project, {
                     defaultValue: this.data.defaultValue,
@@ -23,20 +23,24 @@ export class ReferencePropertySerializer extends PropertySerializer<ReferenceTyp
                 );
 
                 const value = typeSerializer.serialize();
-                args.push(value.type);
+                parameters.push(value);
             }
 
             return {
                 ...this.optional,
+                parameters,
                 name: this.name,
-                type: new PropertyBox(this.data.type.name, ...args),
+                kind: PropertyKind.REFERENCE,
+                reference: this.data.type.name,
             };
         }
 
         return {
             ...this.optional,
             name: this.name,
-            type: this.data.type.name,
+            kind: PropertyKind.REFERENCE,
+            reference: this.data.type.name,
+            parameters: [],
         };
     }
 }
