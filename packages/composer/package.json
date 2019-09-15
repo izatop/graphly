@@ -1,6 +1,6 @@
 {
     "name": "@graphly/composer",
-    "version": "0.0.0-development",
+    "version": "0.1.0-development.0",
     "keywords": [
         "graphql",
         "typescript"
