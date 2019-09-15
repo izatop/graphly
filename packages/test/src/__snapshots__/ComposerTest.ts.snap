@@ -24,7 +24,7 @@ input TodoSearchInput {
 type TodoMutation {
   add(todo: TodoInput!): Todo!
   delete(id: [Int!]!): [Boolean!]!
-  update(id: Int!, todo: TodoInput!): Todo!
+  update(id: Int!, todo: TodoInput!): Todo
 }
 
 type Todo {
@@ -58,7 +58,7 @@ type TodoQuerySearch {
 type TodoQuery {
   count(solved: Boolean = true): Int!
   search(filter: TodoSearchInput): TodoQuerySearch!
-  todo(id: Int!): Todo!
+  todo(id: Int!): Todo
 }
 
 type TestMutation {
