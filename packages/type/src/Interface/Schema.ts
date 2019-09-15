@@ -1,7 +1,7 @@
 import {InputObjectType, ObjectType} from "../Type";
 import {IObject} from "./IObject";
 
-export type TypeID = symbol;
+export type TypeID = string | number;
 export type TypeInt = number;
 export type TypeFloat = number;
 export type TypeString = string;
@@ -21,7 +21,6 @@ export type OutputType<TObjectType extends ObjectType = ObjectType> = TObjectTyp
     | string
     | number
     | boolean
-    | symbol
     | undefined
     ;
 
@@ -36,6 +35,5 @@ export type InputType<TInputObjectType extends InputObjectType = InputObjectType
     | string
     | number
     | boolean
-    | symbol
     | undefined
     ;
