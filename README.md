@@ -65,6 +65,8 @@ MySchema/Input/TodoInput.ts
     
 ```
 
+Put into this directory only a schema and context/container files.
+
 ### Resolvers
 
 Any public property of a class may be a type or a resolver.
