@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.4](https://github.com/graphly/graphly/compare/v0.2.3...v0.2.4) (2019-09-18)
+
+
+### Bug Fixes
+
+* a base type check ([758b914](https://github.com/graphly/graphly/commit/758b914))
+* fix base for wrong ordered types ([dd3cc39](https://github.com/graphly/graphly/commit/dd3cc39))
+
+
+
+
+
 ## [0.2.3](https://github.com/graphly/graphly/compare/v0.2.2...v0.2.3) (2019-09-15)
 
 
