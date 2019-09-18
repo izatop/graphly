@@ -64,5 +64,36 @@ export class ProjectSerializer {
                 }
             }
         }
+
+        const kindTypeCheck = (t: TypeMap): t is ITypeObject => (
+            [TypeKind.ABSTRACT, TypeKind.CLASS, TypeKind.INTERFACE, TypeKind.SERVICE].includes(t.kind)
+        );
+
+        // post-check for wrong ordered types
+        for (const child of this.types.values()) {
+            if (kindTypeCheck(child) && child.base === TYPE.UNKNOWN) {
+                const base = this.resolveBaseByTypeMap(child);
+                if (base) {
+                    child.base = base;
+                }
+            }
+        }
+    }
+
+    protected resolveBaseByTypeMap(type: ITypeObject): string {
+        const {reference} = type;
+        if (!reference) {
+            return TYPE.UNKNOWN;
+        }
+
+        if (this.types.has(reference)) {
+            return this.resolveBaseByTypeMap(this.types.ensure(reference) as ITypeObject);
+        }
+
+        if (reference in TypeBase) {
+            return reference;
+        }
+
+        return TYPE.UNKNOWN;
     }
 }
