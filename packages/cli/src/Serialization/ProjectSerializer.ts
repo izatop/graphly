@@ -86,12 +86,12 @@ export class ProjectSerializer {
             return TYPE.UNKNOWN;
         }
 
-        if (this.types.has(reference)) {
-            return this.resolveBaseByTypeMap(this.types.ensure(reference) as ITypeObject);
+        if (TypeBase.has(reference)) {
+            return reference;
         }
 
-        if (reference in TypeBase) {
-            return reference;
+        if (this.types.has(reference)) {
+            return this.resolveBaseByTypeMap(this.types.ensure(reference) as ITypeObject);
         }
 
         return TYPE.UNKNOWN;
