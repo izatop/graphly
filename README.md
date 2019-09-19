@@ -5,55 +5,100 @@ No more hell of decorators and pain with unreadable the GraphQLXXXType spaghetti
 
 ## Features
 
-1. Writing a schema as a tree of classes.
-2. Class properties may be declared as a type or a resolver.
-3. Auto passing a service container and a context to resolvers.
-4. Schemas can be separated in independent scopes.
-5. Auto-generated return types with generics and interfaces.
+1. Writing the GraphQL schemas as a class tree.
+2. Providing Service Container and Context State to the resolvers.
+3. Defining independent GraphQL schemas nearby in one project.
+4. Defining GraphQL types on the fly by an interface definition.
 
-See packages/test to meet a full schema example.
+See [packages/test](https://github.com/graphly/graphly/tree/master/packages/test)
+to meet the GraphQL schema definition example.
 
-### Tree of schema types
+## Getting started
 
-Usage example
+First you need install `@graphly/cli` and `@graphly/types`
 
+`yarn add @graphly/cli @graphly/types` or `npm i @graphly/clu @graphly/types`
+
+Next write your schema
+
+MySchema/MySchema.ts
 ```typescript
-import {ObjectType, Schema, TypeInt} from "@graphly/type";
+import {Schema} from "@graphly/type";
 
 export class MySchema extends Schema {
     public readonly query: MyQuery;
 
+    /**
+     * This method is required and uses to detect a schema path.
+     */
     public static getSchemaLocation() {
         return __filename;
     }
 }
+```
+
+MySchema/MyQuery.ts
+```typescript
+import {ObjectType} from "@graphly/type";
 
 export class MyQuery extends ObjectType {
-  public readonly todo: TodoQuery;
-}
-
-export class TodoQuery extends ObjectType {
-    public find(id: TypeInt): Promise<Todo> {
-        // ...
+    public hello() {
+        return "Hello, World";
     }
-}
-
-export class Todo extends ObjectType {
-    public readonly id: TypeInt;
-    public readonly title: string;
-    public readonly status: TodoStatus;
-    public get statusText() {
-        return this.status ? "Open" : "Close";
-    } 
-}
-
-export enum TodoStatus {
-    OPEN,
-    CLOSE,
 }
 ```
 
-I recommend separate schema classes as one class per file like this:
+MySchema/MyContext.ts
+```typescript
+import {Context} from "@graphly/type";
+import {MyContainer} from "./MyContainer";
+
+export class MyContext extends Context<MyContainer, {}, {}> {}
+```
+
+MySchema/MyContainer.ts
+```typescript
+import {Container} from "@graphly/type";
+
+export class MyContainer extends Container<{}> {}
+```
+
+Let's build a `typemap` of this schema `graphly-cli compose MySchema/MySchema.ts`
+it will write `MySchema.json` nearby compiled MySchema.js.
+
+Then you can use `Scope` from `@graphly/type` to define your own scope for this schema
+and call `graphql`
+
+```typescript
+import {graphql} from "graphql";
+import {Scope} from "@graphly/type";
+import {MySchema} from "./MySchema/MySchema";
+import {MyContext} from "./MySchema/MyContext";
+import {MyContainer} from "./MySchema/MyContainer";
+
+async function main() {
+    const myScope = new Scope({
+        schema: MySchema,
+        context: MyContext,
+        container: MyContainer,
+        config: {},
+    });
+    
+    const state = {};
+    const config = await myScope.createConfig(state);
+    
+    console.log(await graphql(
+        config.schema,
+        `query MyQuery {hello}`,
+        config.rootValue,
+        config.context,
+     ));
+}
+```
+
+### Project structure
+
+Typical structure of a project may be like this
 
 ```
 MySchema
@@ -65,29 +110,24 @@ MySchema/Query/Todo.ts
 MySchema/Query/Todo/TodoStatus.ts
 MySchema/Mutation/TodoMutation.ts
 MySchema/Input/TodoInput.ts
-... and etc
-    
+MySchema/MyContainer.ts
+MySchema/MyContext.ts
+...
 ```
 
-Put into this directory only a schema and context/container files.
+Remember that a project directory should contain only `schema`, `enum`, `context`
+or `container` types.
 
 ### Resolvers
 
-Any public property of a class may be a type or a resolver.
+Resolvers are class methods which return only the output type. You can pass
+only the input/service type as a resolver argument
 
 ```typescript
-import {ObjectType, InputObjectType} from "@graphly/type";
-
 class TotoMutation extends ObjectType {
     public add(todo: TodoInput, context: MyContext): Promise<Todo> {
         return context.todos.add(todo);
     }
-}
-
-class TodoInput extends InputObjectType {
-    public readonly id: TypeInt;
-    public readonly title: string = "New Todo";
-    public readonly status: TodoStatus = TodoStatus.OPEN;
 }
 ```
 
@@ -95,8 +135,8 @@ Sometimes TypeScript can resolve an incorrect return type like this:
 
 ```typescript
 class MyQuery {
-    public async session(context: MyContext) {
-        if (context.isAuthorized) { // Promise<UserSession> | Promise<undefined>
+    public async session(context: MyContext) { // Promise<UserSession> | Promise<undefined>
+        if (context.isAuthorized) {
             return context.userSession;
         }
 
@@ -105,7 +145,7 @@ class MyQuery {
 }
 ```
 
-Just force a return type declaration for the resolver:
+To fix this behavior just force a return type for the resolver
 
 ```typescript
 class MyQuery {
@@ -115,45 +155,70 @@ class MyQuery {
 }
 ```
 
-### Context and service Container
+### Service types
 
-You can pass any of Context or Container as argument to 
-a resolver method with input arguments.
+Context and Service Container are service types. Context is a request state
+and Container is a global state and service provider like a database link
+and so on.
+
+You should linking context with container to getting relevant type in its context
 
 ```typescript
-import {Context, Container, ObjectType} from "@graphly/type";
-import {IConfig, IState} from "./interfaces";
+interface IConfig {
+    dsn: string;
+}
 
-class MyQuery extends ObjectType {
-    public me(context: MyContext) {
-        return context.user;
-    }
+interface IState {
+    user: User;
 }
 
 class MyContext extends Context<MyContainer, IConfig, IState> {
-    public get user() {
+    public get currentUser() {
         return this.state.user;
+    }
+
+    public get todos() {
+        return this.container.repository.collection("todos");
     }
 }
 
 class MyContainer extends Container<IConfig> {
     public get repository() {
-        return createDbConnection(this.config.db.connectionString);
+        return createDbConnection(this.config.dsn);
+    }
+}
+```   
+
+The service type can be used as a resolver argument
+
+```typescript
+class TodoMutation extends ObjectType {
+    public async add(todo: TodoInput, context: MyContext): Promise<Todo> {
+        const {todos} = context;
+        const {insertedId} = await todos.insertOne(todo);
+        return todos.findOne({_id: insertedId});
     }
 }
 ```
 
-### Auto generation object types
+Remember, that `container` will be passed to `context` and resolver arguments
+with resolved properties. It touches `container` getters too.
+
+### Type generation on the fly
+
+You can use interfaces to generating typically structures on the fly.
+For example you can use pagination interface to auto-generate its type
 
 ```typescript
 import {ObjectType, IObject, TypeInt} from "@graphly/type";
 
 class TodoQuery extends ObjectType {
     public async search(offset: TypeInt = 0, limit: TypeInt = 10, context: MyContext): Promise<IPageable<Todo>> {
-        const count = await context.rodos.count();
-        const node = await context.rodos.find()
+        const count = await context.todos.countDocuments();
+        const node = await context.todos.find()
             .offset(offset)
-            .limit(limit);
+            .limit(limit)
+            .toArray();
 
         return {count, limit, offset, node}
     }
@@ -167,7 +232,7 @@ interface IPageable<T extends ObjectType> extends IObject {
 }
 ```
 
-In this case `TodoQuery.search` will return a new type:
+In this case `TodoQuery.search` will define a new type:
 
 ```graphql
 type TodoQuerySearch {
@@ -217,10 +282,10 @@ async function main() {
 ## Limitations
 
 It's a little bit difficult to parse all types of the TypeScript reflection so class schema has
-some limitations for syntax that can be used.
+some limitations for syntax that can be used:
 
 1. Don't use spread syntax in resolver arguments.
-2. Use Promise, AsyncIterator and IObject only as a return type.
+2. Use Promise, AsyncIterator, Subscription and IObject only as a parents of return types.
 3. Don't use nearby resolvers.
 4. Be careful to use initial values of class members.
 

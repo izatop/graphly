@@ -22,6 +22,20 @@ export class ProjectSerializer {
             }
         }
 
+        const kindTypeCheck = (t: TypeMap): t is ITypeObject => (
+            [TypeKind.ABSTRACT, TypeKind.CLASS, TypeKind.INTERFACE, TypeKind.SERVICE].includes(t.kind)
+        );
+
+        // post-check for wrong ordered types
+        for (const child of this.types.values()) {
+            if (kindTypeCheck(child) && child.base === TYPE.UNKNOWN) {
+                const base = this.resolveBaseByTypeMap(child);
+                if (base) {
+                    child.base = base;
+                }
+            }
+        }
+
         return this.types;
     }
 
@@ -55,26 +69,18 @@ export class ProjectSerializer {
         for (const child of declaration.children || []) {
             if ([ReflectionKind.Class, ReflectionKind.Interface, ReflectionKind.Enum].includes(child.kind)) {
                 try {
+                    // skip plain interfaces
+                    if (child.kind === ReflectionKind.Interface
+                        && !(child.extendedTypes && child.extendedTypes.length > 0)) {
+                        continue;
+                    }
+
                     const serializer = new TypeSerializer(this, child);
                     const description = serializer.serialize();
                     this.types.set(serializer.name, description);
                     this.traceEvent.emit("type", serializer.name, description);
                 } catch (error) {
                     this.traceEvent.warning(error);
-                }
-            }
-        }
-
-        const kindTypeCheck = (t: TypeMap): t is ITypeObject => (
-            [TypeKind.ABSTRACT, TypeKind.CLASS, TypeKind.INTERFACE, TypeKind.SERVICE].includes(t.kind)
-        );
-
-        // post-check for wrong ordered types
-        for (const child of this.types.values()) {
-            if (kindTypeCheck(child) && child.base === TYPE.UNKNOWN) {
-                const base = this.resolveBaseByTypeMap(child);
-                if (base) {
-                    child.base = base;
                 }
             }
         }

@@ -44,7 +44,7 @@ ${todoFragment}
 
 describe("Composer", () => {
     const config = {
-        time: Date.now(),
+        dsn: "connection string",
     };
 
     const scope = new Scope({
@@ -55,17 +55,18 @@ describe("Composer", () => {
     });
 
     const runQuery = async (q: string, v?: KeyValue) => {
-        const {schema, context, rootValue} = await scope.createConfig({id});
+        const state = {timestamp: Date.now()};
+        const {schema, context, rootValue} = await scope.createConfig(state);
         return graphql(schema, q, rootValue, context, v);
     };
 
-    const id = Math.random().toString(32);
     test("Test Context", async () => {
-        const {context} = await scope.createConfig({id});
+        const state = {timestamp: Date.now()};
+        const {context} = await scope.createConfig(state);
         expect(context.container.repository).toBeInstanceOf(TestRepository);
         expect(context.container.config).toMatchObject(config);
         expect(context.container.config).toBe(context.getConfig());
-        expect(context.state).toMatchObject({id});
+        expect(context.state).toMatchObject(state);
     });
 
     test("Schema query", async () => {
