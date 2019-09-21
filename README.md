@@ -17,7 +17,7 @@ to meet the GraphQL schema definition example.
 
 First you need install `@graphly/cli` and `@graphly/types`
 
-`yarn add @graphly/cli @graphly/types` or `npm i @graphly/clu @graphly/types`
+`yarn add @graphly/cli @graphly/types` or `npm i @graphly/cli @graphly/types`
 
 Next write your schema
 
