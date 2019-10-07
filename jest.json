@@ -2,9 +2,6 @@
     "roots": [
         "<rootDir>/packages/test/src"
     ],
-    "snapshotSerializers": [
-        "jest-serializer-path"
-    ],
     "transform": {
         "^.+\\.ts$": "ts-jest"
     },
