@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.7](https://github.com/graphly/graphly/compare/v0.2.6...v0.2.7) (2019-10-09)
+
+
+### Bug Fixes
+
+* merge ci updates and fix README ([8b6ca06](https://github.com/graphly/graphly/commit/8b6ca06c0411cd41687a7356dc5e018cb0725d16))
+* return types for async resolvers ([35afcb2](https://github.com/graphly/graphly/commit/35afcb255f00481f4bcf1c6b271f9c755a4ef713))
+
+
+
+
+
 ## [0.2.6](https://github.com/graphly/graphly/compare/v0.2.5...v0.2.6) (2019-10-07)
 
 
