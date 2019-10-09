@@ -125,7 +125,7 @@ only the input/service type as a resolver argument
 
 ```typescript
 class TotoMutation extends ObjectType {
-    public add(todo: TodoInput, context: MyContext): Promise<Todo> {
+    public add(todo: TodoInput, context: MyContext): Returns<Todo> {
         return context.todos.add(todo);
     }
 }
@@ -149,7 +149,24 @@ To fix this behavior just force a return type for the resolver
 
 ```typescript
 class MyQuery {
-    public async session(context: MyContext): Promise<UserSession | undefined> {
+    public async session(context: MyContext): ReturnsNullable<UserSession> {
+        // ...
+    }
+}
+```
+
+### Return types in resolves
+
+Force use `Returns` or `Promise` for non-nullable and `ReturnsNullable`
+for nullable (for `null` and `undefined` type too) in async resolvers.
+
+```typescript
+class MeQuery {
+    public async me(): Returns<User> {
+        // ...
+    }
+
+    public async bestFriend(): ReturnsNullable<User> {
         // ...
     }
 }
@@ -193,7 +210,7 @@ The service type can be used as a resolver argument
 
 ```typescript
 class TodoMutation extends ObjectType {
-    public async add(todo: TodoInput, context: MyContext): Promise<Todo> {
+    public async add(todo: TodoInput, context: MyContext): Returns<Todo> {
         const {todos} = context;
         const {insertedId} = await todos.insertOne(todo);
         return todos.findOne({_id: insertedId});
@@ -210,10 +227,10 @@ You can use interfaces to generating typically structures on the fly.
 For example you can use pagination interface to auto-generate its type
 
 ```typescript
-import {ObjectType, IObject, TypeInt} from "@graphly/type";
+import {ObjectType, IObject, TypeInt, Returns} from "@graphly/type";
 
 class TodoQuery extends ObjectType {
-    public async search(offset: TypeInt = 0, limit: TypeInt = 10, context: MyContext): Promise<IPageable<Todo>> {
+    public async search(offset: TypeInt = 0, limit: TypeInt = 10, context: MyContext): Returns<IPageable<Todo>> {
         const count = await context.todos.countDocuments();
         const node = await context.todos.find()
             .offset(offset)
