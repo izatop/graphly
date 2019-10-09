@@ -1,5 +1,5 @@
 // tslint:disable:no-submodule-imports
-import {IPropertyReference, PropertyKind} from "@graphly/schema";
+import {IPropertyReference, PropertyKind, TYPE} from "@graphly/schema";
 import {ReferenceType} from "typedoc/dist/lib/models";
 import {createPropertySerializer} from "./index";
 import {PropertySerializer} from "./PropertySerializer";
@@ -32,7 +32,8 @@ export class ReferencePropertySerializer extends PropertySerializer<ReferenceTyp
                 name: this.name,
                 kind: PropertyKind.REFERENCE,
                 reference: this.data.type.name,
-                nullable: parameters.some((item) => item.nullable),
+                nullable: this.data.type.name === TYPE.RETURNS_NULLABLE
+                    || parameters.some((item) => item.nullable),
             };
         }
 

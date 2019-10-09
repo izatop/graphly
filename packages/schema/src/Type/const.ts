@@ -14,6 +14,8 @@ export namespace TYPE {
 
     export const ARRAY = "Array";
     export const PROMISE = "Promise";
+    export const RETURNS = "Returns";
+    export const RETURNS_NULLABLE = "ReturnsNullable";
     export const ASYNC_ITERATOR = "AsyncIterator";
     export const T_SUBSCRIPTION = "Subscription";
 }

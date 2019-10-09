@@ -15,9 +15,3 @@ export const TypeService = new Set([
     TYPE.CONTEXT,
     TYPE.CONTAINER,
 ]);
-
-export const ReturnType = new Set([
-    TYPE.PROMISE,
-    TYPE.ASYNC_ITERATOR,
-    TYPE.T_SUBSCRIPTION,
-]);

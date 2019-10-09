@@ -10,3 +10,5 @@ export type KeyValue<V = any> = { [key: string]: V };
 export type Arrayable<T> = T | T[];
 export type Resolvable<T> = T | ResolverFunction<T>;
 export type Promisable<T> = T | Promise<T>;
+export type Returns<T> = Promise<T>;
+export type ReturnsNullable<T> = Promise<undefined | null | T>;
