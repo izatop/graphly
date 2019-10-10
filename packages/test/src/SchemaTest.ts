@@ -20,6 +20,24 @@ query TodoQuery ($id: Int!) {
 ${todoFragment}
 `;
 
+const todoTodoSearchQuery = `
+query TodoSearchQuery {
+    todo {
+        search { node {...TodoFragment} }
+    }
+}
+${todoFragment}
+`;
+
+const todoTodoSearchAllQuery = `
+query TodoSearchQueryAll {
+    todo {
+        searchAll { node {...TodoFragment} }
+    }
+}
+${todoFragment}
+`;
+
 const todoCountQuery = `
 query TodoCountQuery {
     todo {
@@ -135,5 +153,11 @@ describe("Composer", () => {
         const todoCount = await runQuery(todoCountQuery);
         expect(todoCount.errors).toBeUndefined();
         expect(todoCount.data).toMatchObject({todo: {count: 1}});
+    });
+
+    const iPageableTestQuery = [todoTodoSearchQuery, todoTodoSearchAllQuery];
+    test.each(iPageableTestQuery)("IPageable", async (q) => {
+        const query = await runQuery(q);
+        expect(query.errors).toBeUndefined();
     });
 });

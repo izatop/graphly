@@ -14,7 +14,7 @@ export class ArgumentPropertyResolver extends PropertyResolver<GraphQLInputType>
             .transform();
     }
 
-    protected createInterfaceType(name: string, property: IPropertyReference, type: ITypeObject): GraphQLInputType {
+    protected createInterfaceType(of: ITypeObject, property: IPropertyReference, type: ITypeObject): GraphQLInputType {
         throw new Error(`Input types don't support interfaces`);
     }
 }

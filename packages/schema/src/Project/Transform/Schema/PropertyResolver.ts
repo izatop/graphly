@@ -15,10 +15,9 @@ import {
     PropertyKind,
     PropertyType,
     ReturnType,
+    TYPE,
     TypeKind,
 } from "../../../Type";
-import {TYPE} from "../../../Type/const";
-import {ucfirst} from "../../../util/ucfirst";
 import {ScalarTypeTransform} from "../ScalarTypeTransform";
 import {SchemaTransform} from "./SchemaTransform";
 
@@ -76,16 +75,16 @@ export abstract class PropertyResolver<T extends GraphQLOutputType | GraphQLInpu
 
         if (this.context.types.has(property.reference)) {
             const type = this.context.types.ensure(property.reference);
-            if (type.kind === TypeKind.CLASS) {
-                this.cache.set(type.name, this.createObjectType(type));
-            }
-
             if (type.kind === TypeKind.INTERFACE) {
-                this.cache.set(type.name, this.createInterfaceType(
-                    ucfirst(of.name) + ucfirst(property.name),
+                return this.createInterfaceType(
+                    of,
                     property,
                     type,
-                ));
+                );
+            }
+
+            if (type.kind === TypeKind.CLASS) {
+                this.cache.set(type.name, this.createObjectType(type));
             }
 
             if (type.kind === TypeKind.ENUM) {
@@ -110,5 +109,5 @@ export abstract class PropertyResolver<T extends GraphQLOutputType | GraphQLInpu
 
     protected abstract createObjectType(type: ITypeObject): T;
 
-    protected abstract createInterfaceType(name: string, property: IPropertyReference, type: ITypeObject): T;
+    protected abstract createInterfaceType(of: ITypeObject, property: IPropertyReference, type: ITypeObject): T;
 }

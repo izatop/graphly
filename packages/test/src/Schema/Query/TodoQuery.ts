@@ -12,6 +12,18 @@ export class TodoQuery extends ObjectType {
             .findOne(id);
     }
 
+    public async searchAll(limit = 10, offset = 0, context: TestContext): Returns<IPageable<Todo>> {
+        const {todos} = context;
+        const todosQuery = await todos.find();
+
+        return {
+            limit,
+            offset,
+            count: todosQuery.length,
+            node: todosQuery.slice(offset, offset + limit),
+        };
+    }
+
     public async search(context: TestContext, filter?: TodoSearchInput): Returns<IPageable<Todo>> {
         const {todos} = context;
         let todosQuery = await todos.find();

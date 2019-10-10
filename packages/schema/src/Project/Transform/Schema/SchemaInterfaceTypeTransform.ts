@@ -1,7 +1,8 @@
 import {XMap} from "@sirian/common";
 import {ok} from "assert";
 import {GraphQLObjectType} from "graphql";
-import {IPropertyReference, ITypeObject, PropertyType, TYPE, TypeKind} from "../../../Type";
+import {IPropertyReference, ITypeObject, PropertyKind, PropertyType, TYPE, TypeKind} from "../../../Type";
+import {ucfirst} from "../../../util/ucfirst";
 import {InterfaceType} from "../InterfaceType";
 import {TransformAbstract} from "../TransformAbstract";
 import {SchemaObjectTypeTransform} from "./SchemaObjectTypeTransform";
@@ -30,6 +31,24 @@ export class SchemaInterfaceTypeTransform extends TransformAbstract<Args, GraphQ
         return this.context.project;
     }
 
+    public static getInterfaceName(of: ITypeObject, property: IPropertyReference, interfaceType: ITypeObject) {
+        const nameChain = [];
+        const interfaceReferences = property.parameters
+            .filter((p) => p.kind === PropertyKind.REFERENCE) as IPropertyReference[];
+        if (interfaceReferences.length === 0) {
+            nameChain.push(of.name, property.name);
+        }
+
+        if (interfaceReferences.length > 0) {
+            nameChain.push(
+                interfaceType.name,
+                ...interfaceReferences.map((p) => p.reference),
+            );
+        }
+
+        return nameChain.map(ucfirst).join("");
+    }
+
     public transform() {
         ok(
             this.interfaceType.base === TYPE.OBJECT_INTERFACE,
@@ -49,11 +68,11 @@ export class SchemaInterfaceTypeTransform extends TransformAbstract<Args, GraphQ
         }
 
         const nextType: ITypeObject = {
+            name: this.name,
             kind: TypeKind.CLASS,
             file: this.interfaceType.file,
             base: this.interfaceType.base,
             reference: this.interfaceType.base,
-            name: this.name,
             property: nextProperty,
             parameter: this.interfaceType.parameter,
         };

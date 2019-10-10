@@ -15,8 +15,18 @@ export class ObjectPropertyResolver extends PropertyResolver<GraphQLOutputType> 
             .transform();
     }
 
-    protected createInterfaceType(name: string, property: IPropertyReference, type: ITypeObject): GraphQLOutputType {
-        return new SchemaInterfaceTypeTransform(this.context, name, property, type)
-            .transform();
+    protected createInterfaceType(of: ITypeObject,
+                                  property: IPropertyReference,
+                                  type: ITypeObject): GraphQLOutputType {
+        const interfaceName = SchemaInterfaceTypeTransform.getInterfaceName(of, property, type);
+        if (!this.cache.has(interfaceName)) {
+            this.cache.set(
+                interfaceName,
+                new SchemaInterfaceTypeTransform(this.context, interfaceName, property, type)
+                    .transform(),
+            );
+        }
+
+        return this.cache.ensure(interfaceName);
     }
 }

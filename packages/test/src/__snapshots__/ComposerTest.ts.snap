@@ -48,7 +48,14 @@ enum TodoFlag {
   PUBLIC
 }
 
-type TodoQuerySearch {
+type IPageableTodo {
+  count: Int!
+  limit: Int!
+  node: [Todo!]!
+  offset: Int!
+}
+
+type IPageableTodo {
   count: Int!
   limit: Int!
   node: [Todo!]!
@@ -57,7 +64,8 @@ type TodoQuerySearch {
 
 type TodoQuery {
   count(solved: Boolean = true): Int!
-  search(filter: TodoSearchInput): TodoQuerySearch!
+  search(filter: TodoSearchInput): IPageableTodo!
+  searchAll(limit: Float = 10, offset: Float = 0): IPageableTodo!
   todo(id: Int!): Todo
 }
 
@@ -85,7 +93,7 @@ type TestSubscription {
   onTodoUpdate(): Todo!
 }
 
-type TodoQuerySearch {
+type IPageableTodo {
   count: Int!
   limit: Int!
   node: [Todo!]!

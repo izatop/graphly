@@ -1,6 +1,16 @@
 import {XMap} from "@sirian/common";
 import {memoize} from "@sirian/decorators";
-import {InputType, IPropertyReference, ITypeEnum, ITypeObject, OutputType, PropertyType, TypeKind, TypeMap} from "../../../Type";
+import {
+    InputType,
+    IPropertyReference,
+    ITypeEnum,
+    ITypeObject,
+    OutputType,
+    PropertyKind,
+    PropertyType,
+    TypeKind,
+    TypeMap,
+} from "../../../Type";
 import {TYPE} from "../../../Type/const";
 import {ucfirst} from "../../../util/ucfirst";
 import {Project} from "../../Project";
@@ -67,6 +77,24 @@ export class GQLTransform extends TransformAbstract<[Project], string> {
     }
 
     public createTypeByInterface(parent: ITypeObject, property: IPropertyReference, interfaceType: ITypeObject) {
+        const nameChain = [];
+        const interfaceReferences = property.parameters
+            .filter((p) => p.kind === PropertyKind.REFERENCE) as IPropertyReference[];
+
+        if (interfaceReferences.length === 0) {
+            nameChain.push(parent.name, property.name);
+        }
+
+        if (interfaceReferences.length > 0) {
+            nameChain.push(
+                interfaceType.name,
+                ...interfaceReferences.map((p) => p.reference),
+            );
+        }
+
+        const interfaceName = nameChain.map(ucfirst)
+            .join("");
+
         const map = new XMap<string, PropertyType>();
         if (interfaceType.parameter) {
             for (const [index, parameter] of interfaceType.parameter.entries()) {
@@ -80,11 +108,11 @@ export class GQLTransform extends TransformAbstract<[Project], string> {
         }
 
         const nextType: ITypeObject = {
+            name: interfaceName,
             kind: TypeKind.CLASS,
             file: interfaceType.file,
             base: interfaceType.base,
             reference: interfaceType.base,
-            name: `${ucfirst(parent.name)}${ucfirst(property.name)}`,
             property: nextProperty,
             parameter: interfaceType.parameter,
         };
