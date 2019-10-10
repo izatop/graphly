@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.8](https://github.com/graphly/graphly/compare/v0.2.7...v0.2.8) (2019-10-10)
+
+
+### Bug Fixes
+
+* update collision in interface name generation ([1ce45e7](https://github.com/graphly/graphly/commit/1ce45e7d86e98bcf190a092f1e3f0f6756603a6b))
+
+
+
+
+
 ## [0.2.7](https://github.com/graphly/graphly/compare/v0.2.6...v0.2.7) (2019-10-09)
 
 
