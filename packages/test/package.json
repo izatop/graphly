@@ -1,6 +1,6 @@
 {
     "name": "@graphly/test",
-    "version": "0.2.8",
+    "version": "0.2.9",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
@@ -9,7 +9,7 @@
     "dependencies": {
         "@graphly/cli": "^0.2.8",
         "@graphly/schema": "^0.2.8",
-        "@graphly/type": "^0.2.8",
+        "@graphly/type": "^0.2.9",
         "graphql": "^14.5.8"
     },
     "private": true
