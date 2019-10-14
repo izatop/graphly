@@ -1,7 +1,10 @@
 import {InputObjectType, ObjectType} from "../Type";
 import {IObject} from "./IObject";
 
-export type TypeID = string | number;
+// TypeID may have one of these types: string/number
+// or string-serialization object like ObjectId type.
+export type TypeID = any;
+
 export type TypeInt = number;
 export type TypeFloat = number;
 export type TypeString = string;
