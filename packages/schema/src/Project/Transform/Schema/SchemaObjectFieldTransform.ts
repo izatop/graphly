@@ -96,6 +96,27 @@ export class SchemaObjectFieldTransform extends TransformAbstract<Args, Returns>
         return this.createObjectPropertyResolveFunction(this.property);
     }
 
+    /**
+     * Resolve empty object for stub properties like RootQuery.todo.search where
+     * Foo.todo is a property of a sub type TodoQuery { search(), ... }
+     *
+     * @param property
+     */
+    protected createObjectPropertyResolveFunction(property: PropertyType): any {
+        if (property.kind === PropertyKind.REFERENCE && this.schema.types.has(property.reference)) {
+            const propertyKey = this.property.name;
+            return (parent: {[key: string]: any}) => {
+                if (!Var.isUndefined(parent[propertyKey])) {
+                    return parent[propertyKey];
+                }
+
+                return {};
+            };
+        }
+
+        return;
+    }
+
     protected createSubscriptionResolveFunction(): GraphQLFieldResolver<any, any, any> | undefined {
         if (this.type.base !== TYPE.SUBSCRIPTION) {
             return undefined;
@@ -110,19 +131,5 @@ export class SchemaObjectFieldTransform extends TransformAbstract<Args, Returns>
             return new SchemaResolveTransform(this.schema, this, this.property)
                 .transform();
         }
-    }
-
-    /**
-     * Resolve empty object for stub properties like RootQuery.todo.search where
-     * Foo.todo is a property of a sub type TodoQuery { search(), ... }
-     *
-     * @param property
-     */
-    protected createObjectPropertyResolveFunction(property: PropertyType): any {
-        if (property.kind === PropertyKind.REFERENCE) {
-            return this.schema.types.has(property.reference) ? () => ({}) : undefined;
-        }
-
-        return;
     }
 }
