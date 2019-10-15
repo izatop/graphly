@@ -2,8 +2,7 @@ import {Var} from "@sirian/common";
 import {ok} from "assert";
 import {GraphQLFieldConfig, GraphQLFieldResolver, GraphQLNonNull} from "graphql";
 import * as vm from "vm";
-import {PropertyKind, PropertyType} from "../../../Type";
-import {TYPE} from "../../../Type/const";
+import {PropertyKind, PropertyType, TYPE} from "../../../Type";
 import {TransformAbstract} from "../TransformAbstract";
 import {SchemaInputArgsTransform} from "./SchemaInputArgsTransform";
 import {SchemaObjectTypeTransform} from "./SchemaObjectTypeTransform";
@@ -105,7 +104,7 @@ export class SchemaObjectFieldTransform extends TransformAbstract<Args, Returns>
     protected createObjectPropertyResolveFunction(property: PropertyType): any {
         if (property.kind === PropertyKind.REFERENCE && this.schema.types.has(property.reference)) {
             const propertyKey = this.property.name;
-            return (parent: {[key: string]: any}) => {
+            return (parent: { [key: string]: any }) => {
                 if (!Var.isUndefined(parent[propertyKey])) {
                     return parent[propertyKey];
                 }
