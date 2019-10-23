@@ -34,7 +34,13 @@ export class ComposeCommand extends Command {
             watch(watchDirectory, watchOptions, (e, file) => {
                 // tslint:disable-next-line:no-console
                 this.log("Schema", e, file);
-                this.compose(files);
+                const directory = watchDirectory.find((d) => file.startsWith(d));
+                if (directory) {
+                    const schemaFiles = files.filter((schema) => schema.startsWith(directory));
+                    if (schemaFiles.length > 0) {
+                        this.compose(schemaFiles);
+                    }
+                }
             });
         }
     }
