@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.12](https://github.com/graphly/graphly/compare/v0.2.11...v0.2.12) (2019-10-23)
+
+
+### Bug Fixes
+
+* watch multiple schemas fix ([e80d87e](https://github.com/graphly/graphly/commit/e80d87e43794f58d60984c5062640b8fc5f8afc5))
+
+
+
+
+
 ## [0.2.11](https://github.com/graphly/graphly/compare/v0.2.10...v0.2.11) (2019-10-23)
 
 
