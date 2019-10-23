@@ -1093,6 +1093,13 @@
   dependencies:
     "@sirian/ts-extra-types" "^3.52.1"
 
+"@sirian/common@^5.7.4":
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/@sirian/common/-/common-5.7.4.tgz#458157989e03d5a21a8a787bc2085b5f9ca40d1d"
+  integrity sha512-0GoAVjGY2c4FaIceUzawo3jJ+HQ9Dz5n8GqcZdk+8Bfu+6x52eFaiGB4sSSCj3cvhQL/T25Hbs0HxGBLVDtYkg==
+  dependencies:
+    "@sirian/ts-extra-types" "^3.53.0"
+
 "@sirian/console@^6.3.41":
   version "6.3.41"
   resolved "https://registry.yarnpkg.com/@sirian/console/-/console-6.3.41.tgz#43592f787a03777e1c8b257b73c4bb7181232401"
@@ -1115,6 +1122,15 @@
     "@sirian/error" "^2.1.18"
     "@sirian/ts-extra-types" "^3.52.1"
 
+"@sirian/decorators@^1.3.33":
+  version "1.3.33"
+  resolved "https://registry.yarnpkg.com/@sirian/decorators/-/decorators-1.3.33.tgz#2a461285e624f5e3a405bc60fca408f11d3ddb3f"
+  integrity sha512-GMicQUfEauIqiqtUCLUhgvAK69EA+66frGsS5B9laL6qenYJdiZ8W+PZh58MoApZRN51aBSDJgamiu7WiRiaWg==
+  dependencies:
+    "@sirian/common" "^5.7.4"
+    "@sirian/error" "^2.1.19"
+    "@sirian/ts-extra-types" "^3.53.0"
+
 "@sirian/disposer@^2.2.2":
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/@sirian/disposer/-/disposer-2.2.2.tgz#2f4fdadd154af804cf4b266cdd01adc089450612"
@@ -1130,6 +1146,13 @@
   integrity sha512-4HCMh8A+NpyhyJHuEYrA4gp1rVTl4KY8utieWj3fngaI5PwLykMPPZ+XlG1u7NzNMQniWCjeYxsT5geFjgObfg==
   dependencies:
     "@sirian/ts-extra-types" "^3.52.1"
+
+"@sirian/error@^2.1.19":
+  version "2.1.19"
+  resolved "https://registry.yarnpkg.com/@sirian/error/-/error-2.1.19.tgz#d694fe2d336eea340a49dee1965e9b6fc2ee85ad"
+  integrity sha512-alIqOa7lYPnKwZ/gx/KapPfwfZ7+P7gfzIHPpO35IFXr7Jj/dXwbvK+12fK2lhBtor5IxOWzZnVyfQJfbSuvpA==
+  dependencies:
+    "@sirian/ts-extra-types" "^3.53.0"
 
 "@sirian/event-dispatcher@^5.0.10":
   version "5.0.10"
@@ -1154,6 +1177,11 @@
   version "3.52.1"
   resolved "https://registry.yarnpkg.com/@sirian/ts-extra-types/-/ts-extra-types-3.52.1.tgz#ac1299009f75b67ef9ffb5171ff70f4b5ce09c28"
   integrity sha512-eg/LtW7IOr6uDD4c5XwsICadwl5BcQa04fk/FOSE4zKhXm7m96osylM5O83D9JK7UKPSedjpqi0gscukJ4yLeg==
+
+"@sirian/ts-extra-types@^3.53.0":
+  version "3.53.0"
+  resolved "https://registry.yarnpkg.com/@sirian/ts-extra-types/-/ts-extra-types-3.53.0.tgz#d05fe0043b80fc8aebcb903a96a41652b320b2d2"
+  integrity sha512-kz2IcPtim6XHoVIT+3m3qcMVzaojVlkH+/LUkxixQdMsylPYwMFv7a/zO9Lkxe9plwjlTI9Df6NeQqDgdqlH7g==
 
 "@sirian/xpromise@^2.4.18":
   version "2.4.18"
@@ -4602,6 +4630,11 @@ node-pre-gyp@^0.12.0:
     rimraf "^2.6.1"
     semver "^5.3.0"
     tar "^4"
+
+node-watch@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/node-watch/-/node-watch-0.6.3.tgz#9abf739ae0638435be6c0d1c99d4dc2e53df7317"
+  integrity sha512-InVPsg51EemnMVH3fvrrSVgqVBMlksZ/mK7ZDWx/NuWdNQi28wcVJX1/BP38alraPFXbRi9jZ35OfK4Ra7l8Bg==
 
 "nopt@2 || 3":
   version "3.0.6"
