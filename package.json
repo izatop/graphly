@@ -10,11 +10,11 @@
     "scripts": {
         "clean": "lerna run clean",
         "lint": "tslint 'packages/*/src/**/*.ts'",
-        "build": "yarn run clean && tsc -b packages",
+        "build": "yarn run clean && tsc -b packages && lerna link && yarn test:compose",
         "build:watch": "tsc -b packages -w",
-        "build:compose": "lerna run compose --scope=@graphly/test",
-        "test": "yarn build && yarn build:compose && jest --config jest.json",
-        "test:watch": "yarn build:compose && jest --watch --config jest.json",
+        "test": "jest --config jest.json",
+        "test:watch": "jest --watch --config jest.json",
+        "test:compose": "lerna run compose --scope=@graphly/test",
         "bootstrap": "lerna bootstrap && lerna link"
     },
     "workspaces": [
