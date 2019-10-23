@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.11](https://github.com/graphly/graphly/compare/v0.2.10...v0.2.11) (2019-10-23)
+
+
+### Bug Fixes
+
+* graphly-cli compose --watch mode added ([b91964f](https://github.com/graphly/graphly/commit/b91964fa9eccca6b25678e580b1340eb1865fcc7))
+
+
+
+
+
 ## [0.2.10](https://github.com/graphly/graphly/compare/v0.2.9...v0.2.10) (2019-10-14)
 
 **Note:** Version bump only for package @graphly/test

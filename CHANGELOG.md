@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.11](https://github.com/graphly/graphly/compare/v0.2.10...v0.2.11) (2019-10-23)
+
+
+### Bug Fixes
+
+* graphly-cli compose --watch mode added ([b91964f](https://github.com/graphly/graphly/commit/b91964fa9eccca6b25678e580b1340eb1865fcc7))
+* update deps ([239ac51](https://github.com/graphly/graphly/commit/239ac51e740158e02b1717d721dcb82c0de80462))
+* update deps/fix yarn.lock ([fa7db2c](https://github.com/graphly/graphly/commit/fa7db2c1fe2c1a232c0903ea89f7d970f50904fb))
+
+
+
+
+
 ## [0.2.10](https://github.com/graphly/graphly/compare/v0.2.9...v0.2.10) (2019-10-14)
 
 
