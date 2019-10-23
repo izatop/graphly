@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.10](https://github.com/graphly/graphly/compare/v0.2.9...v0.2.10) (2019-10-14)
+
+
+### Bug Fixes
+
+* ObjectType field resolution fix ([cbb9664](https://github.com/graphly/graphly/commit/cbb9664bc2f529549c905b0a1d8f66dea4c6626b))
+
+
+
+
+
 ## [0.2.9](https://github.com/graphly/graphly/compare/v0.2.8...v0.2.9) (2019-10-14)
 
 
