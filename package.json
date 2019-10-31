@@ -10,7 +10,7 @@
     "scripts": {
         "clean": "lerna run clean",
         "lint": "tslint 'packages/*/src/**/*.ts'",
-        "build": "yarn run clean && tsc -b packages && lerna link && yarn test:compose",
+        "build": "yarn run clean && tsc -b packages && lerna link",
         "build:watch": "tsc -b packages -w",
         "test": "jest --config jest.json",
         "test:watch": "jest --watch --config jest.json",

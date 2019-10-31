@@ -32,6 +32,7 @@ before_script:
 script:
   - yarn lint
   - yarn build
+  - yarn test:compose
   - yarn test
   - git status
   - lerna publish --conventional-commits --yes
