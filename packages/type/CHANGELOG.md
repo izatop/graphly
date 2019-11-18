@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.13](https://github.com/graphly/graphly/compare/v0.2.12...v0.2.13) (2019-11-18)
+
+**Note:** Version bump only for package @graphly/type
+
+
+
+
+
 ## [0.2.11](https://github.com/graphly/graphly/compare/v0.2.10...v0.2.11) (2019-10-23)
 
 

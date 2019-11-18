@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.13](https://github.com/graphly/graphly/compare/v0.2.12...v0.2.13) (2019-11-18)
+
+
+### Bug Fixes
+
+* typedoc@0.15.2 broke paths ([21524be](https://github.com/graphly/graphly/commit/21524be09770c63e67f4fcd2a46c8436a11e48da))
+
+
+
+
+
 ## [0.2.12](https://github.com/graphly/graphly/compare/v0.2.11...v0.2.12) (2019-10-23)
 
 **Note:** Version bump only for package @graphly/test
