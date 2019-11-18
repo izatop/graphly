@@ -26,6 +26,6 @@
         "lerna": "^3.18.4",
         "ts-jest": "^24.1.0",
         "tslint": "^5.20.1",
-        "typescript": "^3.7.2"
+        "typescript": "3.7.2"
     }
 }
