@@ -21,11 +21,11 @@
         "packages/*"
     ],
     "devDependencies": {
-        "@types/jest": "^24.0.21",
+        "@types/jest": "^24.0.23",
         "jest": "^24.9.0",
-        "lerna": "^3.18.3",
+        "lerna": "^3.18.4",
         "ts-jest": "^24.1.0",
-        "tslint": "^5.20.0",
-        "typescript": "^3.6.4"
+        "tslint": "^5.20.1",
+        "typescript": "^3.7.2"
     }
 }
