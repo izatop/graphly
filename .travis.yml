@@ -15,11 +15,11 @@ before_install:
   - npm i -g yarn
   - export PATH=`yarn global bin`:$PATH
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-  - yarn global add greenkeeper-lockfile@2
-  - yarn global add lerna
+  - yarn global add greenkeeper-lockfile@2 lerna
 
 install:
-  - yarn run bootstrap
+  - yarn install --pure-lockfile
+  - lerna link
 
 before_script:
   - greenkeeper-lockfile-update
