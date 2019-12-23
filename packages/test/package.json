@@ -1,13 +1,13 @@
 {
     "name": "@graphly/test",
-    "version": "0.2.14",
+    "version": "0.2.15",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
         "compose": "graphly-cli compose src/Schema/TestSchema.ts"
     },
     "dependencies": {
-        "@graphly/cli": "^0.2.14",
+        "@graphly/cli": "^0.2.15",
         "@graphly/schema": "^0.2.14",
         "@graphly/type": "^0.2.14",
         "graphql": "^14.5.8"
