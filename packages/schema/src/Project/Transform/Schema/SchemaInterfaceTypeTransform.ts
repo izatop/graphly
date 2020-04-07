@@ -11,6 +11,24 @@ import {SchemaTransform} from "./SchemaTransform";
 type Args = [SchemaTransform, string, IPropertyReference, ITypeObject];
 
 export class SchemaInterfaceTypeTransform extends TransformAbstract<Args, GraphQLObjectType> {
+
+    public static getInterfaceName(of: ITypeObject, property: IPropertyReference, interfaceType: ITypeObject) {
+        const nameChain = [];
+        const interfaceReferences = property.parameters
+            .filter((p) => p.kind === PropertyKind.REFERENCE) as IPropertyReference[];
+        if (interfaceReferences.length === 0) {
+            nameChain.push(of.name, property.name);
+        }
+
+        if (interfaceReferences.length > 0) {
+            nameChain.push(
+                interfaceType.name,
+                ...interfaceReferences.map((p) => p.reference),
+            );
+        }
+
+        return nameChain.map(ucfirst).join("");
+    }
     public get context() {
         return this.args[0];
     }
@@ -29,24 +47,6 @@ export class SchemaInterfaceTypeTransform extends TransformAbstract<Args, GraphQ
 
     public get project() {
         return this.context.project;
-    }
-
-    public static getInterfaceName(of: ITypeObject, property: IPropertyReference, interfaceType: ITypeObject) {
-        const nameChain = [];
-        const interfaceReferences = property.parameters
-            .filter((p) => p.kind === PropertyKind.REFERENCE) as IPropertyReference[];
-        if (interfaceReferences.length === 0) {
-            nameChain.push(of.name, property.name);
-        }
-
-        if (interfaceReferences.length > 0) {
-            nameChain.push(
-                interfaceType.name,
-                ...interfaceReferences.map((p) => p.reference),
-            );
-        }
-
-        return nameChain.map(ucfirst).join("");
     }
 
     public transform() {

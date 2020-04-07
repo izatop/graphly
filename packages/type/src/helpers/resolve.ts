@@ -3,7 +3,7 @@ import {Lookup} from "../Interface";
 
 export const resolve = async <C extends object>(source: C) => {
     const proto = source.constructor.prototype;
-    const properties: Array<Promise<[string, PropertyDescriptor]>> = [];
+    const properties: Promise<[string, PropertyDescriptor]>[] = [];
     for (const [property, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(source))) {
         if (Var.isPromiseLike(descriptor.value)) {
             properties.push(
@@ -17,7 +17,7 @@ export const resolve = async <C extends object>(source: C) => {
         properties.push(Promise.resolve([property, descriptor]));
     }
 
-    const descriptors: Array<Promise<[string, PropertyDescriptor]>> = [];
+    const descriptors: Promise<[string, PropertyDescriptor]>[] = [];
     for (const [property, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(proto))) {
         if (descriptor.get && !descriptor.set) {
             const value = descriptor.get();
