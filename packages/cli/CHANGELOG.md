@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.17](https://github.com/graphly/graphly/compare/v0.2.16...v0.2.17) (2020-04-07)
+
+
+### Bug Fixes
+
+* travis-ci ([961d322](https://github.com/graphly/graphly/commit/961d322558327bddd80450172583119fb6cc5b50))
+
+
+
+
+
 ## [0.2.16](https://github.com/graphly/graphly/compare/v0.2.15...v0.2.16) (2020-04-07)
 
 
