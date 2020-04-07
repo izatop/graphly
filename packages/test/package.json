@@ -10,7 +10,7 @@
         "@graphly/cli": "^0.2.15",
         "@graphly/schema": "^0.2.14",
         "@graphly/type": "^0.2.14",
-        "graphql": "^14.6.0"
+        "graphql": "^15.0.0"
     },
     "private": true
 }

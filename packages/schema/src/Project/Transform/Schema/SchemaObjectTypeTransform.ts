@@ -34,8 +34,8 @@ export class SchemaObjectTypeTransform extends TransformAbstract<Args, GraphQLOb
         });
     }
 
-    protected fields(): GraphQLFieldConfigMap<any, any, any> {
-        const fields: Thunk<GraphQLFieldConfigMap<any, any, any>> = {};
+    protected fields(): GraphQLFieldConfigMap<any, any> {
+        const fields: Thunk<GraphQLFieldConfigMap<any, any>> = {};
         for (const property of this.type.property) {
             fields[property.name] = new SchemaObjectFieldTransform(this.context, this, property)
                 .transform();
