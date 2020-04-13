@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/graphly/graphly/compare/v0.2.17...v0.3.0) (2020-04-13)
+
+
+### Features
+
+* typedoc 0.17, use json reflection ([7563766](https://github.com/graphly/graphly/commit/756376610c9b573acbe7d581c9ae4efe8103a5a4))
+
+
+
+
+
 ## [0.2.17](https://github.com/graphly/graphly/compare/v0.2.16...v0.2.17) (2020-04-07)
 
 
