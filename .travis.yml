@@ -25,6 +25,7 @@ before_script:
   - git config --global user.email "travis@travis-ci.org"
   - git config --global user.name "Travis CI"
   - git remote set-url origin https://${GH_TOKEN}@github.com/graphly/graphly.git
+  - git checkout master
 
 script:
   - yarn lint && yarn build && yarn test && lerna publish --conventional-commits --yes
