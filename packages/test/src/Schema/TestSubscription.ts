@@ -8,12 +8,12 @@ export class TestSubscription extends SubscriptionType {
         return todos.subscribe("add");
     }
 
-    public onTodoUpdate(context: TestContext) {
+    public onTodoUpdate(context: TestContext): Subscription<Todo> {
         const {todos} = context;
         return todos.subscribe("update");
     }
 
-    public onTodoDelete(context: TestContext) {
+    public onTodoDelete(context: TestContext): Subscription<Todo> {
         const {todos} = context;
         return todos.subscribe("delete");
     }

@@ -1,8 +1,7 @@
 import {existsSync, writeFileSync} from "fs";
 import * as path from "path";
-import {Application} from "typedoc";
-import {ProjectSerializer} from "../Serialization";
-import {TraceEvent} from "../util/TraceEvent";
+import * as TypeDoc from "typedoc";
+import {Project} from "../Project";
 
 export interface IComposerOptions {
     name?: string;
@@ -12,9 +11,9 @@ export interface IComposerOptions {
 }
 
 export class Composer {
-    private readonly application: Application;
+    private readonly application: TypeDoc.Application;
 
-    private readonly project: ProjectSerializer;
+    private readonly project: Project;
 
     private readonly schemaPath: string;
 
@@ -25,6 +24,7 @@ export class Composer {
     constructor(options: IComposerOptions) {
         this.schemaPath = path.resolve(options.schemaPath);
         this.basePath = path.dirname(this.schemaPath);
+        this.targetBasePath = this.basePath;
 
         if (!options.tsconfig) {
             options.tsconfig = this.resolveTSConfigFile(this.basePath);
@@ -36,8 +36,8 @@ export class Composer {
 
         const tsconfigRelativePath = path.dirname(options.tsconfig);
         const tsconfig = require(options.tsconfig);
-        this.targetBasePath = this.basePath;
-        if (tsconfig.compilerOptions && tsconfig.compilerOptions.outDir && tsconfig.compilerOptions.rootDir) {
+        const {compilerOptions = {}} = tsconfig;
+        if (compilerOptions.outDir && compilerOptions.rootDir) {
             this.targetBasePath = path.join(
                 tsconfigRelativePath,
                 tsconfig.compilerOptions.outDir,
@@ -55,11 +55,15 @@ export class Composer {
             throw new Error(`Cannot resolve schema path at ${this.schemaPath}`);
         }
 
-        TraceEvent.toggle(options.verbose || false);
-        this.application = new Application({
+        this.application = new TypeDoc.Application();
+        this.application.options.addReader(new TypeDoc.TSConfigReader());
+        this.application.options.addReader(new TypeDoc.TypeDocReader());
+
+        this.application.bootstrap({
             name: options.name || "GraphQL",
             tsconfig: options.tsconfig,
-            exclude: `!${this.basePath}/**/*`,
+            exclude: [`!${this.basePath}/**/*`],
+            includes: "src",
         });
 
         const reflection = this.application.convert([this.schemaPath]);
@@ -67,7 +71,10 @@ export class Composer {
             throw new Error(`Cannot convert source to reflection at ${this.schemaPath}`);
         }
 
-        this.project = new ProjectSerializer(reflection);
+        this.project = new Project(
+            path.relative(path.resolve(options.tsconfig, "../../"), this.targetBasePath),
+            this.application.serializer.projectToObject(reflection, {}),
+        );
     }
 
     public compose() {

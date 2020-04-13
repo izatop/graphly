@@ -17,9 +17,7 @@ before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
   - yarn global add greenkeeper-lockfile@2 lerna
 
-install:
-  - yarn install --pure-lockfile
-  - lerna link
+install: yarn install --pure-lockfile
 
 before_script:
   - greenkeeper-lockfile-update
@@ -27,11 +25,9 @@ before_script:
   - git config --global user.email "travis@travis-ci.org"
   - git config --global user.name "Travis CI"
   - git remote set-url origin https://${GH_TOKEN}@github.com/graphly/graphly.git
-  - git checkout master
-  - yarn lint && yarn build && yarn test:compose && yarn test
 
 script:
-  - lerna publish --conventional-commits --yes
+  - yarn lint && yarn build && yarn test && lerna publish --conventional-commits --yes
 
 after_script:
   - greenkeeper-lockfile-upload

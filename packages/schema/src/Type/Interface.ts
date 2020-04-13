@@ -50,6 +50,7 @@ export interface IPropertyReference extends IProperty {
 export interface IPropertyParameter extends IProperty {
     kind: PropertyKind.PARAMETER;
     parameter: string;
+    constraint?: object;
 }
 
 export interface IPropertyUnion extends IProperty {

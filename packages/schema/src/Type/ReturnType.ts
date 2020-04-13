@@ -7,3 +7,5 @@ export const ReturnType = new Set([
     TYPE.RETURNS,
     TYPE.RETURNS_NULLABLE,
 ]);
+
+export const NullableType = new Set([TYPE.RETURNS_NULLABLE]);

@@ -5,6 +5,9 @@ import * as path from "path";
 import {Composer} from "../Composer";
 
 export class ComposeCommand extends Command {
+    protected get verbose(): boolean {
+        return this.getOption("verbose");
+    }
 
     public static configure(def: CommandDefinition) {
         def
@@ -16,9 +19,6 @@ export class ComposeCommand extends Command {
             .setDescription("GraphQL Server");
 
         process.on("SIGINT", () => process.exit());
-    }
-    protected get verbose(): boolean {
-        return this.getOption("verbose");
     }
 
     public async execute() {
