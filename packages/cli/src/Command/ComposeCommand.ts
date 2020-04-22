@@ -13,8 +13,8 @@ export class ComposeCommand extends Command {
         def
             .addArguments([new Argument({name: "file", multiple: true, required: true})])
             .addOptions([
-                new Option({name: "config", shortcut: "c"}),
                 new Option({name: "base"}),
+                new Option({name: "config"}),
                 new FlagOption({name: "watch", shortcut: "w"}),
             ])
             .setDescription("GraphQL Server");

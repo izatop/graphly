@@ -1328,6 +1328,13 @@
   dependencies:
     type-detect "4.0.8"
 
+"@sirian/assert@^1.1.7":
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/@sirian/assert/-/assert-1.1.7.tgz#b3afd19d9755452b872ef89073b3deef4a7f6409"
+  integrity sha512-a7Vr/Q+pPYRnrC685Bwego7UAV5vRg4ELbWRj+hLYZ6W1iOhh+6QmYNtCUdgDO6srIFwuf0Kf793l+RHCUAdcQ==
+  dependencies:
+    "@sirian/error" "^2.1.25"
+
 "@sirian/common@^5.13.0":
   version "5.13.0"
   resolved "https://registry.yarnpkg.com/@sirian/common/-/common-5.13.0.tgz#18105dc3a97d27b4ec6595451f2762d6309c8137"

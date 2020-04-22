@@ -28,6 +28,7 @@
     },
     "dependencies": {
         "@graphly/schema": "^0.3.0",
+        "@sirian/assert": "^1.1.7",
         "@sirian/common": "^5.13.0",
         "@sirian/console": "^6.6.5",
         "@sirian/decorators": "^1.5.4",

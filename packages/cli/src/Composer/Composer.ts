@@ -1,3 +1,4 @@
+import {assert} from "@sirian/assert";
 import {existsSync, writeFileSync} from "fs";
 import * as path from "path";
 import * as TypeDoc from "typedoc";
@@ -17,17 +18,19 @@ export class Composer {
 
     private readonly schemaPath: string;
 
-    private readonly basePath: string;
+    private readonly sourceRoot: string;
 
-    private readonly targetBasePath: string;
+    private readonly targetRoot: string;
 
     constructor(options: IComposerOptions) {
         this.schemaPath = path.resolve(options.schemaPath);
-        this.basePath = path.dirname(this.schemaPath);
-        this.targetBasePath = this.basePath;
+        this.sourceRoot = path.dirname(this.schemaPath);
+        this.targetRoot = this.sourceRoot;
 
-        if (!options.tsconfig) {
-            options.tsconfig = this.resolveTSConfigFile(this.basePath);
+        if (options.tsconfig && /.\.json$/.test(options.tsconfig)) {
+            options.tsconfig = this.resolveTSConfigFile(this.sourceRoot, options.tsconfig);
+        } else if (!options.tsconfig) {
+            options.tsconfig = this.resolveTSConfigFile(this.sourceRoot);
         }
 
         if (!existsSync(options.tsconfig)) {
@@ -38,14 +41,14 @@ export class Composer {
         const tsconfig = require(options.tsconfig);
         const {compilerOptions = {}} = tsconfig;
         if (compilerOptions.outDir && compilerOptions.rootDir) {
-            this.targetBasePath = path.join(
+            this.targetRoot = path.join(
                 tsconfigRelativePath,
                 tsconfig.compilerOptions.outDir,
                 path.relative(
                     tsconfig.compilerOptions.rootDir,
                     path.relative(
                         tsconfigRelativePath,
-                        this.basePath,
+                        this.sourceRoot,
                     ),
                 ),
             );
@@ -62,7 +65,7 @@ export class Composer {
         this.application.bootstrap({
             name: options.name || "GraphQL",
             tsconfig: options.tsconfig,
-            exclude: [`!${this.basePath}/**/*`],
+            exclude: [`!${this.sourceRoot}/**/*`],
         });
 
         const reflection = this.application.convert([this.schemaPath]);
@@ -71,7 +74,7 @@ export class Composer {
         }
 
         this.project = new Project(
-            path.relative(path.resolve(options.tsconfig, "../../"), this.targetBasePath),
+            path.relative(path.resolve("../"), this.sourceRoot),
             this.application.serializer.projectToObject(reflection, {}),
         );
     }
@@ -83,7 +86,7 @@ export class Composer {
     public save(savePath?: string) {
         const typeMap = this.compose();
         if (!savePath) {
-            const basePath = this.targetBasePath;
+            const basePath = this.targetRoot;
             const baseName = path.basename(this.schemaPath, path.extname(this.schemaPath));
             savePath = path.join(basePath, `${baseName}.json`);
         }
@@ -91,19 +94,13 @@ export class Composer {
         writeFileSync(savePath, JSON.stringify([...typeMap.values()]));
     }
 
-    protected resolveTSConfigFile(basePath: string, original?: string): string {
-        const tsconfig = path.resolve(basePath, "tsconfig.json");
+    protected resolveTSConfigFile(directory: string, name = "tsconfig.json"): string {
+        const tsconfig = path.resolve(directory, name);
         if (existsSync(tsconfig)) {
             return tsconfig;
         }
 
-        if (basePath === "/") {
-            throw new Error(`Cannot resolve tsconfig.json from ${original}`);
-        }
-
-        return this.resolveTSConfigFile(
-            path.resolve(basePath, "../"),
-            original || basePath,
-        );
+        assert(directory !== "/", "Cannot resolve tsconfig.json");
+        return this.resolveTSConfigFile(path.resolve(directory, "../"), name);
     }
 }
