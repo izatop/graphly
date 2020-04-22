@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/graphly/graphly/compare/v0.3.0...v0.3.1) (2020-04-22)
+
+
+### Bug Fixes
+
+* graphly-cli --config option ([5993ddf](https://github.com/graphly/graphly/commit/5993ddf50f48fc4c9c12638b555154fffd484027))
+* update deps ([5eb2239](https://github.com/graphly/graphly/commit/5eb223984814d7fbbfb73796340bc1ccb497b7cf))
+
+
+
+
+
 # [0.3.0](https://github.com/graphly/graphly/compare/v0.2.17...v0.3.0) (2020-04-13)
 
 
