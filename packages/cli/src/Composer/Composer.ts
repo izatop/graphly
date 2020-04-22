@@ -63,7 +63,6 @@ export class Composer {
             name: options.name || "GraphQL",
             tsconfig: options.tsconfig,
             exclude: [`!${this.basePath}/**/*`],
-            includes: "src",
         });
 
         const reflection = this.application.convert([this.schemaPath]);

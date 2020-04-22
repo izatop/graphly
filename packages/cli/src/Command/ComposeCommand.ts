@@ -13,6 +13,7 @@ export class ComposeCommand extends Command {
         def
             .addArguments([new Argument({name: "file", multiple: true, required: true})])
             .addOptions([
+                new Option({name: "config", shortcut: "c"}),
                 new Option({name: "base"}),
                 new FlagOption({name: "watch", shortcut: "w"}),
             ])
@@ -54,12 +55,14 @@ export class ComposeCommand extends Command {
 
     @debounce(1000)
     protected compose(files: string[]) {
+        const config: string = this.getOption("config");
         for (const schemaPath of files) {
             const name = path.basename(schemaPath);
             const composer = new Composer({
                 name,
                 schemaPath,
                 verbose: this.verbose,
+                tsconfig: config,
             });
 
             composer.save();
