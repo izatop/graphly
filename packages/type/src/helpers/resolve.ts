@@ -1,11 +1,11 @@
-import {Var} from "@sirian/common";
+import {isPromiseLike} from "@sirian/common";
 import {Lookup} from "../Interface";
 
 export const resolve = async <C extends object>(source: C) => {
     const proto = source.constructor.prototype;
     const properties: Promise<[string, PropertyDescriptor]>[] = [];
     for (const [property, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(source))) {
-        if (Var.isPromiseLike(descriptor.value)) {
+        if (isPromiseLike(descriptor.value)) {
             properties.push(
                 Promise.resolve(descriptor.value)
                     .then((value: any) => [property, {...descriptor, value}]),
@@ -20,8 +20,8 @@ export const resolve = async <C extends object>(source: C) => {
     const descriptors: Promise<[string, PropertyDescriptor]>[] = [];
     for (const [property, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(proto))) {
         if (descriptor.get && !descriptor.set) {
-            const value = descriptor.get();
-            if (Var.isPromiseLike(value)) {
+            const value = descriptor.get.call(source);
+            if (isPromiseLike(value)) {
                 descriptors.push(
                     Promise.resolve(value)
                         .then((solve: any) => [property, {...descriptor, get: () => solve}]),

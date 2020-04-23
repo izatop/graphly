@@ -1,4 +1,4 @@
-import {Var} from "@sirian/common";
+import {isUndefined} from "@sirian/common";
 import {ok} from "assert";
 import {GraphQLFieldConfig, GraphQLFieldResolver, GraphQLNonNull} from "graphql";
 import * as vm from "vm";
@@ -79,7 +79,7 @@ export class SchemaObjectFieldTransform extends TransformAbstract<Args, Returns>
             };
 
             return (parent?: { [key: string]: any }) => {
-                if (!parent || Var.isUndefined(parent[propertyKey])) {
+                if (!parent || isUndefined(parent[propertyKey])) {
                     return resolverFunction.call(parent || {});
                 }
 
@@ -105,7 +105,7 @@ export class SchemaObjectFieldTransform extends TransformAbstract<Args, Returns>
         if (property.kind === PropertyKind.REFERENCE && this.schema.types.has(property.reference)) {
             const propertyKey = this.property.name;
             return (parent: { [key: string]: any }) => {
-                if (!Var.isUndefined(parent[propertyKey])) {
+                if (!isUndefined(parent[propertyKey])) {
                     return parent[propertyKey];
                 }
 

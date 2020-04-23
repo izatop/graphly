@@ -4,6 +4,6 @@ import {IConfig} from "./interfaces";
 
 export class TestContainer extends Container<IConfig> {
     public get repository() {
-        return Promise.resolve(new TestRepository());
+        return Promise.resolve(new TestRepository(this.config.dsn));
     }
 }

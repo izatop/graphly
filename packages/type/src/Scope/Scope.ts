@@ -1,5 +1,5 @@
 import {Project} from "@graphly/schema";
-import {Var} from "@sirian/common";
+import {isObject} from "@sirian/common";
 import {memoize} from "@sirian/decorators";
 import {IncomingMessage} from "http";
 import {RequestContext, resolve} from "../helpers";
@@ -66,7 +66,7 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
     protected async createSchema() {
         const {schema} = this.options;
         const location = schema.getSchemaLocation();
-        const filename = Var.isObject(location)
+        const filename = isObject(location)
             ? location.filename
             : location;
 

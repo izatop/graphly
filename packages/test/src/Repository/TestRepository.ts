@@ -13,6 +13,8 @@ export class TestRepository {
     private readonly increments = new Map<string, number>();
     private readonly dispatcher = new EventEmitter();
 
+    constructor(protected readonly dsn: string) {}
+
     public get<T extends Document>(name: string) {
         if (!database.has(name)) {
             database.set(name, new Map());

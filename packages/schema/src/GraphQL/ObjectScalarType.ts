@@ -1,12 +1,12 @@
-import {Var} from "@sirian/common";
+import {isObject, isString} from "@sirian/common";
 import {GraphQLScalarType, Kind} from "graphql";
 
 const parseValue = (value?: string | object) => {
-    if (Var.isObject(value)) {
+    if (isObject(value)) {
         return value;
     }
 
-    if (Var.isString(value)) {
+    if (isString(value)) {
         return JSON.parse(value);
     }
 

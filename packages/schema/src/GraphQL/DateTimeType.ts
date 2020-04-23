@@ -1,4 +1,4 @@
-import {Var} from "@sirian/common";
+import {isNumber} from "@sirian/common";
 import {GraphQLScalarType, Kind} from "graphql";
 
 export const DateTimeType = new GraphQLScalarType({
@@ -8,7 +8,7 @@ export const DateTimeType = new GraphQLScalarType({
         return new Date(value);
     },
     serialize(value) {
-        if (Var.isNumber(value)) {
+        if (isNumber(value)) {
             return value;
         }
 
