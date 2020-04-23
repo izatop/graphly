@@ -1,14 +1,25 @@
-import {ITypeObject, TypeBase, TypeKind, TypeMap} from "@graphly/schema";
+import {TYPE, TypeMap} from "@graphly/schema";
+import {assert} from "@sirian/assert";
+import * as path from "path";
 import {JSONOutput} from "typedoc";
 import {getEnumConfig, getServiceConfig, getTypeConfig} from "./class";
-import {assert, isContainerReflection, isEnum, isObject, isReferenceType, isService, isType} from "./common";
+import {
+    getTypeMapBase,
+    isContainerReflection,
+    isEnum,
+    isObject,
+    isReferenceType,
+    isService,
+    isType,
+    isTypeMapReference,
+} from "./common";
 
 export class Project {
+    public readonly verbose: boolean;
     public readonly types = new Map<string, JSONOutput.Reflection>();
-    public readonly base: string;
 
-    constructor(path: string, reflection: JSONOutput.ProjectReflection) {
-        this.base = path;
+    constructor(reflection: JSONOutput.ProjectReflection, verbose = false) {
+        this.verbose = verbose;
         for (const child of reflection.children ?? []) {
             if (isContainerReflection(child)) {
                 this.applyModule(child);
@@ -19,29 +30,30 @@ export class Project {
         }
     }
 
-    public serialize() {
+    public serialize(schema: string, source: string) {
         const types = new Map<string, TypeMap>();
         for (const type of this.traverse()) {
-            this.log("serialize:success", type.name);
+            this.info("serialize:success", type.name);
             types.set(type.name, type);
         }
 
-        const kinds = [TypeKind.CLASS, TypeKind.ABSTRACT, TypeKind.INTERFACE];
-        const isReference = (value: TypeMap): value is ITypeObject => kinds.includes(value.kind);
-        const getParentBase = (base: string) => {
-            const type = types.get(base);
-            assert(type && isReference(type));
-            return type.base;
-        };
-
-        const resolve = (value: ITypeObject) => TypeBase.has(value.base)
-            ? value.base
-            : getParentBase(value.base);
-
         for (const type of types.values()) {
-            if (isReference(type)) {
-                type.base = resolve(type);
+            if (isTypeMapReference(type)) {
+                type.base = getTypeMapBase(type, types);
             }
+        }
+
+        const SchemaType = [...types.values()].find((type) => (
+            isTypeMapReference(type) && type.base === TYPE.SCHEMA),
+        );
+
+        assert(SchemaType, "Cannot find the Schema Type");
+        const base = path.relative(schema.replace(SchemaType.file.source, ""), source);
+        for (const type of types.values()) {
+            type.file = {
+                source: path.relative(base, type.file.source),
+                target: path.relative(base, type.file.target),
+            };
         }
 
         return types;
@@ -50,7 +62,7 @@ export class Project {
     public* traverse() {
         for (const child of this.types.values()) {
             try {
-                this.log("transform", child.name);
+                this.info("transform", child.name);
                 if (isEnum(child)) {
                     yield getEnumConfig(child, this);
                     continue;
@@ -75,9 +87,9 @@ export class Project {
     }
 
     protected applyModule(module: JSONOutput.ContainerReflection) {
-        this.log("module:children", module.name);
+        this.info("module:children", module.name);
         for (const child of module.children ?? []) {
-            this.log("child:cache", child.name);
+            this.info("child:cache", child.name);
             if (isReferenceType(child)) {
                 this.types.set(child.name, child);
                 continue;
@@ -89,6 +101,12 @@ export class Project {
 
     protected warn(message: string, ...data: any[]) {
         this.log(message, ...data);
+    }
+
+    protected info(message: string, ...data: any[]) {
+        if (this.verbose) {
+            this.log(message, ...data);
+        }
     }
 
     protected log(message: string, ...data: any[]) {

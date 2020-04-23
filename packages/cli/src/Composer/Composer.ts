@@ -27,7 +27,7 @@ export class Composer {
         this.sourceRoot = path.dirname(this.schemaPath);
         this.targetRoot = this.sourceRoot;
 
-        if (options.tsconfig && /.\.json$/.test(options.tsconfig)) {
+        if (options.tsconfig && /^[a-z0-9._-]+\.json$/i.test(options.tsconfig)) {
             options.tsconfig = this.resolveTSConfigFile(this.sourceRoot, options.tsconfig);
         } else if (!options.tsconfig) {
             options.tsconfig = this.resolveTSConfigFile(this.sourceRoot);
@@ -74,13 +74,13 @@ export class Composer {
         }
 
         this.project = new Project(
-            path.relative(path.resolve("../"), this.sourceRoot),
             this.application.serializer.projectToObject(reflection, {}),
+            options.verbose,
         );
     }
 
     public compose() {
-        return this.project.serialize();
+        return this.project.serialize(this.schemaPath, this.sourceRoot);
     }
 
     public save(savePath?: string) {

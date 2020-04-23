@@ -1,6 +1,5 @@
 // tslint:disable:no-bitwise
-import {TypeMap, TypeService} from "@graphly/schema";
-import * as path from "path";
+import {ITypeObject, TypeBase, TypeKind, TypeMap, TypeService} from "@graphly/schema";
 import {JSONOutput, ReflectionKind} from "typedoc";
 import {Project} from "./Project";
 
@@ -79,19 +78,32 @@ export function getBase(child: { extendedTypes?: JSONOutput.Type[] }) {
     return parents[parents.length - 1];
 }
 
+const kinds = [TypeKind.CLASS, TypeKind.ABSTRACT, TypeKind.INTERFACE];
+export const isTypeMapReference = (value: TypeMap): value is ITypeObject => kinds.includes(value.kind);
+
+export function getTypeMapBase(value: ITypeObject, map: Map<string, TypeMap>): string {
+    if (TypeBase.has(value.base)) {
+        return value.base;
+    }
+
+    const type = map.get(value.base);
+    assert(type && isTypeMapReference(type));
+    return getTypeMapBase(type, map);
+}
+
 export function getParent(child: { extendedTypes?: JSONOutput.Type[] }) {
     const parents = getParents(child);
     assert(parents.length > 0);
     return parents[0];
 }
 
-export function getSource(input: JSONOutput.ContainerReflection, base: string) {
+export function getSource(input: JSONOutput.ContainerReflection) {
     assert(input.sources && input.sources.length, `${input.name} should have source`);
     const [source] = input.sources;
-    const file = path.relative(base, source.fileName);
+    const file = source.fileName;
     return {
         source: file,
-        target: file.replace(/.[a-z]+$/, ""),
+        target: file.replace(/\.[a-z]+$/, ""),
     };
 }
 

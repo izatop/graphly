@@ -12,7 +12,7 @@ import {
 } from "./common";
 import {getPropertyArrayConfig} from "./prop";
 
-export const getTypeConfig: TypeToTypeMap = (reflection: JSONOutput.DeclarationReflection, {base}) => {
+export const getTypeConfig: TypeToTypeMap = (reflection: JSONOutput.DeclarationReflection) => {
     assert(reflection.extendedTypes, `${reflection.name} should extending one of base type`);
     const {name} = reflection;
     const kind = isInterface(reflection)
@@ -23,27 +23,27 @@ export const getTypeConfig: TypeToTypeMap = (reflection: JSONOutput.DeclarationR
         kind,
         name,
         base: getBase(reflection),
-        file: getSource(reflection, base),
+        file: getSource(reflection),
         reference: getParent(reflection),
         property: [...getPropertyArrayConfig(reflection)],
         parameter: reflection.typeParameter?.map((parameter) => parameter.name) ?? [],
     };
 };
 
-export const getServiceConfig: TypeToTypeMap = (reflection: JSONOutput.DeclarationReflection, {base}) => {
+export const getServiceConfig: TypeToTypeMap = (reflection: JSONOutput.DeclarationReflection) => {
     return {
         kind: TypeKind.SERVICE,
         name: reflection.name,
-        file: getSource(reflection, base),
+        file: getSource(reflection),
         base: getBase(reflection),
     };
 };
 
-export const getEnumConfig: TypeToTypeMap = (reflection: JSONOutput.DeclarationReflection, {base}) => {
+export const getEnumConfig: TypeToTypeMap = (reflection: JSONOutput.DeclarationReflection) => {
     return {
         name: reflection.name,
         kind: TypeKind.ENUM,
-        file: getSource(reflection, base),
+        file: getSource(reflection),
         property: getEnumMembersConfig(reflection),
     };
 };
