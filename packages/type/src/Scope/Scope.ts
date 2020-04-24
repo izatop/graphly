@@ -1,9 +1,8 @@
 import {Project} from "@graphly/schema";
 import {isObject} from "@sirian/common";
 import {memoize} from "@sirian/decorators";
-import {IncomingMessage} from "http";
-import {RequestContext, resolve} from "../helpers";
-import {KeyValue, RequestHooks, RequestLifecycleHooks} from "../Interface";
+import {resolve} from "../helpers";
+import {KeyValue, RequestHooks} from "../Interface";
 import {Schema, SchemaCtor} from "../Schema";
 import {Container, ContainerCtor} from "./Container";
 import {Context, ContextCtor} from "./Context";
