@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.4](https://github.com/graphly/graphly/compare/v0.3.3...v0.3.4) (2020-04-23)
+
+
+### Bug Fixes
+
+* resolve a container ([362d66d](https://github.com/graphly/graphly/commit/362d66d0e24526545be7a2582b417c53eb324f45))
+
+
+
+
+
 ## [0.3.3](https://github.com/graphly/graphly/compare/v0.3.2...v0.3.3) (2020-04-23)
 
 **Note:** Version bump only for package @graphly/test
