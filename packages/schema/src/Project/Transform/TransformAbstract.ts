@@ -21,7 +21,7 @@ export abstract class TransformAbstract<TIn extends any[], TOut, TArgs extends a
 
     public warning(...args: any) {
         // tslint:disable-next-line:no-console
-        console.error(...args);
+        console.warn(...args);
     }
 
     public error(error: string | Error, ...args: any) {

@@ -3,7 +3,7 @@ import {isObject} from "@sirian/common";
 import {memoize} from "@sirian/decorators";
 import {IncomingMessage} from "http";
 import {RequestContext, resolve} from "../helpers";
-import {KeyValue, RequestLifecycleHooks} from "../Interface";
+import {KeyValue, RequestHooks, RequestLifecycleHooks} from "../Interface";
 import {Schema, SchemaCtor} from "../Schema";
 import {Container, ContainerCtor} from "./Container";
 import {Context, ContextCtor} from "./Context";
@@ -28,31 +28,30 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
         this.options = options;
     }
 
-    public async createConfig(state: TState) {
+    public async createFactory<T = undefined>(hook: RequestHooks<TState, TContainer, T>) {
         const schema = await this.createSchema();
         const container = await this.createContainer();
-        const contextCtor = this.options.context;
+        const CurrentContextCtor = this.options.context;
 
-        return {
-            schema,
-            context: new contextCtor(container, state),
-            rootValue: {},
+        return async (payload: T) => {
+            const state = await hook(payload, container);
+
+            return {
+                schema,
+                context: new CurrentContextCtor(container, state),
+                rootValue: {},
+            };
         };
     }
 
-    public async createServerConfig(hooks: RequestLifecycleHooks<TState, TContainer>) {
+    public async createConfig(state: TState) {
         const schema = await this.createSchema();
         const container = await this.createContainer();
-        const createContextState = RequestContext.createContextState(hooks, container);
-        const contextCtor = this.options.context;
-        const context = async (request: IncomingMessage) => {
-            const state = await createContextState(request);
-            return new contextCtor(container, state);
-        };
+        const CurrentContextCtor = this.options.context;
 
         return {
             schema,
-            context,
+            context: new CurrentContextCtor(container, state),
             rootValue: {},
         };
     }

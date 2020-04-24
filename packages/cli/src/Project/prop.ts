@@ -52,7 +52,7 @@ export function* getPropertyArrayConfig(reflection: JSONOutput.DeclarationReflec
 
 export function getMethodConfig(reflection: MethodReflection): IPropertyFunction {
     const {name, signatures = [], flags} = reflection;
-    assert(signatures.length === 1);
+    assert(signatures.length === 1, "Only one signature should be on method declaration");
 
     const args: PropertyType[] = [];
     const [signature] = signatures;
@@ -74,7 +74,7 @@ export function getMethodConfig(reflection: MethodReflection): IPropertyFunction
 
 export function getAccessorConfig(reflection: AccessorReflection): IPropertyFunction {
     const {name, flags, getSignature = []} = reflection;
-    assert(getSignature.length === 1);
+    assert(getSignature.length === 1, "Accessor should have only one signature");
 
     const returns = getPropertyConfig({...getSignature[0], flags, name});
     return {
@@ -177,7 +177,7 @@ export function getUnionConfig(reflection: UnionReflection): PropertyType {
 
 export function getTypeParameter(reflection: ParameterReflection): PropertyType {
     const {type, name, flags, defaultValue} = reflection;
-    assert(!type.constraint || isReference(type.constraint));
+    assert(!type.constraint || isReference(type.constraint), "Wrong type parameter reference");
 
     return {
         name,

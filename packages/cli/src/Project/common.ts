@@ -75,7 +75,7 @@ export function getParents({extendedTypes = []}: { extendedTypes?: JSONOutput.Ty
 
 export function getBase(child: { extendedTypes?: JSONOutput.Type[] }) {
     const parents = getParents(child);
-    assert(parents.length > 0);
+    assert(parents.length > 0, "Type should have parent");
     return parents[parents.length - 1];
 }
 
@@ -88,13 +88,13 @@ export function getTypeMapBase(value: ITypeObject, map: Map<string, TypeMap>): s
     }
 
     const type = map.get(value.base);
-    assert(type && isTypeMapReference(type));
+    assert(type && isTypeMapReference(type), "Wrong reference type");
     return getTypeMapBase(type, map);
 }
 
 export function getParent(child: { extendedTypes?: JSONOutput.Type[] }) {
     const parents = getParents(child);
-    assert(parents.length > 0);
+    assert(parents.length > 0, "Type should have parent");
     return parents[0];
 }
 

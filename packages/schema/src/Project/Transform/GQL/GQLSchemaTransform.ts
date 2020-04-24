@@ -5,8 +5,9 @@ export class GQLSchemaTransform extends GQLTypeTransform {
 
     public transform(): string {
         const segments: string[] = [];
+        const {resolver} = this.context;
         for (const property of this.type.property) {
-            const type = this.context.resolver.resolve(this.type, property);
+            const type = resolver.resolve(this.type, property);
             if (type) {
                 segments.push(`${property.name}: ${type}`);
                 continue;
