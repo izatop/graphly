@@ -1,5 +1,6 @@
 // tslint:disable:no-bitwise
 import {ITypeObject, TypeBase, TypeKind, TypeMap, TypeService} from "@graphly/schema";
+import {assert} from "@sirian/assert";
 import {JSONOutput, ReflectionKind} from "typedoc";
 import {Project} from "./Project";
 
@@ -136,8 +137,3 @@ export function isObject<T extends object>(value: any): value is T {
     return typeof value === "object" && !!value;
 }
 
-export function assert(expr: any, message?: string): asserts expr {
-    if (!expr) {
-        throw new Error(message ?? "Assertion failed");
-    }
-}

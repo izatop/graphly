@@ -1,3 +1,4 @@
+import {assert} from "@sirian/assert";
 import {XMap} from "@sirian/common";
 import {memoize} from "@sirian/decorators";
 import {
@@ -8,10 +9,10 @@ import {
     OutputType,
     PropertyKind,
     PropertyType,
+    TYPE,
     TypeKind,
     TypeMap,
 } from "../../../Type";
-import {TYPE} from "../../../Type/const";
 import {ucfirst} from "../../../util/ucfirst";
 import {Project} from "../../Project";
 import {InterfaceType} from "../InterfaceType";
@@ -67,11 +68,20 @@ export class GQLTransform extends TransformAbstract<[Project], string> {
     }
 
     public transform() {
-        for (const type of this.types.values()) {
+        this.segments.push(`scalar DateTime\nscalar Object`);
+        const isSchema = (type: TypeMap) => type.kind === TypeKind.CLASS && type.base === TYPE.SCHEMA;
+        const isNotTheSchema = (type: TypeMap) => !isSchema(type);
+        const values = [...this.types.values()];
+        const schema = values.find(isSchema);
+        assert(schema && this.isTransformable(schema), "The Schema doesn't exists");
+
+        for (const type of values.filter(isNotTheSchema)) {
             if (this.isTransformable(type)) {
                 this.emit(type);
             }
         }
+
+        this.emit(schema);
 
         return this.segments.join("\n\n");
     }
@@ -94,6 +104,10 @@ export class GQLTransform extends TransformAbstract<[Project], string> {
 
         const interfaceName = nameChain.map(ucfirst)
             .join("");
+
+        if (this.types.has(interfaceName)) {
+            return interfaceName;
+        }
 
         const map = new XMap<string, PropertyType>();
         if (interfaceType.parameter) {

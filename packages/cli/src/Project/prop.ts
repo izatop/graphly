@@ -1,16 +1,7 @@
 import {IPropertyFunction, IPropertyScalar, NullableType, PropertyKind, PropertyType, TYPE} from "@graphly/schema";
+import {assert} from "@sirian/assert";
 import {JSONOutput} from "typedoc";
-import {
-    assert,
-    isAccessor,
-    isArray,
-    isIntrinsic,
-    isMethod,
-    isProperty,
-    isReference,
-    isTypeParameter,
-    isUnion,
-} from "./common";
+import {isAccessor, isArray, isIntrinsic, isMethod, isProperty, isReference, isTypeParameter, isUnion} from "./common";
 
 type PropertyReflection = Pick<JSONOutput.DeclarationReflection, "flags" | "name" | "type" | "defaultValue">;
 type AccessorReflection = Pick<JSONOutput.DeclarationReflection, "getSignature" | "flags" | "name" | "type" | "defaultValue">;

@@ -1,15 +1,7 @@
 import {TypeKind} from "@graphly/schema";
+import {assert} from "@sirian/assert";
 import {JSONOutput} from "typedoc";
-import {
-    assert,
-    getBase,
-    getParent,
-    getSource,
-    isClassAbstract,
-    isEnumMember,
-    isInterface,
-    TypeToTypeMap,
-} from "./common";
+import {getBase, getParent, getSource, isClassAbstract, isEnumMember, isInterface, TypeToTypeMap} from "./common";
 import {getPropertyArrayConfig} from "./prop";
 
 export const getTypeConfig: TypeToTypeMap = (reflection: JSONOutput.DeclarationReflection) => {

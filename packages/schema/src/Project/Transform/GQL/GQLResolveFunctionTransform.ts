@@ -43,6 +43,10 @@ export class GQLResolveFunctionTransform extends TransformAbstract<[GQLTypeTrans
             }
         }
 
-        return `${property.name}(${args.join(", ")})`;
+        if (args.length) {
+            return `${property.name}(${args.join(", ")})`;
+        }
+
+        return property.name;
     }
 }

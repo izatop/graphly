@@ -1,5 +1,5 @@
 import {assert} from "@sirian/assert";
-import {existsSync, writeFileSync} from "fs";
+import {existsSync, mkdirSync, statSync, writeFileSync} from "fs";
 import * as path from "path";
 import * as TypeDoc from "typedoc";
 import {Project} from "../Project";
@@ -84,14 +84,21 @@ export class Composer {
     }
 
     public save(savePath?: string) {
-        const typeMap = this.compose();
         if (!savePath) {
             const basePath = this.targetRoot;
             const baseName = path.basename(this.schemaPath, path.extname(this.schemaPath));
             savePath = path.join(basePath, `${baseName}.json`);
         }
 
-        writeFileSync(savePath, JSON.stringify([...typeMap.values()]));
+        const outDir = path.dirname(savePath);
+        if (!existsSync(outDir)) {
+            mkdirSync(outDir, {recursive: true});
+        }
+
+        writeFileSync(savePath, JSON.stringify([...this.compose().values()]));
+        process.stdout.write(`Schema written to ${savePath}\n`);
+
+        return savePath;
     }
 
     protected resolveTSConfigFile(directory: string, name = "tsconfig.json"): string {

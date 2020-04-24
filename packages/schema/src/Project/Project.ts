@@ -19,7 +19,7 @@ export class Project {
         }
     }
 
-    public static async from(file: string) {
+    public static from(file: string) {
         const basePath = path.dirname(file);
         const baseName = path.basename(file, path.extname(file));
         const typeMapPath = path.resolve(basePath, `${baseName}.json`);
