@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Composer 1`] = `
-"input TodoChecklistInput {
+"scalar DateTime
+scalar Object
+
+input TodoChecklistInput {
   solved: Boolean
   text: String!
 }
@@ -55,13 +58,6 @@ type IPageableTodo {
   offset: Int!
 }
 
-type IPageableTodo {
-  count: Int!
-  limit: Int!
-  node: [Todo!]!
-  offset: Int!
-}
-
 type TodoQuery {
   count(solved: Boolean = true): Int!
   search(filter: TodoSearchInput): IPageableTodo!
@@ -81,22 +77,15 @@ type TestQuery {
   hello: String!
 }
 
+type TestSubscription {
+  onTodoAdded: Todo!
+  onTodoDelete: Todo!
+  onTodoUpdate: Todo!
+}
+
 schema {
   mutation: TestMutation
   query: TestQuery
   subscription: TestSubscription
-}
-
-type TestSubscription {
-  onTodoAdded(): Todo!
-  onTodoDelete(): Todo!
-  onTodoUpdate(): Todo!
-}
-
-type IPageableTodo {
-  count: Int!
-  limit: Int!
-  node: [Todo!]!
-  offset: Int!
 }"
 `;
