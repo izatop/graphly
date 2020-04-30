@@ -1,15 +1,15 @@
 {
     "name": "@graphly/test",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
         "compose": "graphly-cli compose src/Schema/TestSchema.ts"
     },
     "dependencies": {
-        "@graphly/cli": "^0.4.0",
-        "@graphly/schema": "^0.4.0",
-        "@graphly/type": "^0.4.0",
+        "@graphly/cli": "^0.4.1",
+        "@graphly/schema": "^0.4.1",
+        "@graphly/type": "^0.4.1",
         "graphql": "^15.0.0"
     },
     "private": true

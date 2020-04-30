@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/graphly/graphly/compare/v0.4.0...v0.4.1) (2020-04-30)
+
+
+### Bug Fixes
+
+* watch mode, update deps ([193569d](https://github.com/graphly/graphly/commit/193569d78b7c9e68f2f04caca318153a681c996b))
+
+
+
+
+
 # [0.4.0](https://github.com/graphly/graphly/compare/v0.3.5...v0.4.0) (2020-04-24)
 
 
