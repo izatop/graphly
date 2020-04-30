@@ -35,14 +35,12 @@ export class ComposeCommand extends Command {
         if (watchFlag) {
             const watchOptions = {recursive: true, filter: /^.+\.(ts|js)$/};
             const watchDirectory = paths.map((file) => path.dirname(file));
-            // tslint:disable-next-line:no-console
             this.log("Schema watching:", watchDirectory);
             watch(watchDirectory, watchOptions, (e, file) => {
-                // tslint:disable-next-line:no-console
                 this.log("Schema", e, file);
                 const directory = watchDirectory.find((d) => file.startsWith(d));
                 if (directory) {
-                    const schemaFiles = files.filter((schema) => schema.startsWith(directory));
+                    const schemaFiles = paths.filter((schema) => schema.startsWith(directory));
                     if (schemaFiles.length > 0) {
                         this.compose(schemaFiles);
                     }

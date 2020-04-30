@@ -1,5 +1,5 @@
 import {assert} from "@sirian/assert";
-import {existsSync, mkdirSync, statSync, writeFileSync} from "fs";
+import {existsSync, mkdirSync, writeFileSync} from "fs";
 import * as path from "path";
 import * as TypeDoc from "typedoc";
 import {Project} from "../Project";
