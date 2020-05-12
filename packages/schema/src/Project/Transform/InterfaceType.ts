@@ -16,7 +16,7 @@ export class InterfaceType {
                     this.replaceTypeParameter(map, parameter)
                 ));
 
-                return {kind: PropertyKind.REFERENCE, ...property, parameters};
+                return {...property, kind: PropertyKind.REFERENCE, parameters};
             }
         }
 
