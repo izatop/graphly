@@ -13,7 +13,9 @@ export class GQLSchemaTransform extends GQLTypeTransform {
                 continue;
             }
 
-            this.warning(new Error(`Skip schema property ${property.name}`));
+            if (property.name === "query") {
+                this.error(new Error(`Schema.query field shouldn't be empty`));
+            }
         }
 
         return `${this.declaration} {\n  ${segments.join("\n  ")}\n}`;

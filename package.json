@@ -22,10 +22,10 @@
     ],
     "devDependencies": {
         "@types/jest": "^25.2.1",
-        "jest": "^25.5.2",
+        "jest": "^26.0.1",
         "lerna": "^3.20.2",
-        "ts-jest": "^25.4.0",
+        "ts-jest": "^25.5.1",
         "tslint": "^6.1.2",
-        "typescript": "3.8.3"
+        "typescript": "3.9.2"
     }
 }
