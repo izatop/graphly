@@ -33,7 +33,7 @@
         "@sirian/console": "^6.6.5",
         "@sirian/decorators": "^1.5.4",
         "node-watch": "^0.6.4",
-        "typedoc": "0.17.6"
+        "typedoc": "0.17.7"
     },
     "publishConfig": {
         "access": "public"
