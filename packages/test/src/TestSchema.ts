@@ -1,7 +1,7 @@
 import {Schema} from "@graphly/type";
-import {TestMutation} from "./TestMutation";
-import {TestQuery} from "./TestQuery";
-import {TestSubscription} from "./TestSubscription";
+import {TestMutation} from "./Schema/TestMutation";
+import {TestQuery} from "./Schema/TestQuery";
+import {TestSubscription} from "./Schema/TestSubscription";
 
 export class TestSchema extends Schema {
     public readonly query: TestQuery;

@@ -5,9 +5,12 @@ import {JSONOutput} from "typedoc";
 import {getEnumConfig, getServiceConfig, getTypeConfig} from "./class";
 import {
     getTypeMapBase,
+    inheritances,
     isContainerReflection,
     isEnum,
+    isExtendableType,
     isObject,
+    isReference,
     isReferenceType,
     isService,
     isType,
@@ -89,13 +92,23 @@ export class Project {
     protected applyModule(module: JSONOutput.ContainerReflection) {
         this.info("module:children", module.name);
         for (const child of module.children ?? []) {
-            this.info("child:cache", child.name);
+            const name = child.name;
+            this.info("child:cache", name);
+
+            if (isExtendableType(child) && child.extendedTypes) {
+                for (const type of child.extendedTypes) {
+                    if (isReference(type)) {
+                        inheritances.set(child.name, type.name);
+                    }
+                }
+            }
+
             if (isReferenceType(child)) {
-                this.types.set(child.name, child);
+                this.types.set(name, child);
                 continue;
             }
 
-            this.warn("child:skip", child);
+            this.warn("child:skip", name);
         }
     }
 

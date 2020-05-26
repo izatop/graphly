@@ -61,7 +61,6 @@ export class Composer {
         this.application = new TypeDoc.Application();
         this.application.options.addReader(new TypeDoc.TSConfigReader());
         this.application.options.addReader(new TypeDoc.TypeDocReader());
-
         this.application.bootstrap({
             name: options.name || "GraphQL",
             tsconfig: options.tsconfig,

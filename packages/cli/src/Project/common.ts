@@ -6,6 +6,8 @@ import {Project} from "./Project";
 
 export type TypeToTypeMap = <T extends JSONOutput.Reflection>(type: T, project: Project) => TypeMap;
 
+export const inheritances = new Map<string, string>();
+
 export function isContainerReflection(input: JSONOutput.Reflection): input is JSONOutput.ContainerReflection {
     return input.kind === ReflectionKind.Module;
 }
@@ -13,6 +15,10 @@ export function isContainerReflection(input: JSONOutput.Reflection): input is JS
 export function isReferenceType(input: JSONOutput.Reflection): input is JSONOutput.Reflection {
     return (ReflectionKind.ClassOrInterface & input.kind) === input.kind
         || (ReflectionKind.Enum & input.kind) === input.kind;
+}
+
+export function isExtendableType(input: JSONOutput.Reflection): input is JSONOutput.DeclarationReflection {
+    return isClass(input) || isClassAbstract(input) || isInterface(input);
 }
 
 export function isAccessor(input: JSONOutput.Reflection): input is JSONOutput.DeclarationReflection {
@@ -76,7 +82,17 @@ export function getParents({extendedTypes = []}: { extendedTypes?: JSONOutput.Ty
 export function getBase(child: { extendedTypes?: JSONOutput.Type[] }) {
     const parents = getParents(child);
     assert(parents.length > 0, "Type should have parent");
-    return parents[parents.length - 1];
+    let tail = parents[parents.length - 1];
+    while (tail && !TypeBase.has(tail)) {
+        const parent = inheritances.get(tail);
+        if (!parent) {
+            break;
+        }
+
+        tail = parent;
+    }
+
+    return tail;
 }
 
 const kinds = [TypeKind.CLASS, TypeKind.ABSTRACT, TypeKind.INTERFACE];
@@ -88,7 +104,7 @@ export function getTypeMapBase(value: ITypeObject, map: Map<string, TypeMap>): s
     }
 
     const type = map.get(value.base);
-    assert(type && isTypeMapReference(type), "Wrong reference type");
+    assert(type && isTypeMapReference(type), `Wrong reference type ${value.name} of ${value.base}`);
     return getTypeMapBase(type, map);
 }
 
@@ -111,6 +127,11 @@ export function getSource(input: JSONOutput.ContainerReflection) {
 export function isReference(type: any): type is JSONOutput.ReferenceType {
     return isObject<JSONOutput.ReferenceType>(type) && "type" in type
         && type.type === "reference";
+}
+
+export function isReflection(type: any): type is JSONOutput.ReflectionType {
+    return isObject<JSONOutput.ReflectionType>(type) && "type" in type
+        && type.type === "reflection";
 }
 
 export function isIntrinsic(type: any): type is JSONOutput.IntrinsicType {

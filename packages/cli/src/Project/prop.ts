@@ -1,7 +1,17 @@
 import {IPropertyFunction, IPropertyScalar, NullableType, PropertyKind, PropertyType, TYPE} from "@graphly/schema";
 import {assert} from "@sirian/assert";
 import {JSONOutput} from "typedoc";
-import {isAccessor, isArray, isIntrinsic, isMethod, isProperty, isReference, isTypeParameter, isUnion} from "./common";
+import {
+    isAccessor,
+    isArray,
+    isIntrinsic,
+    isMethod,
+    isProperty,
+    isReference,
+    isReflection,
+    isTypeParameter,
+    isUnion,
+} from "./common";
 
 type PropertyReflection = Pick<JSONOutput.DeclarationReflection, "flags" | "name" | "type" | "defaultValue">;
 type AccessorReflection = Pick<JSONOutput.DeclarationReflection, "getSignature" | "flags" | "name" | "type" | "defaultValue">;
@@ -140,7 +150,16 @@ export function getPropertyConfig(reflection: PropertyReflection): PropertyType 
         return getTypeParameter({name, flags, type, defaultValue});
     }
 
-    throw new Error(`Unknown type ${name}`);
+    if (isReflection(type)) {
+        return {
+            name,
+            nullable,
+            defaultValue,
+            kind: PropertyKind.NEVER,
+        };
+    }
+
+    throw new Error(`Unknown type ${name} ${type?.type}`);
 }
 
 export function getUnionConfig(reflection: UnionReflection): PropertyType {

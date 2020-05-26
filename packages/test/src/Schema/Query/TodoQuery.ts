@@ -1,12 +1,12 @@
 import {Lookup, ObjectType, Returns, ReturnsNullable, TypeInt} from "@graphly/type";
+import {MainContainer} from "../../MainContainer";
 import {TodoSearchInput} from "../Input/TodoSearchInput";
-import {TestContainer} from "../TestContainer";
 import {TestContext} from "../TestContext";
 import {IPageable} from "./IPageable";
 import {Todo} from "./Todo";
 
 export class TodoQuery extends ObjectType {
-    public todo(id: TypeInt, container: Lookup<TestContainer>): ReturnsNullable<Todo> {
+    public todo(id: TypeInt, container: Lookup<MainContainer>): ReturnsNullable<Todo> {
         const {repository} = container;
         return repository.get<Todo>("todos")
             .findOne(id);

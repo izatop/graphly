@@ -1,11 +1,11 @@
 import {Composer} from "@graphly/cli";
 import {KeyValue, Scope} from "@graphly/type";
 import {graphql} from "graphql";
+import {MainContainer} from "./MainContainer";
 import {TestRepository} from "./Repository/TestRepository";
 import {TodoInput} from "./Schema/Input/TodoInput";
-import {TestContainer} from "./Schema/TestContainer";
 import {TestContext} from "./Schema/TestContext";
-import {TestSchema} from "./Schema/TestSchema";
+import {TestSchema} from "./TestSchema";
 
 const todoFragment = `
 fragment TodoFragment on Todo { id title description solved deadlineAt checklist { text solved } }
@@ -68,7 +68,7 @@ describe("Composer", () => {
     const scope = new Scope({
         schema: TestSchema,
         context: TestContext,
-        container: TestContainer,
+        container: MainContainer,
         config,
     });
 

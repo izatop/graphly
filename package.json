@@ -15,6 +15,7 @@
         "test": "jest --config jest.json",
         "test:watch": "jest --watch --config jest.json",
         "test:compose": "lerna run compose --scope=@graphly/test",
+        "test:compose:watch": "lerna run compose:watch --scope=@graphly/test",
         "bootstrap": "lerna bootstrap && lerna link"
     },
     "workspaces": [
@@ -23,7 +24,7 @@
     "devDependencies": {
         "@types/jest": "^25.2.3",
         "jest": "^26.0.1",
-        "lerna": "^3.21.0",
+        "lerna": "^3.22.0",
         "ts-jest": "^26.0.0",
         "tslint": "^6.1.2",
         "typescript": "3.9.3"

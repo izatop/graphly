@@ -1,6 +1,6 @@
 import {Project} from "@graphly/schema";
 import {GraphQLSchema} from "graphql";
-import {TestSchema} from "./Schema/TestSchema";
+import {TestSchema} from "./TestSchema";
 
 test("Composer", async () => {
     const project = await Project.from(TestSchema.getSchemaLocation());

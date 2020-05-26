@@ -4,7 +4,8 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "compose": "graphly-cli compose src/Schema/TestSchema.ts"
+        "compose": "graphly-cli -vvv compose src/TestSchema.ts",
+        "compose:watch": "graphly-cli -w compose src/TestSchema.ts"
     },
     "dependencies": {
         "@graphly/cli": "^0.4.3",
