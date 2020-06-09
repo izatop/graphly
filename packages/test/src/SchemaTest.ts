@@ -8,7 +8,7 @@ import {TestContext} from "./Schema/TestContext";
 import {TestSchema} from "./TestSchema";
 
 const todoFragment = `
-fragment TodoFragment on Todo { id title description solved deadlineAt checklist { text solved } }
+fragment TodoFragment on Todo { id code title description solved deadlineAt checklist { text solved } }
 `;
 
 const todoTodoQuery = `

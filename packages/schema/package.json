@@ -27,7 +27,7 @@
         "@sirian/assert": "^1.1.7",
         "@sirian/common": "^5.13.0",
         "@sirian/decorators": "^1.5.4",
-        "graphql": "^15.0.0"
+        "graphql": "^15.1.0"
     },
     "publishConfig": {
         "access": "public"

@@ -38,6 +38,7 @@ type Todo {
   id: Int!
   solved: Boolean!
   title: String!
+  code: String!
 }
 
 type TodoChecklist {

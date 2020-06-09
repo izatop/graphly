@@ -2,6 +2,7 @@ import {ok} from "assert";
 import {GraphQLFieldResolver} from "graphql";
 import {resolve} from "path";
 import {InputType, IPropertyFunction, PropertyKind, PropertyType, TYPE, TypeKind} from "../../../Type";
+import {getPropertyDescriptor} from "../../../util/helper";
 import {TransformAbstract} from "../TransformAbstract";
 import {SchemaObjectFieldTransform} from "./SchemaObjectFieldTransform";
 import {SchemaTransform} from "./SchemaTransform";
@@ -39,7 +40,9 @@ export class SchemaResolveTransform extends TransformAbstract<Args, Returns> {
         );
 
         const ns = `${this.type.name}.${this.property.name}`;
-        const descriptor = Reflect.getOwnPropertyDescriptor(owner.prototype, this.property.name)!;
+        const descriptor = getPropertyDescriptor(owner, this.property.name)!;
+        ok(descriptor, `Cannot find descriptor of ${ns}`);
+
         const resolver = this.createMagickResolveFunction(ns, owner.prototype, descriptor);
         return function $resolve(parent: object, args: object, context: object) {
             return resolver(parent, args, context);

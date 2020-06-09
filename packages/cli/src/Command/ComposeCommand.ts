@@ -58,28 +58,32 @@ export class ComposeCommand extends Command {
 
     @debounce(1000)
     protected compose(files: string[]) {
-        const config: string = this.getOption("config");
-        const typesDir: string = this.getOption("types-dir");
-        for (const schemaPath of files) {
-            const name = path.basename(schemaPath);
-            const composer = new Composer({
-                name,
-                schemaPath,
-                verbose: this.verbose,
-                tsconfig: config,
-            });
+        try {
+            const config: string = this.getOption("config");
+            const typesDir: string = this.getOption("types-dir");
+            for (const schemaPath of files) {
+                const name = path.basename(schemaPath);
+                const composer = new Composer({
+                    name,
+                    schemaPath,
+                    verbose: this.verbose,
+                    tsconfig: config,
+                });
 
-            const schemaFile = composer.save();
-            if (typesDir) {
-                const typesPath = path.resolve(typesDir);
-                const graphqlSchemaFile = `${path.basename(schemaFile, ".json")}.graphql`;
-                const project = Project.from(schemaFile);
-                if (!existsSync(typesPath)) {
-                    mkdirSync(typesPath, {recursive: true});
+                const schemaFile = composer.save();
+                if (typesDir) {
+                    const typesPath = path.resolve(typesDir);
+                    const graphqlSchemaFile = `${path.basename(schemaFile, ".json")}.graphql`;
+                    const project = Project.from(schemaFile);
+                    if (!existsSync(typesPath)) {
+                        mkdirSync(typesPath, {recursive: true});
+                    }
+
+                    writeFileSync(path.join(typesPath, graphqlSchemaFile), project.toGraphQL());
                 }
-
-                writeFileSync(path.join(typesPath, graphqlSchemaFile), project.toGraphQL());
             }
+        } catch (error) {
+            this.log(error);
         }
     }
 }

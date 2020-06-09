@@ -1,13 +1,11 @@
-import {ObjectType, TypeInt} from "@graphly/type";
+import {BaseType} from "./BaseType";
 import {TodoChecklist} from "./TodoChecklist";
 import {TodoFlag} from "./TodoFlag";
 
 /**
  * Todo type description
  */
-export class Todo extends ObjectType {
-    public readonly id: TypeInt;
-
+export class Todo extends BaseType {
     public readonly title: string;
 
     public readonly description?: string;
