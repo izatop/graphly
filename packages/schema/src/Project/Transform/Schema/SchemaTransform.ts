@@ -1,7 +1,9 @@
+import {XMap} from "@sirian/common";
+import {memoize} from "@sirian/decorators";
 import {ok} from "assert";
 import {GraphQLObjectType, GraphQLSchema, GraphQLSchemaConfig} from "graphql";
 import {IPropertyReference, PropertyKind, TypeKind} from "../../../Type";
-import {TYPE} from "../../../Type/const";
+import {TYPE} from "../../../Type";
 import {Project} from "../../Project";
 import {TransformAbstract} from "../TransformAbstract";
 import {ArgumentPropertyResolver} from "./ArgumentPropertyResolver";
@@ -11,9 +13,14 @@ import {SchemaObjectTypeTransform} from "./SchemaObjectTypeTransform";
 type Args = [Project];
 
 export class SchemaTransform extends TransformAbstract<Args, GraphQLSchema> {
-    public readonly output = new ObjectPropertyResolver(this);
+    public readonly output: ObjectPropertyResolver = new ObjectPropertyResolver(this, this.cache);
 
-    public readonly input = new ArgumentPropertyResolver(this);
+    public readonly input: ArgumentPropertyResolver = new ArgumentPropertyResolver(this, this.cache);
+
+    @memoize
+    protected get cache() {
+        return new XMap<string, any>();
+    }
 
     public get project() {
         return this.args[0];

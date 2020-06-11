@@ -21,20 +21,19 @@ import {
 import {ScalarTypeTransform} from "../ScalarTypeTransform";
 import {SchemaTransform} from "./SchemaTransform";
 
-const cache = new XMap<string, any>();
-
 export abstract class PropertyResolver<T extends GraphQLOutputType | GraphQLInputType> {
     public scalars = new ScalarTypeTransform();
 
     public context: SchemaTransform;
 
-    public cache = cache;
+    public cache: XMap<string, any>;
 
     public base: Set<string>;
 
-    constructor(context: SchemaTransform, base: Set<string>) {
+    constructor(context: SchemaTransform, base: Set<string>, cache: XMap<string, any>) {
         this.base = base;
         this.context = context;
+        this.cache = cache;
     }
 
     public resolve(of: ITypeObject, property: PropertyType): T | undefined {

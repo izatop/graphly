@@ -1,3 +1,4 @@
+import {XMap} from "@sirian/common";
 import {GraphQLInputType} from "graphql";
 import {IPropertyReference, ITypeObject, OutputType} from "../../../Type";
 import {PropertyResolver} from "./PropertyResolver";
@@ -5,8 +6,8 @@ import {SchemaInputObjectTypeTransform} from "./SchemaInputObjectTypeTransform";
 import {SchemaTransform} from "./SchemaTransform";
 
 export class ArgumentPropertyResolver extends PropertyResolver<GraphQLInputType> {
-    constructor(context: SchemaTransform) {
-        super(context, OutputType);
+    constructor(context: SchemaTransform, cache: XMap<string, any>) {
+        super(context, OutputType, cache);
     }
 
     protected createObjectType(type: ITypeObject) {

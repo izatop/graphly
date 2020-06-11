@@ -5,6 +5,7 @@ export abstract class TransformAbstract<TIn extends any[], TOut, TArgs extends a
 
     constructor(...args: TIn) {
         this.args = args;
+        this.init();
     }
 
     public abstract transform(...args: TArgs): TOut;
@@ -28,5 +29,9 @@ export abstract class TransformAbstract<TIn extends any[], TOut, TArgs extends a
         // tslint:disable-next-line:no-console
         console.error(...args);
         throw error;
+    }
+
+    protected init() {
+        // do nothing
     }
 }

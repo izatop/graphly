@@ -22,7 +22,7 @@
         "packages/*"
     ],
     "devDependencies": {
-        "@types/jest": "^25.2.3",
+        "@types/jest": "^26.0.0",
         "jest": "^26.0.1",
         "lerna": "^3.22.1",
         "ts-jest": "^26.1.0",
