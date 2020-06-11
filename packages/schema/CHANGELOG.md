@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.6](https://github.com/graphly/graphly/compare/v0.4.5...v0.4.6) (2020-06-11)
+
+
+### Bug Fixes
+
+* cache intersection ([64ff189](https://github.com/graphly/graphly/commit/64ff189f4b24518e8c12b11a1558c0f27f5cd603))
+* lint ([97559c5](https://github.com/graphly/graphly/commit/97559c59a89aa1f60169085ade2d7a4b68248191))
+
+
+
+
+
 ## [0.4.5](https://github.com/graphly/graphly/compare/v0.4.4...v0.4.5) (2020-06-09)
 
 
