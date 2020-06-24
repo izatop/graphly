@@ -5,6 +5,7 @@ import {JSONOutput} from "typedoc";
 import {getEnumConfig, getServiceConfig, getTypeConfig} from "./class";
 import {
     getTypeMapBase,
+    hasTypeMapBase,
     inheritances,
     isContainerReflection,
     isEnum,
@@ -41,7 +42,7 @@ export class Project {
         }
 
         for (const type of types.values()) {
-            if (isTypeMapReference(type)) {
+            if (isTypeMapReference(type) && hasTypeMapBase(type, types)) {
                 type.base = getTypeMapBase(type, types);
             }
         }

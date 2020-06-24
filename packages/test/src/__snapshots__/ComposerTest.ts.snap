@@ -75,6 +75,7 @@ type TestQuery {
   random: Float!
   todo: TodoQuery!
   timestamp: Float!
+  config: Boolean!
   hello: String!
 }
 

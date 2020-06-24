@@ -1,5 +1,7 @@
-import {ObjectType} from "@graphly/type";
+import {ObjectType, TypeBoolean} from "@graphly/type";
+import {ITestState} from "./interfaces";
 import {TodoQuery} from "./Query/TodoQuery";
+import {TestContext} from "./TestContext";
 
 export class TestQuery extends ObjectType {
     /**
@@ -39,5 +41,13 @@ export class TestQuery extends ObjectType {
      */
     public hello() {
         return "Hello world";
+    }
+
+    public config(ctx: TestContext): boolean {
+        return this.testProtectedState(ctx.state);
+    }
+
+    protected testProtectedState(state: ITestState): boolean {
+        return true;
     }
 }

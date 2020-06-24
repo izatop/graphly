@@ -108,6 +108,14 @@ export function getTypeMapBase(value: ITypeObject, map: Map<string, TypeMap>): s
     return getTypeMapBase(type, map);
 }
 
+export function hasTypeMapBase(value: ITypeObject, map: Map<string, TypeMap>): boolean {
+    if (TypeBase.has(value.base)) {
+        return true;
+    }
+
+    return map.has(value.base);
+}
+
 export function getParent(child: { extendedTypes?: JSONOutput.Type[] }) {
     const parents = getParents(child);
     assert(parents.length > 0, "Type should have parent");
