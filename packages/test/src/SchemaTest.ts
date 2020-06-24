@@ -73,14 +73,14 @@ describe("Composer", () => {
     });
 
     const runQuery = async (q: string, v?: KeyValue) => {
-        const state = {timestamp: Date.now()};
+        const state = {timestamp: Date.now(), authorized: false, session: ""};
         const factory = await scope.createFactory(() => state);
         const {schema, context, rootValue} = await factory(undefined);
         return graphql(schema, q, rootValue, context, v);
     };
 
     test("Test Context", async () => {
-        const state = {timestamp: Date.now()};
+        const state = {timestamp: Date.now(), authorized: false, session: ""};
         const factory = await scope.createFactory(() => state);
         const {context} = await factory(undefined);
         expect(context.container.repository).toBeInstanceOf(TestRepository);
