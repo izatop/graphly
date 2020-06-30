@@ -1,6 +1,6 @@
 import {ok} from "assert";
 import * as GQL from "graphql";
-import {DateTimeType} from "../../GraphQL/DateTimeType";
+import {DateTimeType, DomainNameType, EmailAddressType, IPv4AddressType} from "../../GraphQL";
 import {ObjectScalarType} from "../../GraphQL/ObjectScalarType";
 import {TransformAbstract} from "./TransformAbstract";
 
@@ -18,6 +18,9 @@ export class ScalarTypeTransform extends TransformAbstract<[], GQL.GraphQLScalar
         ["Date", DateTimeType],
         ["TypeDate", DateTimeType],
         ["TypeObject", ObjectScalarType],
+        ["TypeEmail", EmailAddressType],
+        ["TypeDomain", DomainNameType],
+        ["TypeIPv4", IPv4AddressType],
         ["object", ObjectScalarType],
     ]);
 

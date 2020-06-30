@@ -11,6 +11,9 @@ export type TypeString = string;
 export type TypeBoolean = string;
 export type TypeObject = { [key: string]: any };
 export type TypeDate = Date;
+export type TypeDomain = string;
+export type TypeEmail = string;
+export type TypeIPv4 = string;
 
 export type OutputType<TObjectType extends ObjectType = ObjectType> = TObjectType
     | IObject
@@ -21,6 +24,9 @@ export type OutputType<TObjectType extends ObjectType = ObjectType> = TObjectTyp
     | TypeBoolean
     | TypeObject
     | TypeDate
+    | TypeDomain
+    | TypeEmail
+    | TypeIPv4
     | string
     | number
     | boolean
@@ -35,6 +41,9 @@ export type InputType<TInputObjectType extends InputObjectType = InputObjectType
     | TypeBoolean
     | TypeObject
     | TypeDate
+    | TypeDomain
+    | TypeEmail
+    | TypeIPv4
     | string
     | number
     | boolean

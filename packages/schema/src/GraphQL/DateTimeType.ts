@@ -1,24 +1,26 @@
 import {isNumber} from "@sirian/common";
-import {GraphQLScalarType, Kind} from "graphql";
+import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
 
 export const DateTimeType = new GraphQLScalarType({
     name: "DateTime",
-    description: "DateTime scalar type represents in ISO date string",
-    parseValue(value) {
+    description: "The `DateTime` scalar type represents a date in ISO format",
+    parseValue: (value) => {
         return new Date(value);
     },
-    serialize(value) {
+    serialize: (value) => {
         if (isNumber(value)) {
             return value;
         }
 
         return value.getTime();
     },
-    parseLiteral(ast) {
-        if (ast.kind === Kind.INT) {
-            return +ast.value;
+    parseLiteral: (ast) => {
+        if (ast.kind !== Kind.INT) {
+            throw new GraphQLError(
+                `Only INT value allowed as timestamp, received: ${ast.kind}`,
+            );
         }
 
-        return null;
+        return +ast.value;
     },
 });

@@ -1,4 +1,4 @@
-import {ObjectType, TypeBoolean} from "@graphly/type";
+import {ObjectType, TypeBoolean, TypeDomain, TypeEmail, TypeIPv4} from "@graphly/type";
 import {ITestState} from "./interfaces";
 import {TodoQuery} from "./Query/TodoQuery";
 import {TestContext} from "./TestContext";
@@ -18,6 +18,10 @@ export class TestQuery extends ObjectType {
      * Evaluate expression as a resolver
      */
     public readonly random = Math.random();
+
+    public readonly domain: TypeDomain = "foo.example.com";
+    public readonly email: TypeEmail = "a+b@foo.example.com";
+    public readonly ipv4: TypeIPv4 = "127.0.0.1";
 
     /**
      * Not in a schema

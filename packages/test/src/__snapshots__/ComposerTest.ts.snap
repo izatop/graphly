@@ -71,6 +71,9 @@ type TestMutation {
 }
 
 type TestQuery {
+  domain: DomainName!
+  email: EmailAddress!
+  ipv4: IPv4Address!
   optional: Float
   random: Float!
   todo: TodoQuery!

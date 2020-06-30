@@ -27,7 +27,7 @@
         "@graphly/schema": "^0.4.8",
         "@sirian/common": "^5.14.0",
         "@sirian/decorators": "^1.5.5",
-        "graphql": "^15.1.0"
+        "graphql": "^15.2.0"
     },
     "publishConfig": {
         "access": "public"
