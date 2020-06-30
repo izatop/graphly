@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.9](https://github.com/graphly/graphly/compare/v0.4.8...v0.4.9) (2020-06-30)
+
+
+### Bug Fixes
+
+* supports email, domain and ip4 ([49a59a6](https://github.com/graphly/graphly/commit/49a59a648ac8758b2d1b4716222fb6bd660a9878))
+
+
+
+
+
 ## [0.4.8](https://github.com/graphly/graphly/compare/v0.4.7...v0.4.8) (2020-06-24)
 
 **Note:** Version bump only for package @graphly/type
