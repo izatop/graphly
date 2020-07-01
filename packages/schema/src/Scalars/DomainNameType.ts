@@ -4,7 +4,7 @@ import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
 const validator = /^(?:[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9])?\.){0,126}(?:[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9]))\.?$/i;
 
 const parse = (value: any) => {
-    if (isString(value) || !validator.test(value)) {
+    if (!isString(value) || !validator.test(value)) {
         throw new TypeError(`Value is not a valid domain name: ${value}`);
     }
 

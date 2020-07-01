@@ -17,7 +17,7 @@ const sValidEmail = "^" + sAddrSpec + "$"; // as whole string
 const validator = new RegExp(sValidEmail);
 
 const parse = (value: any) => {
-    if (isString(value) || !validator.test(value)) {
+    if (!isString(value) || !validator.test(value)) {
         throw new TypeError(`Value is not a valid email address: ${value}`);
     }
 

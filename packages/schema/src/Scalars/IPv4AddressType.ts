@@ -4,7 +4,7 @@ import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
 const validator = /^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/;
 
 const parse = (value: any) => {
-    if (isString(value) || !validator.test(value)) {
+    if (!isString(value) || !validator.test(value)) {
         throw new TypeError(`Value is not a valid IPv4 address: ${value}`);
     }
 

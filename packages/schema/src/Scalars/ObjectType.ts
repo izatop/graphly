@@ -1,7 +1,7 @@
 import {isObject, isString} from "@sirian/common";
 import {GraphQLScalarType, Kind} from "graphql";
 
-const parseValue = (value?: string | object) => {
+const parse = (value?: string | object) => {
     if (isObject(value)) {
         return value;
     }
@@ -16,8 +16,8 @@ const parseValue = (value?: string | object) => {
 export const ObjectType = new GraphQLScalarType({
     name: "Object",
     description: "Arbitrary object",
-    parseValue,
-    serialize: parseValue,
+    parseValue: parse,
+    serialize: parse,
     parseLiteral: (ast) => {
         switch (ast.kind) {
             case Kind.STRING:
