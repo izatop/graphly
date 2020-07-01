@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.10](https://github.com/graphly/graphly/compare/v0.4.9...v0.4.10) (2020-07-01)
+
+
+### Bug Fixes
+
+* scalar types ([45aad63](https://github.com/graphly/graphly/commit/45aad63558b2faa465390a5a1d7e31341c867719))
+
+
+
+
+
 ## [0.4.9](https://github.com/graphly/graphly/compare/v0.4.8...v0.4.9) (2020-06-30)
 
 
