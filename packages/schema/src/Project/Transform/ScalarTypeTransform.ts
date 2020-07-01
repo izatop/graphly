@@ -1,7 +1,6 @@
 import {ok} from "assert";
 import * as GQL from "graphql";
-import {DateTimeType, DomainNameType, EmailAddressType, IPv4AddressType} from "../../GraphQL";
-import {ObjectScalarType} from "../../GraphQL/ObjectScalarType";
+import * as Scalars from "../../Scalars";
 import {TransformAbstract} from "./TransformAbstract";
 
 export class ScalarTypeTransform extends TransformAbstract<[], GQL.GraphQLScalarType, [string]> {
@@ -15,13 +14,13 @@ export class ScalarTypeTransform extends TransformAbstract<[], GQL.GraphQLScalar
         ["number", GQL.GraphQLFloat],
         ["TypeFloat", GQL.GraphQLFloat],
         ["TypeInt", GQL.GraphQLInt],
-        ["Date", DateTimeType],
-        ["TypeDate", DateTimeType],
-        ["TypeObject", ObjectScalarType],
-        ["TypeEmail", EmailAddressType],
-        ["TypeDomain", DomainNameType],
-        ["TypeIPv4", IPv4AddressType],
-        ["object", ObjectScalarType],
+        ["Date", Scalars.DateTimeType],
+        ["TypeDate", Scalars.DateTimeType],
+        ["TypeObject", Scalars.ObjectType],
+        ["TypeEmail", Scalars.EmailAddressType],
+        ["TypeDomain", Scalars.DomainNameType],
+        ["TypeIPv4", Scalars.IPv4AddressType],
+        ["object", Scalars.ObjectType],
     ]);
 
     public has(type: string) {

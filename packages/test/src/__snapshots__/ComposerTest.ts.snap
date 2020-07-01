@@ -2,6 +2,9 @@
 
 exports[`Composer 1`] = `
 "scalar DateTime
+scalar DomainName
+scalar EmailAddress
+scalar IPv4Address
 scalar Object
 
 input TodoChecklistInput {

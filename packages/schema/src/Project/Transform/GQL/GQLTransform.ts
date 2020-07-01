@@ -1,5 +1,5 @@
 import {assert} from "@sirian/assert";
-import {XMap} from "@sirian/common";
+import {Obj, XMap} from "@sirian/common";
 import {memoize} from "@sirian/decorators";
 import {
     InputType,
@@ -13,6 +13,7 @@ import {
     TypeKind,
     TypeMap,
 } from "../../../Type";
+import * as Scalars from "../../../Scalars";
 import {ucfirst} from "../../../util/ucfirst";
 import {Project} from "../../Project";
 import {InterfaceType} from "../InterfaceType";
@@ -68,7 +69,8 @@ export class GQLTransform extends TransformAbstract<[Project], string> {
     }
 
     public transform() {
-        this.segments.push(`scalar DateTime\nscalar Object`);
+        const scalars = Object.values(Scalars);
+        this.segments.push(scalars.map(({name}) => `scalar ${name}`).join("\n"));
         const isSchema = (type: TypeMap) => type.kind === TypeKind.CLASS && type.base === TYPE.SCHEMA;
         const isNotTheSchema = (type: TypeMap) => !isSchema(type);
         const values = [...this.types.values()];

@@ -13,7 +13,7 @@ const parseValue = (value?: string | object) => {
     return null;
 };
 
-export const ObjectScalarType = new GraphQLScalarType({
+export const ObjectType = new GraphQLScalarType({
     name: "Object",
     description: "Arbitrary object",
     parseValue,
