@@ -1,5 +1,5 @@
 import {Composer} from "@graphly/cli";
-import {KeyValue, Scope} from "@graphly/type";
+import {Scope} from "@graphly/type";
 import {graphql} from "graphql";
 import {MainContainer} from "./MainContainer";
 import {TestRepository} from "./Repository/TestRepository";
@@ -72,30 +72,31 @@ describe("Composer", () => {
         config,
     });
 
-    const runQuery = async (q: string, v?: KeyValue) => {
+    const runQuery = async (q: string, v?: Record<string, any>) => {
         const state = {timestamp: Date.now(), authorized: false, session: ""};
-        const factory = await scope.createFactory(() => state);
-        const {schema, context, rootValue} = await factory(undefined);
-        return graphql(schema, q, rootValue, context, v);
+        const factory = await scope.create(() => state);
+        const {schema, contextValue, rootValue} = await factory(undefined);
+        return graphql(schema, q, rootValue, contextValue, v);
     };
 
     test("Test Context", async () => {
         const state = {timestamp: Date.now(), authorized: false, session: ""};
-        const factory = await scope.createFactory(() => state);
-        const {context} = await factory(undefined);
-        expect(context.container.repository).toBeInstanceOf(TestRepository);
-        expect(context.container.config).toMatchObject(config);
-        expect(context.container.config).toBe(context.getConfig());
-        expect(context.state).toMatchObject(state);
+        const factory = await scope.create(() => state);
+        const {contextValue, rootValue} = await factory(undefined, {test: true});
+        expect(contextValue.container.repository).toBeInstanceOf(TestRepository);
+        expect(contextValue.container.config).toMatchObject(config);
+        expect(contextValue.container.config).toBe(contextValue.getConfig());
+        expect(contextValue.state).toMatchObject(state);
+        expect(rootValue).toMatchObject({test: true});
     });
 
     test("Schema query", async () => {
         const query = `query {optional random timestamp hello}`;
         const {data} = await runQuery(query);
-        expect(data!.optional).toBe(null);
-        expect(typeof data!.random).toBe("number");
-        expect(typeof data!.timestamp).toBe("number");
-        expect(data!.hello).toBe("Hello world");
+        expect(data?.optional).toBe(null);
+        expect(typeof data?.random).toBe("number");
+        expect(typeof data?.timestamp).toBe("number");
+        expect(data?.hello).toBe("Hello world");
 
         const todo: TodoInput = {
             checklist: [],

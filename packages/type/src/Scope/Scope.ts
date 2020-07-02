@@ -32,16 +32,15 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
      * @param hook
      */
     public async createFactory<T = undefined>(hook: RequestHooks<TState, TContainer, T>) {
-        return this.factory(hook);
+        return this.create(hook);
     }
 
-    public async factory<T = undefined>(hook: RequestHooks<TState, TContainer, T>) {
+    public async create<T = undefined>(hook: RequestHooks<TState, TContainer, T>) {
         const schema = await this.createSchema();
         const container = await this.createContainer();
         return async <R>(payload: T, rootValue: any = {}) => {
-            const contextValue = async () => {
-                return new this.options.context(container, await hook(payload, container));
-            };
+            const state = await hook(payload, container);
+            const contextValue = new this.options.context(container, state);
 
             return {
                 schema,
@@ -58,6 +57,7 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
         const schema = await this.createSchema();
         const container = await this.createContainer();
         const contextValue = new this.options.context(container, state);
+
         return {
             schema,
             rootValue,
