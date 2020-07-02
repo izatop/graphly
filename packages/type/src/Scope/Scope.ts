@@ -27,31 +27,44 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
         this.options = options;
     }
 
+    /**
+     * @deprecated
+     * @param hook
+     */
     public async createFactory<T = undefined>(hook: RequestHooks<TState, TContainer, T>) {
+        return this.factory(hook);
+    }
+
+    public async factory<T = undefined>(hook: RequestHooks<TState, TContainer, T>) {
         const schema = await this.createSchema();
         const container = await this.createContainer();
-        const CurrentContextCtor = this.options.context;
-
-        return async (payload: T) => {
-            const state = await hook(payload, container);
+        return async <R>(payload: T, rootValue: any = {}) => {
+            const contextValue = async () => {
+                return new this.options.context(container, await hook(payload, container));
+            };
 
             return {
                 schema,
-                context: new CurrentContextCtor(container, state),
-                rootValue: {},
+                rootValue,
+                contextValue,
+
+                // @deprecated
+                context: contextValue,
             };
         };
     }
 
-    public async createConfig(state: TState) {
+    public async createConfig(state: TState, rootValue: any = {}) {
         const schema = await this.createSchema();
         const container = await this.createContainer();
-        const CurrentContextCtor = this.options.context;
-
+        const contextValue = new this.options.context(container, state);
         return {
             schema,
-            context: new CurrentContextCtor(container, state),
-            rootValue: {},
+            rootValue,
+            contextValue,
+
+            // @deprecated
+            context: contextValue,
         };
     }
 
