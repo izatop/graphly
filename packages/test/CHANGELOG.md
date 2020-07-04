@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.12](https://github.com/graphly/graphly/compare/v0.4.11...v0.4.12) (2020-07-02)
+
+
+### Bug Fixes
+
+* context ([a8d3263](https://github.com/graphly/graphly/commit/a8d3263c04358ed7d0f3f39a1caf7e071ad9c83b))
+
+
+
+
+
 ## [0.4.11](https://github.com/graphly/graphly/compare/v0.4.10...v0.4.11) (2020-07-01)
 
 **Note:** Version bump only for package @graphly/test
