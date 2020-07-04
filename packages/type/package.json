@@ -27,6 +27,7 @@
         "@graphly/schema": "^0.4.11",
         "@sirian/common": "^5.14.0",
         "@sirian/decorators": "^1.5.5",
+        "@sirian/ts-extra-types": "^3.56.1",
         "graphql": "^15.2.0"
     },
     "publishConfig": {

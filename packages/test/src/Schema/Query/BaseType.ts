@@ -1,9 +1,9 @@
-import {ObjectType, TypeInt} from "@graphly/type";
+import {ObjectType, TypeInt, TypeString} from "@graphly/type";
 
 export abstract class BaseType extends ObjectType {
     public readonly id: TypeInt;
 
-    public get code() {
+    public get code(): TypeString {
         return "code" + this.id.toString();
     }
 }

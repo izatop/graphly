@@ -1,8 +1,8 @@
 import {EventEmitter} from "events";
 
-const database = new Map<string, Map<number, Document>>();
+const database = new Map<string, Map<number, TDocument>>();
 
-type Document = {
+export type TDocument = {
     id: number;
     [key: string]: any;
 };
@@ -15,7 +15,7 @@ export class TestRepository {
 
     constructor(protected readonly dsn: string) {}
 
-    public get<T extends Document>(name: string) {
+    public get<T extends TDocument>(name: string) {
         if (!database.has(name)) {
             database.set(name, new Map());
         }

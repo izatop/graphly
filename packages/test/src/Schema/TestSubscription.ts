@@ -5,16 +5,16 @@ import {TestContext} from "./TestContext";
 export class TestSubscription extends SubscriptionType {
     public onTodoAdded(context: TestContext): Subscription<Todo> {
         const {todos} = context;
-        return todos.subscribe("add");
+        return this.$resolve(todos.subscribe("add"));
     }
 
     public onTodoUpdate(context: TestContext): Subscription<Todo> {
         const {todos} = context;
-        return todos.subscribe("update");
+        return this.$resolve(todos.subscribe("update"));
     }
 
     public onTodoDelete(context: TestContext): Subscription<Todo> {
         const {todos} = context;
-        return todos.subscribe("delete");
+        return this.$resolve(todos.subscribe("delete"));
     }
 }

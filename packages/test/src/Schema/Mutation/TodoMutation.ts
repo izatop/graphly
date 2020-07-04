@@ -5,12 +5,12 @@ import {Todo} from "../Query/Todo";
 import {TestContext} from "../TestContext";
 
 export class TodoMutation extends ObjectType {
-    public add(todo: TodoInput, context: TestContext): Returns<Todo> {
-        return context.todos.add(todo);
+    public async add(todo: TodoInput, context: TestContext): Returns<Todo> {
+        return this.$resolve(await context.todos.add(todo));
     }
 
-    public update(id: TypeInt, todo: TodoInput, context: TestContext): ReturnsNullable<Todo> {
-        return context.todos.update(id, todo);
+    public async update(id: TypeInt, todo: TodoInput, context: TestContext): ReturnsNullable<Todo> {
+        return this.$resolve(await context.todos.update(id, todo));
     }
 
     public delete(id: TypeInt[], container: Lookup<MainContainer>): Returns<boolean[]> {

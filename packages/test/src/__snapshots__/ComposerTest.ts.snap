@@ -42,6 +42,7 @@ type Todo {
   solved: Boolean!
   title: String!
   code: String!
+  timestamp: Int!
 }
 
 type TodoChecklist {

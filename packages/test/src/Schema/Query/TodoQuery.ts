@@ -1,15 +1,18 @@
 import {Lookup, ObjectType, Returns, ReturnsNullable, TypeInt} from "@graphly/type";
 import {MainContainer} from "../../MainContainer";
+import {ITodo} from "../../Repository/ITodo";
 import {TodoSearchInput} from "../Input/TodoSearchInput";
 import {TestContext} from "../TestContext";
 import {IPageable} from "./IPageable";
 import {Todo} from "./Todo";
 
 export class TodoQuery extends ObjectType {
-    public todo(id: TypeInt, container: Lookup<MainContainer>): ReturnsNullable<Todo> {
+    public async todo(id: TypeInt, container: Lookup<MainContainer>): ReturnsNullable<Todo> {
         const {repository} = container;
-        return repository.get<Todo>("todos")
+        const res = await repository.get<ITodo>("todos")
             .findOne(id);
+
+        return this.$resolve(res);
     }
 
     public async searchAll(limit = 10, offset = 0, context: TestContext): Returns<IPageable<Todo>> {
@@ -20,7 +23,7 @@ export class TodoQuery extends ObjectType {
             limit,
             offset,
             count: todosQuery.length,
-            node: todosQuery.slice(offset, offset + limit),
+            node: this.$map(todosQuery.slice(offset, offset + limit)),
         };
     }
 
@@ -37,7 +40,7 @@ export class TodoQuery extends ObjectType {
             limit,
             offset,
             count: todosQuery.length,
-            node: todosQuery.slice(offset, offset + limit),
+            node: this.$map(todosQuery.slice(offset, offset + limit)),
         };
     }
 
