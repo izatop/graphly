@@ -1,9 +1,9 @@
 import {ok} from "assert";
 import {GraphQLInputFieldConfigMap, GraphQLInputObjectType, GraphQLNonNull, Thunk} from "graphql";
 import * as vm from "vm";
-import {InputType, ITypeObject, PropertyKind, PropertyType, ScalarType} from "../../../Type";
+import {InputType, ITypeObject, PropertyKind, PropertyType} from "../../../Type";
 import {TransformAbstract} from "../TransformAbstract";
-import {tryToGetEnumDefaultValue} from "./enum";
+import {evaluateDefaultValue} from "./defaultValue";
 import {SchemaTransform} from "./SchemaTransform";
 
 type Args = [SchemaTransform, ITypeObject];
@@ -56,14 +56,7 @@ export class SchemaInputObjectTypeTransform extends TransformAbstract<Args, Grap
         if (property.defaultValue) {
             switch (property.kind) {
                 case PropertyKind.REFERENCE:
-                    if (ScalarType.has(property.reference) || property.reference === "Array") {
-                        return vm.runInContext(property.defaultValue, vm.createContext({}));
-                    }
-
-                    return tryToGetEnumDefaultValue(
-                        property.defaultValue,
-                        this.project.types.get(property.reference),
-                    );
+                    return evaluateDefaultValue(property, this.project.types.get(property.reference));
                 case PropertyKind.SCALAR:
                     return vm.runInContext(property.defaultValue, vm.createContext({}));
                 default:

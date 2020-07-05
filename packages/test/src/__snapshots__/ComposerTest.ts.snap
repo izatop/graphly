@@ -7,6 +7,11 @@ scalar EmailAddress
 scalar IPv4Address
 scalar Object
 
+input TestObjectInput {
+  enabled: Boolean
+  filter: String
+}
+
 input TodoChecklistInput {
   solved: Boolean
   text: String!
@@ -72,6 +77,13 @@ type TodoQuery {
 
 type TestMutation {
   todo: TodoMutation!
+  test(value: TestObjectInput = {enabled: true}): Boolean!
+}
+
+type TestObject {
+  flag: Boolean!
+  n: String
+  selectors: [Int!]!
 }
 
 type TestQuery {

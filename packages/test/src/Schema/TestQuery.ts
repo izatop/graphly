@@ -2,6 +2,7 @@ import {ObjectType, TypeDomain, TypeEmail, TypeIPv4} from "@graphly/type";
 import {ITestState} from "./interfaces";
 import {TodoQuery} from "./Query/TodoQuery";
 import {TestContext} from "./TestContext";
+import {TestObject} from "./TestObject";
 
 export class TestQuery extends ObjectType {
     /**
@@ -22,6 +23,7 @@ export class TestQuery extends ObjectType {
     public readonly domain: TypeDomain = "foo.example.com";
     public readonly email: TypeEmail = "a+b@foo.example.com";
     public readonly ipv4: TypeIPv4 = "127.0.0.1";
+    public readonly extra: TestObject = {selectors: [1, 2, 3], flag: true};
 
     /**
      * Not in a schema
