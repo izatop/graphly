@@ -22,7 +22,7 @@ const parse = (value: any) => {
     }
 
     return value;
-}
+};
 
 export const EmailAddressType = new GraphQLScalarType({
     name: "EmailAddress",

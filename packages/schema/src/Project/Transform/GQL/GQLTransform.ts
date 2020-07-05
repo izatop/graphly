@@ -1,6 +1,7 @@
 import {assert} from "@sirian/assert";
-import {Obj, XMap} from "@sirian/common";
+import {XMap} from "@sirian/common";
 import {memoize} from "@sirian/decorators";
+import * as Scalars from "../../../Scalars";
 import {
     InputType,
     IPropertyReference,
@@ -13,7 +14,6 @@ import {
     TypeKind,
     TypeMap,
 } from "../../../Type";
-import * as Scalars from "../../../Scalars";
 import {ucfirst} from "../../../util/ucfirst";
 import {Project} from "../../Project";
 import {InterfaceType} from "../InterfaceType";
