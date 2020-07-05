@@ -19,6 +19,8 @@ export class ComposeCommand extends Command {
                 new Option({name: "config"}),
                 new Option({name: "types-dir"}),
                 new FlagOption({name: "watch", shortcut: "w"}),
+                new FlagOption({name: "exclusive", shortcut: "e"}),
+                new Option({name: "extra", shortcut: "x", multiple: true}),
             ])
             .setDescription("GraphQL Server");
 
@@ -59,15 +61,17 @@ export class ComposeCommand extends Command {
     @debounce(1000)
     protected compose(files: string[]) {
         try {
-            const config: string = this.getOption("config");
+            const tsconfig: string = this.getOption("config");
             const typesDir: string = this.getOption("types-dir");
             for (const schemaPath of files) {
                 const name = path.basename(schemaPath);
                 const composer = new Composer({
                     name,
+                    tsconfig,
                     schemaPath,
                     verbose: this.verbose,
-                    tsconfig: config,
+                    exclusive: this.getOption("exclusive"),
+                    extra: this.getOption("extra"),
                 });
 
                 const schemaFile = composer.save();

@@ -1,4 +1,5 @@
 import {Composer} from "@graphly/cli";
+import {TodoStatus} from "@graphly/todo";
 import {Scope} from "@graphly/type";
 import {graphql} from "graphql";
 import {MainContainer} from "./MainContainer";
@@ -8,7 +9,7 @@ import {TestContext} from "./Schema/TestContext";
 import {TestSchema} from "./TestSchema";
 
 const todoFragment = `
-fragment TodoFragment on Todo { id code title description solved deadlineAt checklist { text solved } }
+fragment TodoFragment on Todo { id code title description status deadlineAt checklist { text solved } }
 `;
 
 const todoTodoQuery = `
@@ -102,7 +103,7 @@ describe("Composer", () => {
             checklist: [],
             deadlineAt: new Date(),
             title: "New Todo",
-            solved: false,
+            status: TodoStatus.PENDING,
         };
 
         const add = await runQuery(addTodoQuery, {todo});
@@ -134,7 +135,7 @@ describe("Composer", () => {
             checklist: [{text: "Checklist 1", solved: true}],
             description: "Description",
             deadlineAt: new Date(),
-            solved: true,
+            status: TodoStatus.DONE,
         };
 
         const update = await runQuery(updateTodoQuery, {id: 1, todo: updateTodo});

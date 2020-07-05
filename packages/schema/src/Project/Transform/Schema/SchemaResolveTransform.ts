@@ -108,6 +108,12 @@ export class SchemaResolveTransform extends TransformAbstract<Args, Returns> {
                     }
                 }
 
+                if (type.kind === TypeKind.ENUM) {
+                    return (args: { [k: string]: any }) => {
+                        return args[name];
+                    };
+                }
+
                 if (type.kind === TypeKind.SERVICE) {
                     if (type.base === TYPE.CONTEXT) {
                         return (args: { [k: string]: any }, context: object) => {

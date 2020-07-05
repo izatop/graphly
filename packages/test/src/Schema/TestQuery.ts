@@ -1,4 +1,4 @@
-import {ObjectType, TypeBoolean, TypeDomain, TypeEmail, TypeIPv4} from "@graphly/type";
+import {ObjectType, TypeDomain, TypeEmail, TypeIPv4} from "@graphly/type";
 import {ITestState} from "./interfaces";
 import {TodoQuery} from "./Query/TodoQuery";
 import {TestContext} from "./TestContext";

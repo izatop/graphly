@@ -9,6 +9,8 @@ export interface IComposerOptions {
     schemaPath: string;
     tsconfig?: string;
     verbose?: boolean;
+    exclusive?: boolean;
+    extra?: string[];
 }
 
 export class Composer {
@@ -58,16 +60,22 @@ export class Composer {
             throw new Error(`Cannot resolve schema path at ${this.schemaPath}`);
         }
 
+        const extra: {exclude?: string[]} = {};
+        if (options.exclusive) {
+            extra.exclude = [`!${this.sourceRoot}/**/*`];
+        }
+
         this.application = new TypeDoc.Application();
         this.application.options.addReader(new TypeDoc.TSConfigReader());
         this.application.options.addReader(new TypeDoc.TypeDocReader());
         this.application.bootstrap({
             name: options.name || "GraphQL",
             tsconfig: options.tsconfig,
-            exclude: [`!${this.sourceRoot}/**/*`],
+            ...extra,
         });
 
-        const reflection = this.application.convert([this.schemaPath]);
+        const extraTypesFile = this.resolveExtraTypesPaths(options.extra);
+        const reflection = this.application.convert([this.schemaPath, ...extraTypesFile]);
         if (!reflection) {
             throw new Error(`Cannot convert source to reflection at ${this.schemaPath}`);
         }
@@ -108,5 +116,15 @@ export class Composer {
 
         assert(directory !== "/", "Cannot resolve tsconfig.json");
         return this.resolveTSConfigFile(path.resolve(directory, "../"), name);
+    }
+
+    protected resolveExtraTypesPaths(paths?: string[]) {
+        if (!paths) {
+            return [];
+        }
+
+        const resolvedPaths = paths.map((p) => path.resolve(p, "index.ts"));
+        assert(resolvedPaths.every((p) => existsSync(p)), `Wrong paths ${resolvedPaths.join(", ")}`);
+        return resolvedPaths;
     }
 }

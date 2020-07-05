@@ -1,0 +1,27 @@
+{
+    "name": "@graphly/todo",
+    "version": "0.0.0-development",
+    "keywords": [
+        "graphql",
+        "typescript"
+    ],
+    "author": {
+        "name": "Artur Bier",
+        "email": "izatop@gmail.com"
+    },
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "description": "Graphly Todo",
+    "repository": "https://github.com/graphly/graphly",
+    "scripts": {
+        "clean": "yarn build:clean",
+        "watch": "yarn build:watch",
+        "build": "yarn build:clean && tsc",
+        "build:clean": "rimraf dist tsconfig.tsbuildinfo",
+        "build:watch": "yarn build --watch"
+    },
+    "private": true
+}

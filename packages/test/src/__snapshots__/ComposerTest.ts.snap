@@ -17,14 +17,14 @@ input TodoInput {
   deadlineAt: DateTime
   description: String
   flag: TodoFlag
-  solved: Boolean
+  status: TodoStatus
   title: String
 }
 
 input TodoSearchInput {
   limit: Int
   offset: Int
-  solved: Boolean
+  status: TodoStatus
 }
 
 type TodoMutation {
@@ -39,7 +39,7 @@ type Todo {
   description: String
   flag: TodoFlag
   id: Int!
-  solved: Boolean!
+  status: TodoStatus!
   title: String!
   code: String!
   timestamp: Int!
@@ -64,7 +64,7 @@ type IPageableTodo {
 }
 
 type TodoQuery {
-  count(solved: Boolean = true): Int!
+  count(status: TodoStatus = TodoStatus.DONE): Int!
   search(filter: TodoSearchInput): IPageableTodo!
   searchAll(limit: Float = 10, offset: Float = 0): IPageableTodo!
   todo(id: Int!): Todo
@@ -90,6 +90,11 @@ type TestSubscription {
   onTodoAdded: Todo!
   onTodoDelete: Todo!
   onTodoUpdate: Todo!
+}
+
+enum TodoStatus {
+  DONE
+  PENDING
 }
 
 schema {

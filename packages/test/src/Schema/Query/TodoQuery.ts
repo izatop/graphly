@@ -1,6 +1,6 @@
 import {$async, $map, Lookup, ObjectType, Returns, ReturnsNullable, TypeInt} from "@graphly/type";
 import {MainContainer} from "../../MainContainer";
-import {ITodo} from "../../Repository/ITodo";
+import {ITodo, TodoStatus} from "../../Repository/ITodo";
 import {TodoSearchInput} from "../Input/TodoSearchInput";
 import {TestContext} from "../TestContext";
 import {IPageable} from "./IPageable";
@@ -28,9 +28,9 @@ export class TodoQuery extends ObjectType {
         const {todos} = context;
         let todosQuery = await todos.find();
 
-        const {solved, limit, offset} = filter || new TodoSearchInput();
-        if (typeof solved === "boolean") {
-            todosQuery = todosQuery.filter((item) => item.solved === solved);
+        const {status, limit, offset} = filter || new TodoSearchInput();
+        if (status && status in TodoStatus) {
+            todosQuery = todosQuery.filter((item) => item.status === status);
         }
 
         return {
@@ -41,11 +41,11 @@ export class TodoQuery extends ObjectType {
         };
     }
 
-    public async count(context: TestContext, solved: boolean = true): Promise<TypeInt> {
+    public async count(context: TestContext, status: TodoStatus = TodoStatus.DONE): Promise<TypeInt> {
         const {todos} = context;
         let todosQuery = await todos.find();
 
-        todosQuery = todosQuery.filter((item) => item.solved === solved);
+        todosQuery = todosQuery.filter((item) => item.status === status);
 
         return todosQuery.length;
     }
