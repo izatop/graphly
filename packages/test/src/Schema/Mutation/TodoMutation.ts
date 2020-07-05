@@ -1,4 +1,4 @@
-import {Lookup, ObjectType, Returns, ReturnsNullable, TypeInt} from "@graphly/type";
+import {$async, $resolve, Lookup, ObjectType, Returns, ReturnsNullable, TypeInt} from "@graphly/type";
 import {MainContainer} from "../../MainContainer";
 import {TodoInput} from "../Input/TodoInput";
 import {Todo} from "../Query/Todo";
@@ -6,11 +6,11 @@ import {TestContext} from "../TestContext";
 
 export class TodoMutation extends ObjectType {
     public async add(todo: TodoInput, context: TestContext): Returns<Todo> {
-        return this.$resolve(await context.todos.add(todo));
+        return $async(context.todos.add(todo));
     }
 
     public async update(id: TypeInt, todo: TodoInput, context: TestContext): ReturnsNullable<Todo> {
-        return this.$resolve(await context.todos.update(id, todo));
+        return $resolve(await context.todos.update(id, todo));
     }
 
     public delete(id: TypeInt[], container: Lookup<MainContainer>): Returns<boolean[]> {

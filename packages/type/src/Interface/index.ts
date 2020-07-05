@@ -15,7 +15,14 @@ export type Promisable<T> = T | Promise<T>;
 export type Returns<T> = Promise<T>;
 export type ReturnsNullable<T> = Promise<T | $Nullable>;
 
-export type $Pick<T, D> = { [K in keyof T]: K extends keyof D ? T[K] extends D[K] ? T[K] : never : T[K] };
-export type $InType<T, D> = T extends PromiseLike<any> ? never : $Pick<T, D>;
+export type $MatchResult<T, D> = {
+    [K in keyof T]: K extends keyof D
+        ? T[K] extends object
+            ? $MatchResult<T[K], D[K]>
+            : T[K] extends D[K] ? T[K] : never
+        : T[K]
+};
+
+export type $InType<T, D> = T extends PromiseLike<any> ? never : $MatchResult<T, D>;
 export type $Implement<T, TProtected extends keyof T = never> = |
     Partial<TProtected extends never ? T : Omit<T, TProtected>>;
