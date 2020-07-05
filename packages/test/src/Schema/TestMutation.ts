@@ -5,7 +5,7 @@ import {TodoMutation} from "./Mutation/TodoMutation";
 export class TestMutation extends ObjectType {
     public todo: TodoMutation;
 
-    public test(value: TestObjectInput = {enabled: true}): boolean {
+    public test(value: TestObjectInput = {enabled: true, filter: "foo"}): boolean {
         return value.enabled;
     }
 }

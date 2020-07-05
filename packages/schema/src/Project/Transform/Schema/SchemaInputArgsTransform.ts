@@ -49,7 +49,7 @@ export class SchemaInputArgsTransform extends TransformAbstract<Args, Returns> {
                 case PropertyKind.REFERENCE:
                     return evaluateDefaultValue(property, this.context.project.types.ensure(property.reference));
                 case PropertyKind.SCALAR:
-                    return vm.runInContext(property.defaultValue, vm.createContext({}));
+                    return vm.runInContext(`(${property.defaultValue})`, vm.createContext({}));
                 default:
                     throw Error("Default value should be a scalar or enum");
             }

@@ -77,7 +77,7 @@ type TodoQuery {
 
 type TestMutation {
   todo: TodoMutation!
-  test(value: TestObjectInput = {enabled: true}): Boolean!
+  test(value: TestObjectInput = {enabled: true, filter: \\"foo\\"}): Boolean!
 }
 
 type TestObject {

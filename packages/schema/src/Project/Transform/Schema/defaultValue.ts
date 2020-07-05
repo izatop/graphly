@@ -8,7 +8,7 @@ export function evaluateDefaultValue(property: IPropertyReference, reference?: T
     }
 
     if (canEvaluate(property.reference, property.defaultValue)) {
-        return vm.runInContext(property.defaultValue, vm.createContext({}));
+        return vm.runInContext(`(${property.defaultValue})`, vm.createContext({}));
     }
 
     assert(

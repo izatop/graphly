@@ -75,7 +75,7 @@ export class SchemaObjectFieldTransform extends TransformAbstract<Args, Returns>
         if (!hasResolver && defaultValue) {
             const propertyKey = this.property.name;
             const resolverFunction = function resolver(this: object) {
-                return vm.runInContext(defaultValue, vm.createContext(this));
+                return vm.runInContext(`(${defaultValue})`, vm.createContext(this));
             };
 
             return (parent?: { [key: string]: any }) => {
