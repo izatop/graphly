@@ -1,6 +1,6 @@
 {
     "name": "@graphly/todo",
-    "version": "0.0.0-development",
+    "version": "0.4.15",
     "keywords": [
         "graphql",
         "typescript"
