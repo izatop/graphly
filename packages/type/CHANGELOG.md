@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.19](https://github.com/graphly/graphly/compare/v0.4.18...v0.4.19) (2020-07-08)
+
+
+### Bug Fixes
+
+* domain name regex ([17d4c79](https://github.com/graphly/graphly/commit/17d4c79964620d251260b9258cdf3b45dfb038b9))
+
+
+
+
+
 ## [0.4.18](https://github.com/graphly/graphly/compare/v0.4.17...v0.4.18) (2020-07-05)
 
 **Note:** Version bump only for package @graphly/type
