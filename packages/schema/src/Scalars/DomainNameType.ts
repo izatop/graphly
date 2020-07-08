@@ -1,14 +1,14 @@
 import {isString} from "@sirian/common";
 import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
 
-const validator = /^(?:[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9])?\.){0,126}(?:[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9]))\.?$/i;
+const validator = /(?=^.{4,253}$)(^((?!-)[a-zA-Z0-9-]{0,62}[a-zA-Z0-9]\.)+[a-zA-Z]{2,63}$)/i;
 
 const parse = (value: any) => {
     if (!isString(value) || !validator.test(value)) {
         throw new TypeError(`Value is not a valid domain name: ${value}`);
     }
 
-    return value;
+    return value.toLowerCase();
 };
 
 export const DomainNameType = new GraphQLScalarType({
@@ -27,6 +27,6 @@ export const DomainNameType = new GraphQLScalarType({
             throw new TypeError(`Value is not a valid domain name: ${ast.value}`);
         }
 
-        return ast.value;
+        return ast.value.toLowerCase();
     },
 });

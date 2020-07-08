@@ -21,7 +21,7 @@ const parse = (value: any) => {
         throw new TypeError(`Value is not a valid email address: ${value}`);
     }
 
-    return value;
+    return value.toLowerCase();
 };
 
 export const EmailAddressType = new GraphQLScalarType({
@@ -40,6 +40,6 @@ export const EmailAddressType = new GraphQLScalarType({
             throw new TypeError(`Value is not a valid email address: ${ast.value}`);
         }
 
-        return ast.value;
+        return ast.value.toLowerCase();
     },
 });
