@@ -1,3 +1,4 @@
+import phone from 'phone';
 import {isString} from "@sirian/common";
 import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
 
@@ -6,13 +7,13 @@ const parse = (value: any) => {
         throw new TypeError(`Value is not a valid phone number: ${value}`);
     }
 
-    value = value.replace(/[^0-9]/g, '');
+    const result = phone(value);
 
-    if (value.length !== 10) {
+    if (result.length === 0) {
         throw new TypeError(`Value is not a valid phone number: ${value}`);
     }
 
-    return value;
+    return result[0];
 };
 
 export const PhoneType = new GraphQLScalarType({
@@ -27,12 +28,12 @@ export const PhoneType = new GraphQLScalarType({
             );
         }
 
-        const value = ast.value.replace(/[^0-9]/g, '');
+        const result = phone(ast.value);
 
-        if (value.length !== 10) {
-            throw new TypeError(`Value is not a valid phone number: ${value}`);
+        if (result.length === 0) {
+            throw new TypeError(`Value is not a valid phone number: ${result}`);
         }
 
-        return value;
+        return result;
     },
 });

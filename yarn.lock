@@ -1550,6 +1550,11 @@
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
   integrity sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==
 
+"@types/phone@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@types/phone/-/phone-2.4.0.tgz#8c02c0513884136fef5948b7781b76e6c7c44997"
+  integrity sha512-oClvNb2ATpf3fmDMuJOzRBRWjUwssc+cTfMPTXf5YmeSnveadSMmuwd3CjpJtU24Mg3VvpA9uNWwh5f75dgCLg==
+
 "@types/prettier@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.0.0.tgz#dc85454b953178cc6043df5208b9e949b54a3bc4"
@@ -5545,6 +5550,11 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
+
+phone@^2.4.13:
+  version "2.4.13"
+  resolved "https://registry.yarnpkg.com/phone/-/phone-2.4.13.tgz#ca765ed62811ca28ae4759b5c0016dea717b3e6f"
+  integrity sha512-C7WWHU9NiMj/cdMcJ/dSrjfSxzdoE5o36JluKkgRtyUthr2EgpzV3bOkSL5/w5NB/OBA2+zOb+gek6i7+mcR0A==
 
 picomatch@^2.0.4, picomatch@^2.0.5:
   version "2.2.2"
