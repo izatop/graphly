@@ -8,6 +8,7 @@ export const ScalarType = new Set([
     "TypeDate",
     "TypeEmail",
     "TypeDomain",
+    "TypePhone",
     "TypeIPv4",
     "Date",
     "string",
