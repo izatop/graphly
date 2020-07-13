@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/graphly/graphly/compare/v0.4.19...v0.5.0) (2020-07-13)
+
+
+### Features
+
+* phone number type ([8f6961a](https://github.com/graphly/graphly/commit/8f6961ac4b6d8c15e06c4dc53d95e7917859c0b2))
+
+
+
+
+
 ## [0.4.19](https://github.com/graphly/graphly/compare/v0.4.18...v0.4.19) (2020-07-08)
 
 
