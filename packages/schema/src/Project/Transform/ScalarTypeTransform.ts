@@ -19,7 +19,7 @@ export class ScalarTypeTransform extends TransformAbstract<[], GQL.GraphQLScalar
         ["TypeObject", Scalars.ObjectType],
         ["TypeEmail", Scalars.EmailAddressType],
         ["TypeDomain", Scalars.DomainNameType],
-        ["TypePhone", Scalars.PhoneType],
+        ["TypePhone", Scalars.PhoneNumberType],
         ["TypeIPv4", Scalars.IPv4AddressType],
         ["object", Scalars.ObjectType],
     ]);

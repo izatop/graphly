@@ -5,6 +5,7 @@ exports[`Composer 1`] = `
 scalar DomainName
 scalar EmailAddress
 scalar IPv4Address
+scalar Phone
 scalar Object
 
 input TestObjectInput {

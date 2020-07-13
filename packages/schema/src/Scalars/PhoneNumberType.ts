@@ -1,22 +1,22 @@
-import phone from 'phone';
 import {isString} from "@sirian/common";
 import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
+import phone from "phone";
 
 const parse = (value: any) => {
     if (!isString(value)) {
         throw new TypeError(`Value is not a valid phone number: ${value}`);
     }
 
-    const result = phone(value);
+    const [result] = phone(value);
 
-    if (result.length === 0) {
+    if (!isString(result)) {
         throw new TypeError(`Value is not a valid phone number: ${value}`);
     }
 
-    return result[0];
+    return result;
 };
 
-export const PhoneType = new GraphQLScalarType({
+export const PhoneNumberType = new GraphQLScalarType({
     name: "Phone",
     description: "The `Phone` scalar type represents the phone number",
     parseValue: parse,
@@ -28,9 +28,9 @@ export const PhoneType = new GraphQLScalarType({
             );
         }
 
-        const result = phone(ast.value);
+        const [result] = phone(ast.value);
 
-        if (result.length === 0) {
+        if (!isString(result)) {
             throw new TypeError(`Value is not a valid phone number: ${result}`);
         }
 
