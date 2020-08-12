@@ -55,7 +55,9 @@ export function isEnumMember(input: JSONOutput.Reflection): input is JSONOutput.
 }
 
 export function isType(child: JSONOutput.DeclarationReflection) {
-    return (isClass(child) || isInterface(child)) && hasParents(child);
+    return (isClass(child) || isInterface(child))
+        && hasParents(child)
+        && TypeBase.has(getBase(child));
 }
 
 export function isService(child: JSONOutput.DeclarationReflection) {
