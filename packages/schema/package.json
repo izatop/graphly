@@ -24,11 +24,11 @@
         "build:watch": "yarn build --watch"
     },
     "dependencies": {
-        "@sirian/assert": "^1.1.8",
-        "@sirian/common": "^5.14.0",
-        "@sirian/decorators": "^1.5.5",
+        "@sirian/assert": "^1.1.10",
+        "@sirian/common": "^5.15.1",
+        "@sirian/decorators": "^1.5.7",
         "graphql": "^15.3.0",
-        "phone": "^2.4.14"
+        "phone": "^2.4.15"
     },
     "publishConfig": {
         "access": "public"
