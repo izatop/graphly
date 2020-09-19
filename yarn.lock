@@ -1569,10 +1569,10 @@
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
 
-"@types/jest@^26.0.13":
-  version "26.0.13"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.13.tgz#5a7b9d5312f5dd521a38329c38ee9d3802a0b85e"
-  integrity sha512-sCzjKow4z9LILc6DhBvn5AkIfmQzDZkgtVVKmGwVrs5tuid38ws281D4l+7x1kP487+FlKDh5kfMZ8WSPAdmdA==
+"@types/jest@^26.0.14":
+  version "26.0.14"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.14.tgz#078695f8f65cb55c5a98450d65083b2b73e5a3f3"
+  integrity sha512-Hz5q8Vu0D288x3iWXePSn53W7hAjP0H7EQ6QvDO9c7t46mR0lNOLlfuwQ+JkVxuhygHzlzPX+0jKdA3ZgSh+Vg==
   dependencies:
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
@@ -5656,10 +5656,10 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
-phone@^2.4.15:
-  version "2.4.15"
-  resolved "https://registry.yarnpkg.com/phone/-/phone-2.4.15.tgz#4ab158ac011c8107e873d7b1d12abcc88fda6bf3"
-  integrity sha512-C1/0wWjwSOxoqYcwMtnb8KhxaFUhBIg0srDa9WZ5mBeCMkmUhC9jJIrWzUQnJdaM5bagLp9wmNHzKPVjLCF0kg==
+phone@^2.4.16:
+  version "2.4.16"
+  resolved "https://registry.yarnpkg.com/phone/-/phone-2.4.16.tgz#f7cdcd5b7ba2dac8c78af15f03fa011e60225882"
+  integrity sha512-SLbFBMFuDiTDwAzw8/LjQ/kat+fP2cmKCxZ+cyKgAUUML5qz7PIv8w8DTFjlP/uWQ6uUFhcpYBSRyYSFsYISjQ==
 
 picomatch@^2.0.4, picomatch@^2.0.5:
   version "2.2.2"
@@ -7051,10 +7051,10 @@ typedoc@0.19.1:
     shelljs "^0.8.4"
     typedoc-default-themes "^0.11.1"
 
-typescript@4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.2.tgz#7ea7c88777c723c681e33bf7988be5d008d05ac2"
-  integrity sha512-e4ERvRV2wb+rRZ/IQeb3jm2VxBsirQLpQhdxplZ2MEzGvDkkMmPglecnNDfSUBivMjP93vRbngYYDQqQ/78bcQ==
+typescript@4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.3.tgz#153bbd468ef07725c1df9c77e8b453f8d36abba5"
+  integrity sha512-tEu6DGxGgRJPb/mVPIZ48e69xCn2yRmCgYmDugAVwmJ6o+0u1RI18eO7E7WBTLYLaEVVOhwQmcdhQHweux/WPg==
 
 uglify-js@^3.1.4:
   version "3.8.1"
