@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.5](https://github.com/graphly/graphly/compare/v0.5.4...v0.5.5) (2020-09-23)
+
+**Note:** Version bump only for package @graphly/test
+
+
+
+
+
 ## [0.5.4](https://github.com/graphly/graphly/compare/v0.5.3...v0.5.4) (2020-09-19)
 
 **Note:** Version bump only for package @graphly/test
