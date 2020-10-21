@@ -28,11 +28,11 @@
     },
     "dependencies": {
         "@graphly/schema": "^0.5.4",
-        "@sirian/assert": "^1.1.10",
-        "@sirian/common": "^5.15.1",
-        "@sirian/console": "^6.7.1",
-        "@sirian/decorators": "^1.5.7",
-        "node-watch": "^0.6.4",
+        "@sirian/assert": "^1.1.11",
+        "@sirian/common": "^5.15.2",
+        "@sirian/console": "^6.7.2",
+        "@sirian/decorators": "^1.5.8",
+        "node-watch": "^0.7.0",
         "typedoc": "0.19.2"
     },
     "publishConfig": {

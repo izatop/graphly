@@ -39,6 +39,10 @@ export class ComposeCommand extends Command {
             const watchDirectory = [...new Set(paths.map((file) => path.dirname(file))).values()];
             this.log("Schema watching:", watchDirectory);
             watch(watchDirectory, watchOptions, (e, file) => {
+                if (!file) {
+                    return ;
+                }
+
                 const directory = watchDirectory.find((d) => file.startsWith(d));
                 this.log("Schema", {event: e, directory, file});
                 if (directory) {
