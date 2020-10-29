@@ -1,6 +1,6 @@
 {
     "name": "@graphly/schema",
-    "version": "0.5.4",
+    "version": "0.5.6",
     "keywords": [
         "graphql",
         "typescript"
