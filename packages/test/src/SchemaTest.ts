@@ -1,10 +1,13 @@
 import {Composer} from "@graphly/cli";
 import {TodoStatus} from "@graphly/todo";
 import {Scope} from "@graphly/type";
-import {graphql} from "graphql";
+import * as assert from "assert";
+import {ExecutionResult, graphql, parse, subscribe} from "graphql";
 import {MainContainer} from "./MainContainer";
+import {ITodo} from "./Repository/ITodo";
 import {TestRepository} from "./Repository/TestRepository";
 import {TodoInput} from "./Schema/Input/TodoInput";
+import {TodoFlag} from "./Schema/Query/TodoFlag";
 import {TestContext} from "./Schema/TestContext";
 import {TestSchema} from "./TestSchema";
 
@@ -33,7 +36,7 @@ ${todoFragment}
 const todoTodoSearchAllQuery = `
 query TodoSearchQueryAll {
     todo {
-        searchAll { node {...TodoFragment} }
+        searchAll { node {...TodoFragment } }
     }
 }
 ${todoFragment}
@@ -61,6 +64,18 @@ mutation updateTodo($id: Int! $todo: TodoInput!) {
 ${todoFragment}
 `;
 
+const onTodoUpdate = `
+subscription subscribeTodoUpdate {
+    onTodoUpdate { id flag title checklist }
+}
+${todoFragment}
+`;
+
+const isAsyncIterator = (source: ExecutionResult | AsyncIterableIterator<ExecutionResult>):
+    source is AsyncIterableIterator<ExecutionResult> => {
+    return Symbol.asyncIterator in source;
+}
+
 describe("Composer", () => {
     const config = {
         dsn: "connection string",
@@ -80,7 +95,42 @@ describe("Composer", () => {
         return graphql(schema, q, rootValue, contextValue, v);
     };
 
-    test("Test Context", async () => {
+    const runSubscribe = async (q: string, v?: Record<string, any>) => {
+        const state = {timestamp: Date.now(), authorized: false, session: ""};
+        const factory = await scope.create(() => state);
+        const {schema, contextValue, rootValue} = await factory(undefined);
+        return subscribe(schema, parse(q), rootValue, contextValue, v);
+    };
+
+    test("Test Subscribe", async () => {
+        const todo: TodoInput = {
+            checklist: [],
+            deadlineAt: new Date(),
+            title: "New Todo",
+            status: TodoStatus.PENDING,
+        };
+
+        const repository = new TestRepository(config.dsn);
+        const todos = repository.get<ITodo>("todos");
+        const iterator = await runSubscribe(onTodoUpdate);
+
+        const {id} = await todos.add(todo);
+        await todos.update(id, {flag: TodoFlag.PRIVATE});
+
+        const items = [];
+        assert.ok(isAsyncIterator(iterator));
+        for await (const item of iterator) {
+            if (item.data?.onTodoUpdate.id === id) {
+                items.push(item);
+                break;
+            }
+        }
+
+        expect(items.length).toBe(1);
+        expect(items).toMatchSnapshot();
+    });
+
+    test.skip("Test Context", async () => {
         const state = {timestamp: Date.now(), authorized: false, session: ""};
         const factory = await scope.create(() => state);
         const {contextValue, rootValue} = await factory(undefined, {test: true});
@@ -91,7 +141,7 @@ describe("Composer", () => {
         expect(rootValue).toMatchObject({test: true});
     });
 
-    test("Schema query", async () => {
+    test.skip("Schema query", async () => {
         const query = `query {optional random timestamp hello}`;
         const {data} = await runQuery(query);
         expect(data?.optional).toBe(null);
@@ -159,9 +209,9 @@ describe("Composer", () => {
         expect(todoCount.data).toMatchObject({todo: {count: 1}});
     });
 
-    const iPageableTestQuery = [todoTodoSearchQuery, todoTodoSearchAllQuery];
+    /*const iPageableTestQuery = [todoTodoSearchQuery, todoTodoSearchAllQuery];
     test.each(iPageableTestQuery)("IPageable", async (q) => {
         const query = await runQuery(q);
         expect(query.errors).toBeUndefined();
-    });
+    });*/
 });

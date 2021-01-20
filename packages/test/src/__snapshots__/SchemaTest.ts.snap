@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Composer Test Subscribe 1`] = `
+Array [
+  Object {
+    "data": Object {
+      "onTodoUpdate": Object {
+        "checklist": Array [],
+        "flag": "PUBLIC",
+        "id": 1,
+        "title": "New Todo",
+      },
+    },
+  },
+]
+`;
