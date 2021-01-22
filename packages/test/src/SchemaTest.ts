@@ -120,6 +120,8 @@ describe("Composer", () => {
         const items = [];
         assert.ok(isAsyncIterator(iterator));
         for await (const item of iterator) {
+            expect(item.errors).toBeUndefined();
+            if (item.errors) break;
             if (item.data?.onTodoUpdate.id === id) {
                 items.push(item);
                 break;
@@ -130,7 +132,7 @@ describe("Composer", () => {
         expect(items).toMatchSnapshot();
     });
 
-    test.skip("Test Context", async () => {
+    test("Test Context", async () => {
         const state = {timestamp: Date.now(), authorized: false, session: ""};
         const factory = await scope.create(() => state);
         const {contextValue, rootValue} = await factory(undefined, {test: true});
@@ -141,7 +143,7 @@ describe("Composer", () => {
         expect(rootValue).toMatchObject({test: true});
     });
 
-    test.skip("Schema query", async () => {
+    test("Schema query", async () => {
         const query = `query {optional random timestamp hello}`;
         const {data} = await runQuery(query);
         expect(data?.optional).toBe(null);
@@ -209,9 +211,9 @@ describe("Composer", () => {
         expect(todoCount.data).toMatchObject({todo: {count: 1}});
     });
 
-    /*const iPageableTestQuery = [todoTodoSearchQuery, todoTodoSearchAllQuery];
+    const iPageableTestQuery = [todoTodoSearchQuery, todoTodoSearchAllQuery];
     test.each(iPageableTestQuery)("IPageable", async (q) => {
         const query = await runQuery(q);
         expect(query.errors).toBeUndefined();
-    });*/
+    });
 });

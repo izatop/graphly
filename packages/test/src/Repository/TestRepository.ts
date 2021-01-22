@@ -70,8 +70,7 @@ export class TestRepository {
 
                 return Promise.resolve(map.delete(id));
             },
-            subscribe<V>(event: EventName, format: (data: T) => V): AsyncIterableIterator<V> {
-                // do not use this code in production it's for test only
+            subscribe(event: EventName): AsyncIterableIterator<T> {
                 const queue: T[] = [];
                 const pending: ((data: T | undefined) => void)[] = [];
                 const listener = (data: T) => {
@@ -96,15 +95,15 @@ export class TestRepository {
                             .forEach((fn) => fn(undefined));
                         return {value: undefined, done: true};
                     },
-                    async next(): Promise<IteratorResult<V>> {
+                    async next(): Promise<IteratorResult<T>> {
                         const next = queue.shift();
                         if (next) {
-                            return {value: format(next), done: false};
+                            return {value: next, done: false};
                         }
 
                         return new Promise((resolve) => pending.push((data) => {
                             if (data) {
-                                return resolve({value: format(data), done: false});
+                                return resolve({value: data, done: false});
                             }
 
                             resolve({value: undefined, done: true});

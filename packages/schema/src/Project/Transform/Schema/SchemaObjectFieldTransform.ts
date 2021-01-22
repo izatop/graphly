@@ -61,6 +61,16 @@ export class SchemaObjectFieldTransform extends TransformAbstract<Args, Returns>
     }
 
     protected createObjectResolveFunction(): GraphQLFieldResolver<any, any, any> | undefined {
+        if (this.type.base === TYPE.SUBSCRIPTION) {
+            const key = this.property.name;
+            // Mutate the subscription source by the GraphQLResolveInfo object
+            return (source: unknown, args, context, info) => {
+                const rootValue = {[key]: source};
+                Object.assign(info, {rootValue});
+                return source;
+            };
+        }
+
         if (this.type.base !== TYPE.OBJECT) {
             return undefined;
         }
