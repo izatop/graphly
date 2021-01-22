@@ -3,12 +3,12 @@ import {Todo} from "./Query/Todo";
 import {TestContext} from "./TestContext";
 
 export class TestSubscription extends SubscriptionType {
-    public onTodoAdded(context: TestContext): Subscription<Todo> {
+    public async onTodoAdded(context: TestContext): Promise<Subscription<Todo>> {
         const {todos} = context;
-        return $subscribe(todos.subscribe("add"));
+        return $subscribe(Promise.resolve(todos.subscribe("add")));
     }
 
-    public onTodoUpdate(context: TestContext): Subscription<Todo> {
+    public async onTodoUpdate(context: TestContext): Promise<Subscription<Todo>> {
         const {todos} = context;
         return $subscribe(todos.subscribe("update"));
     }

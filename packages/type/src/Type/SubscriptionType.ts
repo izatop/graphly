@@ -1,8 +1,9 @@
-import {OutputType, Promisable, ResolverArgs} from "../Interface";
+import {OutputType, ResolverArgs} from "../Interface";
 
-export type Subscription<T> = Promisable<AsyncIterator<T>>;
+export type Subscription<T> = AsyncIterator<T>;
 export type SubscribeFunction<T> = (...args: ResolverArgs[]) => Subscription<T>;
+export type SubscribeFunctionAsync<T> = (...args: ResolverArgs[]) => Promise<Subscription<T>>;
 
 export abstract class SubscriptionType {
-    [key: string]: SubscribeFunction<OutputType>;
+    [key: string]: SubscribeFunction<OutputType> | SubscribeFunctionAsync<OutputType>;
 }
