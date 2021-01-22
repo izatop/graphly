@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.10](https://github.com/graphly/graphly/compare/v0.5.9...v0.5.10) (2021-01-22)
+
+
+### Bug Fixes
+
+* subscription types ([01d9847](https://github.com/graphly/graphly/commit/01d984784dccff8cb9435bf1456c13f546247b20))
+
+
+
+
+
 ## [0.5.9](https://github.com/graphly/graphly/compare/v0.5.8...v0.5.9) (2021-01-22)
 
 **Note:** Version bump only for package @graphly/type
