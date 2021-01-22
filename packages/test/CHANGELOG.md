@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.9](https://github.com/izatop/graphly/compare/v0.5.8...v0.5.9) (2021-01-22)
+
+
+### Bug Fixes
+
+* Mutate the subscription source by the GraphQLResolveInfo object ([fb0dac9](https://github.com/izatop/graphly/commit/fb0dac95e2cb5edadc0bfdeb8e66861671df2dba))
+
+
+
+
+
 ## [0.5.8](https://github.com/izatop/graphly/compare/v0.5.7...v0.5.8) (2021-01-20)
 
 
