@@ -71,10 +71,10 @@ subscription subscribeTodoUpdate {
 ${todoFragment}
 `;
 
-const isAsyncIterator = (source: ExecutionResult | AsyncIterableIterator<ExecutionResult>):
+const isAsyncIterable = (source: ExecutionResult | AsyncIterable<ExecutionResult>):
     source is AsyncIterableIterator<ExecutionResult> => {
     return Symbol.asyncIterator in source;
-}
+};
 
 describe("Composer", () => {
     const config = {
@@ -118,7 +118,7 @@ describe("Composer", () => {
         await todos.update(id, {flag: TodoFlag.PRIVATE});
 
         const items = [];
-        assert.ok(isAsyncIterator(iterator));
+        assert.ok(isAsyncIterable(iterator));
         for await (const item of iterator) {
             expect(item.errors).toBeUndefined();
             if (item.errors) break;

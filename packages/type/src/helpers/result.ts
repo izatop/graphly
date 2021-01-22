@@ -19,10 +19,10 @@ export function $map<T, D>(data: any) {
     return data;
 }
 
-export function $subscribe<T, D>(iterator: Promise<AsyncIterator<$InType<T, D>>>): Promise<Subscription<D>>;
-export function $subscribe<T, D>(iterator: Promise<AsyncIterator<$InType<T, D>>>): Promise<Subscription<D | $Nullable>>;
-export function $subscribe<T, D>(iterator: AsyncIterator<$InType<T, D>>): Subscription<D>;
-export function $subscribe<T, D>(iterator: AsyncIterator<$InType<T, D> | $Nullable>): Subscription<D | $Nullable>;
-export function $subscribe(iterator: AsyncIterator<any> | Promise<AsyncIterator<any>>) {
+export function $subscribe<T, D>(iterator: Promise<AsyncIterable<$InType<T, D>>>): Promise<Subscription<D>>;
+export function $subscribe<T, D>(iterator: Promise<AsyncIterable<$InType<T, D>>>): Promise<Subscription<D | $Nullable>>;
+export function $subscribe<T, D>(iterator: AsyncIterable<$InType<T, D>>): Subscription<D>;
+export function $subscribe<T, D>(iterator: AsyncIterable<$InType<T, D> | $Nullable>): Subscription<D | $Nullable>;
+export function $subscribe(iterator: AsyncIterable<any> | Promise<AsyncIterable<any>>) {
     return iterator;
 }
