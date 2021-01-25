@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/graphly/graphly/compare/v0.5.11...v0.6.0) (2021-01-25)
+
+
+### Bug Fixes
+
+* typedoc downgrade ([6adfb61](https://github.com/graphly/graphly/commit/6adfb6124d560e788c5fc6621eb9b387fb055319))
+
+
+### Features
+
+* less verbose in silent mode ([d4e71ce](https://github.com/graphly/graphly/commit/d4e71ceca1cc6cee5716fd4ea145b164b52553a4))
+
+
+
+
+
 ## [0.5.10](https://github.com/graphly/graphly/compare/v0.5.9...v0.5.10) (2021-01-22)
 
 **Note:** Version bump only for package @graphly/cli
