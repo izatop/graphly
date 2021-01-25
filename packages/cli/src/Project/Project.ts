@@ -82,7 +82,7 @@ export class Project {
                     continue;
                 }
 
-                this.warn("transform:skip", child.name);
+                this.info("transform:skip", child.name);
             } catch (error) {
                 this.warn("transform:error", child.name, {message: error.message, stack: error.stack}, child);
                 throw error;
@@ -109,7 +109,7 @@ export class Project {
                 continue;
             }
 
-            this.warn("child:skip", name);
+            this.info("child:skip", name);
         }
     }
 
