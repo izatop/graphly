@@ -1361,89 +1361,89 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sirian/assert@^1.1.11":
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/@sirian/assert/-/assert-1.1.11.tgz#53ba93de7325eba43b5783b60f484eb4a4562f05"
-  integrity sha512-1vHMhoyN5j4rsXY9/ccVarCJsWTMcolRGfFBOcOTGBQNu9P6+a+JYJBq1z3vNmOAdQOy6tKG06LQufwXP1wEDQ==
+"@sirian/assert@^1.1.18":
+  version "1.1.18"
+  resolved "https://registry.yarnpkg.com/@sirian/assert/-/assert-1.1.18.tgz#f6df8f17573db4d9992fd3ad27709a8e2e8a7f2e"
+  integrity sha512-J0kUppZwcvkcSTg7PFMAdkxySXEEFlHxY92SVWX8QZL46SUy6kEvKWGeJ+nzwgS7hD5AeVy0I5GfgM3M40C9+g==
   dependencies:
-    "@sirian/error" "^2.1.29"
+    "@sirian/error" "^2.2.5"
 
-"@sirian/common@^5.15.2":
-  version "5.15.2"
-  resolved "https://registry.yarnpkg.com/@sirian/common/-/common-5.15.2.tgz#e32f53eb00704777976457f3634db6e371ec42c3"
-  integrity sha512-zqyfAh+UsI1PQO43d6Owsa6NjjBDvOAcWWmtHprgwgXSgnhj9YuHd2vz3IsJD857Wt9MBOMfmWStCaVbJE7ChQ==
+"@sirian/common@^5.17.1":
+  version "5.17.1"
+  resolved "https://registry.yarnpkg.com/@sirian/common/-/common-5.17.1.tgz#7ccdaf925a8efa458401cd0d2fca78099c1497cd"
+  integrity sha512-wOrryB/7L490mzqv3q8vz1L8X3uzQ3MpVOEaeleGv61dL7vlPnjhXsvBDr2v8EvDQHEv8uwxDHJUajb4Y2Nq/w==
   dependencies:
-    "@sirian/ts-extra-types" "^3.59.0"
+    "@sirian/ts-extra-types" "^3.59.7"
 
-"@sirian/console@^6.7.2":
-  version "6.7.2"
-  resolved "https://registry.yarnpkg.com/@sirian/console/-/console-6.7.2.tgz#132a85214671c07f04dac35b0624c514c7760514"
-  integrity sha512-dcE7XvT0tbj3l252bvqN77+602TumGq0t6XeBgR4QE1fAdTf+LNnf/IcLR5NnGGBSurAldgkJ7vHOGqQTWeHlA==
+"@sirian/console@^6.7.11":
+  version "6.7.11"
+  resolved "https://registry.yarnpkg.com/@sirian/console/-/console-6.7.11.tgz#2cb13c2c9e279d0a3bc09f1f953b3e6698b6168c"
+  integrity sha512-+suUlP3z/R96mBT9ngHYtquK6y32P6Ay16Ib9uZH7rraZHnUznP2T0AnQwzUdSkGCQpQnZy+aqcrMOh4yR/NJw==
   dependencies:
-    "@sirian/common" "^5.15.2"
-    "@sirian/decorators" "^1.5.8"
-    "@sirian/error" "^2.1.29"
-    "@sirian/event-dispatcher" "^5.1.11"
-    "@sirian/ts-extra-types" "^3.59.0"
-    "@sirian/xpromise" "^2.9.0"
+    "@sirian/common" "^5.17.1"
+    "@sirian/decorators" "^1.5.17"
+    "@sirian/error" "^2.2.5"
+    "@sirian/event-dispatcher" "^5.1.20"
+    "@sirian/ts-extra-types" "^3.59.7"
+    "@sirian/xpromise" "^2.10.5"
     error-stack-parser "^2.0.4"
 
-"@sirian/decorators@^1.5.8":
-  version "1.5.8"
-  resolved "https://registry.yarnpkg.com/@sirian/decorators/-/decorators-1.5.8.tgz#552c4eea9b7909d32ab3abdac7f3c27031d14ed2"
-  integrity sha512-E2csqR8yoLrP2Ugy4yCDN88VanyX+FtnDk6uFUbmXzBLWUJK4peqqxsPw+E1A+/+Wq0/i3L0t0Y1tpdLba+iMA==
+"@sirian/decorators@^1.5.17":
+  version "1.5.17"
+  resolved "https://registry.yarnpkg.com/@sirian/decorators/-/decorators-1.5.17.tgz#167cdf271a9a86d8cb2be001d0f9b8c11b50c26f"
+  integrity sha512-UW5nowMVHYJD5e6avPFKJ4yg552XMm9kG11WsfMF/oCX+vReYyv3nkkGN8vB4SCnIGSDgniGA6sZuxtqJn0zUQ==
   dependencies:
-    "@sirian/common" "^5.15.2"
-    "@sirian/error" "^2.1.29"
-    "@sirian/ts-extra-types" "^3.59.0"
+    "@sirian/common" "^5.17.1"
+    "@sirian/error" "^2.2.5"
+    "@sirian/ts-extra-types" "^3.59.7"
 
-"@sirian/disposer@^2.3.15":
-  version "2.3.15"
-  resolved "https://registry.yarnpkg.com/@sirian/disposer/-/disposer-2.3.15.tgz#5bf294b7340e00ba2a7f743891696bc5cae1a9c1"
-  integrity sha512-9DY3D8gPyOuC4NgqnJ9Gljwy09kKScK/0SRO/NAAmgQa7swhx7AFc7960geQ/9PpRnJ9po74ggNXrKqHw3by7w==
+"@sirian/disposer@^2.3.24":
+  version "2.3.24"
+  resolved "https://registry.yarnpkg.com/@sirian/disposer/-/disposer-2.3.24.tgz#7baebac5d47a56def1cb8d141e0a945f059e6cbc"
+  integrity sha512-0UpknAkEV2l2b0YWxWUmDAz/biWjWsmCMhDgP52/ZD9IdAOBZBPGtJydMBtCHIYC7npgPV1jcPPH2lawTfCONA==
   dependencies:
-    "@sirian/common" "^5.15.2"
-    "@sirian/event-emitter" "^1.3.15"
-    "@sirian/ts-extra-types" "^3.59.0"
+    "@sirian/common" "^5.17.1"
+    "@sirian/event-emitter" "^1.3.22"
+    "@sirian/ts-extra-types" "^3.59.7"
 
-"@sirian/error@^2.1.29":
-  version "2.1.29"
-  resolved "https://registry.yarnpkg.com/@sirian/error/-/error-2.1.29.tgz#f3714424a750ead1404277d5ab3b3df90c243bda"
-  integrity sha512-klmZ85d/CS1T5ycBRLGlcAkkghTHSALDuM3E1ikJeOXm/smdj/neJyiaDBZiod2wyniuo8Y6zo7zG1o8UZnFFw==
+"@sirian/error@^2.2.5":
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/@sirian/error/-/error-2.2.5.tgz#75faf2e381e36fbd9828eb1fe1e26a6d2a4ba186"
+  integrity sha512-+liTT1Pnd2mBMAvXZDGPBVGBnjuMptCw1JHM5ypucNDZtVSjkkBA0pebN/lo75Yg49Chhh64S4XyCNZU3D5esA==
   dependencies:
-    "@sirian/ts-extra-types" "^3.59.0"
+    "@sirian/ts-extra-types" "^3.59.7"
 
-"@sirian/event-dispatcher@^5.1.11":
-  version "5.1.11"
-  resolved "https://registry.yarnpkg.com/@sirian/event-dispatcher/-/event-dispatcher-5.1.11.tgz#ab8c4ff1bfa964d0949f44daa6c15a136141b5a3"
-  integrity sha512-dGCL0QExKs774tqgRkJ/Iq5cv+gvTmLU3G+rKgVImy41hUwVKkqqsiu8g6GuE9sdOWb8LD3z2JhVTOTNb7SrrQ==
+"@sirian/event-dispatcher@^5.1.20":
+  version "5.1.20"
+  resolved "https://registry.yarnpkg.com/@sirian/event-dispatcher/-/event-dispatcher-5.1.20.tgz#01a5e6b08e1514eee7f46b9876b0acdb170e043f"
+  integrity sha512-ls6vl68Dz3mNaTiIJ6V0e0FeJp+Twi3bIEHRkrIvUO4X7NgXDH2MBfwKffLExyRYWU3DDQf0b4T+sAr3RG3nJA==
   dependencies:
-    "@sirian/common" "^5.15.2"
-    "@sirian/disposer" "^2.3.15"
-    "@sirian/error" "^2.1.29"
-    "@sirian/event-emitter" "^1.3.15"
-    "@sirian/ts-extra-types" "^3.59.0"
-    "@sirian/xpromise" "^2.9.0"
+    "@sirian/common" "^5.17.1"
+    "@sirian/disposer" "^2.3.24"
+    "@sirian/error" "^2.2.5"
+    "@sirian/event-emitter" "^1.3.22"
+    "@sirian/ts-extra-types" "^3.59.7"
+    "@sirian/xpromise" "^2.10.5"
 
-"@sirian/event-emitter@^1.3.15":
-  version "1.3.15"
-  resolved "https://registry.yarnpkg.com/@sirian/event-emitter/-/event-emitter-1.3.15.tgz#21197de7089c75d5935df889cdb758233abac25b"
-  integrity sha512-WEeaCiWsEGTlKYTwbckjbw2i49JHzD0usnSqr45AmwqQidHhKgEfzvDAeHptWbE+SQop9Yk8MBg3STqEtkjY8w==
+"@sirian/event-emitter@^1.3.22":
+  version "1.3.22"
+  resolved "https://registry.yarnpkg.com/@sirian/event-emitter/-/event-emitter-1.3.22.tgz#ad890262975bd7a4a6ad0f4f5f94049c003ae91b"
+  integrity sha512-Vyb+c//SX8+3nFLshinbRT4rAeS1Xj5allYBJnFwPFOtZKb4734DLYSRqzWheqJLwNIIAhNlFRixG/yv+1D6kA==
   dependencies:
-    "@sirian/ts-extra-types" "^3.59.0"
+    "@sirian/ts-extra-types" "^3.59.7"
 
-"@sirian/ts-extra-types@^3.59.0":
-  version "3.59.0"
-  resolved "https://registry.yarnpkg.com/@sirian/ts-extra-types/-/ts-extra-types-3.59.0.tgz#096c621e224b08dd3e4797a5b1c40a885199b5e3"
-  integrity sha512-rIWJMq6FQCgfWHA53ZlnLeeirHU+tq7ba6E9hd6PrHoyDEAjbsB6TEj4+vTtqFLtDyhku6Q8Z1VCOOGRznZmbQ==
+"@sirian/ts-extra-types@^3.59.7":
+  version "3.59.7"
+  resolved "https://registry.yarnpkg.com/@sirian/ts-extra-types/-/ts-extra-types-3.59.7.tgz#364bb247a079e5a049655ab8c68f74fe77719d2a"
+  integrity sha512-y8L6wF/sGabye0dldqG5KtWSqc2nOUuMp9xZhy0SU6DqtAs61WkeoHNfLGDgpzywbDS4RY8HIs1t31w6GUqbRg==
 
-"@sirian/xpromise@^2.9.0":
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/@sirian/xpromise/-/xpromise-2.9.0.tgz#9688d328955a766cbcd9963a7e50095285e09170"
-  integrity sha512-hoDHPN6Unz8yjDuRhZgeW5alKrJDOuqW+zBnQho7pKcrqq5YtG+JBV0EOP9MoK+r7IAmEa5jSZwvTZZQNpOVsw==
+"@sirian/xpromise@^2.10.5":
+  version "2.10.5"
+  resolved "https://registry.yarnpkg.com/@sirian/xpromise/-/xpromise-2.10.5.tgz#d50ff7d68715c0220bfa92c2dab92cf94fd20b66"
+  integrity sha512-DkvGek7Lm8ewfJpZ2pHYPkhYqxuClTSmt1hRTp/TImRPvuvhhape3JPtgPEWQEHou76KpIMjn3o3DBTcG783LA==
   dependencies:
-    "@sirian/error" "^2.1.29"
-    "@sirian/ts-extra-types" "^3.59.0"
+    "@sirian/error" "^2.2.5"
+    "@sirian/ts-extra-types" "^3.59.7"
 
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
   version "7.1.12"
@@ -3421,10 +3421,10 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
   integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
 
-graphql@^15.4.0:
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.4.0.tgz#e459dea1150da5a106486ba7276518b5295a4347"
-  integrity sha512-EB3zgGchcabbsU9cFe1j+yxdzKQKAbGUWRb13DsrsMN1yyfmmIq+2+L5MqVWcDCE4V89R5AyUOi7sMOGxdsYtA==
+graphql@^15.5.0:
+  version "15.5.0"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.5.0.tgz#39d19494dbe69d1ea719915b578bf920344a69d5"
+  integrity sha512-OmaM7y0kaK31NKG31q4YbD2beNYa6jBBKtMFT6gLYJljHLJr42IqJ8KX08u3Li/0ifzTU5HjmoOOrwa5BRLeDA==
 
 growly@^1.3.0:
   version "1.3.0"
@@ -4700,11 +4700,6 @@ lodash.ismatch@^4.4.0:
   resolved "https://registry.yarnpkg.com/lodash.ismatch/-/lodash.ismatch-4.4.0.tgz#756cb5150ca3ba6f11085a78849645f188f85f37"
   integrity sha1-dWy1FQyjum8RCFp4hJZF8Yj4Xzc=
 
-lodash.memoize@4.x:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
-  integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
-
 lodash.set@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
@@ -4735,7 +4730,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.17.12, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.2.1:
+lodash@4.x, lodash@^4.17.12, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.2.1:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
@@ -6938,10 +6933,10 @@ trim-off-newlines@^1.0.0:
   resolved "https://registry.yarnpkg.com/trim-off-newlines/-/trim-off-newlines-1.0.1.tgz#9f9ba9d9efa8764c387698bcbfeb2c848f11adb3"
   integrity sha1-n5up2e+odkw4dpi8v+sshI8RrbM=
 
-ts-jest@^26.4.4:
-  version "26.4.4"
-  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-26.4.4.tgz#61f13fb21ab400853c532270e52cc0ed7e502c49"
-  integrity sha512-3lFWKbLxJm34QxyVNNCgXX1u4o/RV0myvA2y2Bxm46iGIjKlaY0own9gIckbjZJPn+WaJEnfPPJ20HHGpoq4yg==
+ts-jest@^26.5.0:
+  version "26.5.0"
+  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-26.5.0.tgz#3e3417d91bc40178a6716d7dacc5b0505835aa21"
+  integrity sha512-Ya4IQgvIFNa2Mgq52KaO8yBw2W8tWp61Ecl66VjF0f5JaV8u50nGoptHVILOPGoI7SDnShmEqnYQEmyHdQ+56g==
   dependencies:
     "@types/jest" "26.x"
     bs-logger "0.x"
@@ -6949,7 +6944,7 @@ ts-jest@^26.4.4:
     fast-json-stable-stringify "2.x"
     jest-util "^26.1.0"
     json5 "2.x"
-    lodash.memoize "4.x"
+    lodash "4.x"
     make-error "1.x"
     mkdirp "1.x"
     semver "7.x"

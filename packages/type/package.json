@@ -25,10 +25,10 @@
     },
     "dependencies": {
         "@graphly/schema": "^0.6.0",
-        "@sirian/common": "^5.15.2",
-        "@sirian/decorators": "^1.5.8",
-        "@sirian/ts-extra-types": "^3.59.0",
-        "graphql": "^15.4.0"
+        "@sirian/common": "^5.17.1",
+        "@sirian/decorators": "^1.5.17",
+        "@sirian/ts-extra-types": "^3.59.7",
+        "graphql": "^15.5.0"
     },
     "publishConfig": {
         "access": "public"
