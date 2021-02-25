@@ -12,7 +12,11 @@ export const DateTimeType = new GraphQLScalarType({
             return value;
         }
 
-        return value.getTime();
+        if (typeof value.getTime === "function") {
+            return value.getTime();
+        }
+
+        return new Date(value).getTime();
     },
     parseLiteral: (ast) => {
         if (ast.kind !== Kind.INT) {
