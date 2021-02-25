@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2](https://github.com/graphly/graphly/compare/v0.6.1...v0.6.2) (2021-02-25)
+
+
+### Bug Fixes
+
+* safe DateType wrap ([3c290ce](https://github.com/graphly/graphly/commit/3c290ce62b74e7efa8db276fe5c404b20f8858ea))
+
+
+
+
+
 ## [0.6.1](https://github.com/graphly/graphly/compare/v0.6.0...v0.6.1) (2021-02-09)
 
 
