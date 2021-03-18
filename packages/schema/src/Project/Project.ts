@@ -26,7 +26,7 @@ export class Project {
         return new this(basePath, require(typeMapPath));
     }
 
-    @memoize
+    @memoize()
     public toGraphQL(): string {
         try {
             const graphQLTransform = new GQLTransform(this);
@@ -38,7 +38,7 @@ export class Project {
         }
     }
 
-    @memoize
+    @memoize()
     public toSchema(): GraphQLSchema {
         try {
             const schemaTransform = new SchemaTransform(this);

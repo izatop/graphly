@@ -27,7 +27,7 @@ import {GQLTypeResolve} from "./GQLTypeResolve";
 export class GQLTransform extends TransformAbstract<[Project], string> {
     protected segments: string[] = [];
 
-    @memoize
+    @memoize()
     public get resolver() {
         return new GQLTypeResolve(this, this.types);
     }

@@ -24,7 +24,7 @@ export class SchemaTransform extends TransformAbstract<Args, GraphQLSchema> {
         return this.project.types;
     }
 
-    @memoize
+    @memoize()
     protected get cache() {
         return new XMap<string, any>();
     }

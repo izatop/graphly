@@ -68,12 +68,12 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
         };
     }
 
-    @memoize
+    @memoize()
     public createContainer() {
         return resolve(new this.options.container(this.options.config));
     }
 
-    @memoize
+    @memoize()
     protected async createSchema() {
         const {schema} = this.options;
         const location = schema.getSchemaLocation();
