@@ -9,7 +9,7 @@ notifications:
   email: false
 
 node_js:
-  - "12"
+  - "15"
 
 before_install:
   - npm i -g yarn
