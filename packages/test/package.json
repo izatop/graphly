@@ -1,6 +1,6 @@
 {
     "name": "@graphly/test",
-    "version": "0.6.2",
+    "version": "0.6.3",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
@@ -8,10 +8,10 @@
         "compose:watch": "graphly-cli -vvv compose -w -x ../todo/src src/TestSchema.ts"
     },
     "dependencies": {
-        "@graphly/cli": "^0.6.2",
-        "@graphly/schema": "^0.6.2",
+        "@graphly/cli": "^0.6.3",
+        "@graphly/schema": "^0.6.3",
         "@graphly/todo": "^0.6.0",
-        "@graphly/type": "^0.6.2",
+        "@graphly/type": "^0.6.3",
         "graphql": "^15.5.0"
     },
     "private": true
