@@ -31,9 +31,7 @@
         "@sirian/assert": "^1.1.21",
         "@sirian/common": "^7.0.8",
         "@sirian/console": "^6.7.44",
-        "@sirian/decorators": "^1.6.12"
-    },
-    "devDependencies": {
+        "@sirian/decorators": "^1.6.12",
         "node-watch": "^0.7.1",
         "typedoc": "0.19.2"
     },
