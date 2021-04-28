@@ -1,6 +1,6 @@
 {
     "name": "@graphly/type",
-    "version": "0.6.5",
+    "version": "0.6.6",
     "keywords": [
         "graphql",
         "typescript"
@@ -24,7 +24,7 @@
         "build:watch": "yarn build --watch"
     },
     "dependencies": {
-        "@graphly/schema": "^0.6.5",
+        "@graphly/schema": "^0.6.6",
         "@sirian/common": "^8.0.1",
         "@sirian/decorators": "^1.6.15",
         "@sirian/ts-extra-types": "^3.64.0",
