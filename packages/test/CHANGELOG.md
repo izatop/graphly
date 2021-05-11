@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.7](https://github.com/izatop/graphly/compare/v0.6.6...v0.6.7) (2021-05-11)
+
+**Note:** Version bump only for package @graphly/test
+
+
+
+
+
 ## [0.6.6](https://github.com/izatop/graphly/compare/v0.6.5...v0.6.6) (2021-04-28)
 
 **Note:** Version bump only for package @graphly/test
