@@ -29,9 +29,9 @@
     "dependencies": {
         "@graphly/schema": "^0.6.7",
         "@sirian/assert": "^1.1.21",
-        "@sirian/common": "^8.1.0",
-        "@sirian/console": "^6.7.50",
-        "@sirian/decorators": "^1.6.17",
+        "@sirian/common": "^9.1.2",
+        "@sirian/console": "^7.0.4",
+        "@sirian/decorators": "^2.0.4",
         "node-watch": "^0.7.1",
         "typedoc": "0.19.2"
     },

@@ -25,8 +25,8 @@
     },
     "dependencies": {
         "@sirian/assert": "^1.1.21",
-        "@sirian/common": "^8.1.0",
-        "@sirian/decorators": "^1.6.17",
+        "@sirian/common": "^9.1.2",
+        "@sirian/decorators": "^2.0.4",
         "graphql": "^15.5.0",
         "phone": "^2.4.21"
     },
@@ -34,6 +34,6 @@
         "access": "public"
     },
     "devDependencies": {
-        "@types/phone": "^2.4.0"
+        "@types/phone": "^2.4.1"
     }
 }
