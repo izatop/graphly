@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.8](https://github.com/graphly/graphly/compare/v0.6.7...v0.6.8) (2021-06-07)
+
+
+### Bug Fixes
+
+* update deps ([5170bc6](https://github.com/graphly/graphly/commit/5170bc692a2e728ffb202ed6ce80f59f9543dea6))
+
+
+
+
+
 ## [0.6.7](https://github.com/graphly/graphly/compare/v0.6.6...v0.6.7) (2021-05-11)
 
 
