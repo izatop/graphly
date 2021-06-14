@@ -1566,32 +1566,32 @@
   dependencies:
     "@sirian/error" "^2.2.8"
 
-"@sirian/common@^9.1.2":
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/@sirian/common/-/common-9.1.2.tgz#0a28ed5dd39da5a7a5d58476202379bfa5998072"
-  integrity sha512-cQZpvreQgncX0DjHpNQ5vOxgteSDZmVsmRQ6LMkvwmW4Pc5fyHsamPyk35CSZUNYkNBv9SIAMoLFr1vjIjt24A==
+"@sirian/common@^9.3.1":
+  version "9.3.1"
+  resolved "https://registry.yarnpkg.com/@sirian/common/-/common-9.3.1.tgz#296f912687ba3e43899a850f30dcb214d3ad615e"
+  integrity sha512-K08+MO6InQazmbSZgEpd/9yL7z0H1ZmorUy5NJPoA/vI3YuR5WPVuOQwsHKi/T/od73T2HX8i+6SswNaMRU6yQ==
   dependencies:
-    "@sirian/ts-extra-types" "^4.2.0"
+    "@sirian/ts-extra-types" "^4.2.1"
 
-"@sirian/console@^7.0.4":
-  version "7.0.4"
-  resolved "https://registry.yarnpkg.com/@sirian/console/-/console-7.0.4.tgz#fa139bea2f39d8ad863dec4930ecf63f0de16d0a"
-  integrity sha512-7hjBT7pA7jzrs5FvDd7ctaX3SrioUj3uNJbDBOJcPochPcHegLAjcwPmudQbVubF8z9Q3zwBGOxpkABzZYbT6w==
+"@sirian/console@^7.0.8":
+  version "7.0.8"
+  resolved "https://registry.yarnpkg.com/@sirian/console/-/console-7.0.8.tgz#f2d651ef2c44905d5f1f94a073e58b2134b6372d"
+  integrity sha512-TrbZDC6XlSl329aq2/nzrkilYFBYiUMziZ79dSGXpuoohSa1cYeMgIrvzbiJ6TEqfT4gWE2AmgYU3uUeTMJ5mw==
   dependencies:
-    "@sirian/common" "^9.1.2"
-    "@sirian/decorators" "^2.0.4"
-    "@sirian/event-dispatcher" "^6.0.4"
-    "@sirian/ts-extra-types" "^4.2.0"
-    "@sirian/xpromise" "^3.0.3"
+    "@sirian/common" "^9.3.1"
+    "@sirian/decorators" "^2.0.8"
+    "@sirian/event-dispatcher" "^6.0.8"
+    "@sirian/ts-extra-types" "^4.2.1"
+    "@sirian/xpromise" "^3.0.4"
     error-stack-parser "^2.0.4"
 
-"@sirian/decorators@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@sirian/decorators/-/decorators-2.0.4.tgz#564f5d4b34c8dab629c603998108fbacac16f64c"
-  integrity sha512-f/to9NWFb1vgK+yUg9I2khQHZX1Ra388dR4qSE72vsBC9gBJeuZJ+OBiZgC4KK0ltIrXFfKeP34HdZVrB1ldyg==
+"@sirian/decorators@^2.0.8":
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/@sirian/decorators/-/decorators-2.0.8.tgz#b45dcbdba7fccc08f8df7b33083eb20c936f483a"
+  integrity sha512-ttDEt8piCUmGOjedJIO4ZalTG2irIftzu+h6Ldtc+xX62/kSxV6B86r126wUaWt+RMFOO1TkwMdgz4Lxd5OdIw==
   dependencies:
-    "@sirian/common" "^9.1.2"
-    "@sirian/ts-extra-types" "^4.2.0"
+    "@sirian/common" "^9.3.1"
+    "@sirian/ts-extra-types" "^4.2.1"
 
 "@sirian/error@^2.2.8":
   version "2.2.13"
@@ -1600,31 +1600,31 @@
   dependencies:
     "@sirian/ts-extra-types" "^3.61.4"
 
-"@sirian/event-dispatcher@^6.0.4":
-  version "6.0.4"
-  resolved "https://registry.yarnpkg.com/@sirian/event-dispatcher/-/event-dispatcher-6.0.4.tgz#b433773b830da8dee768b3506a56b099cd6762e4"
-  integrity sha512-4T5pYISMbkGg4SsdAB8v+8slIZe6cxVguPfv3L1MfsHdK48OiPIZ7LT6MSIeJUMhV5tzEjesjWoBi8HDmfum+w==
+"@sirian/event-dispatcher@^6.0.8":
+  version "6.0.8"
+  resolved "https://registry.yarnpkg.com/@sirian/event-dispatcher/-/event-dispatcher-6.0.8.tgz#3e0181ceb0755652bf08e4376bb6940581091944"
+  integrity sha512-lt4MS9/MLAnm5tT6oUDpsELCQiCmspbcKXw3dn8f3Vs5/H84Hg2eqv8VvuRyeuNNMQWr3ZJ12GyipKmKBxtZcA==
   dependencies:
-    "@sirian/common" "^9.1.2"
-    "@sirian/ts-extra-types" "^4.2.0"
-    "@sirian/xpromise" "^3.0.3"
+    "@sirian/common" "^9.3.1"
+    "@sirian/ts-extra-types" "^4.2.1"
+    "@sirian/xpromise" "^3.0.4"
 
 "@sirian/ts-extra-types@^3.61.4":
   version "3.62.0"
   resolved "https://registry.yarnpkg.com/@sirian/ts-extra-types/-/ts-extra-types-3.62.0.tgz#51173335f43ad333500dd52abea52927af65c510"
   integrity sha512-uY9H3nonbLyhfsPKOiaMMxY/Qe23k1lnxcY2dG/rqmCv5opRhZpQE9azlNacrMD320hwAIvuq9D1ffDAAd4xTg==
 
-"@sirian/ts-extra-types@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@sirian/ts-extra-types/-/ts-extra-types-4.2.0.tgz#dbb297e6eb402f387905b20b3a3bfa33ecaf7c95"
-  integrity sha512-PKx0QojngYgOQsVU/fi1dvSS6IDgsTqyh8yWIxrMD8NMxde8ahzR/LPthjS0JkMCkMOGxyxij7ETwVr+9lWXCA==
+"@sirian/ts-extra-types@^4.2.1":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@sirian/ts-extra-types/-/ts-extra-types-4.2.1.tgz#e38a7b0918f2ff311081811dd6f9824befc3265c"
+  integrity sha512-1+ygbiuiDMICDVUm9Uwj4IkN122OnDMhZjcPM3oCxvydZyTLnA3Bwev1lrelTaMOv1Idz2puGZ/O+s2tiLvwCg==
 
-"@sirian/xpromise@^3.0.3":
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/@sirian/xpromise/-/xpromise-3.0.3.tgz#2edb1dc469c92b35c2a56f36af671357eb2ba6c6"
-  integrity sha512-9A8al7MwFNxTSWTIJXa368exx0/ojvjHrk5EyHPg85Cc8M6zQ5oFWtSeVtFMr/VLPZm/Pbx/mj21DGcF5zKifQ==
+"@sirian/xpromise@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@sirian/xpromise/-/xpromise-3.0.4.tgz#9e6883578bcb02190a90a27f6ecfc863eef969db"
+  integrity sha512-KhoVi/5ICwLwCtdQncT71HGXQjgTA8dlorrEtsxTyX+jEiJAbegRkisBRwva8QhjYySQH4rRRGBmxV2y4SncuA==
   dependencies:
-    "@sirian/ts-extra-types" "^4.2.0"
+    "@sirian/ts-extra-types" "^4.2.1"
 
 "@tootallnate/once@1":
   version "1.1.2"
