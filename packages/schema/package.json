@@ -27,7 +27,7 @@
         "@sirian/assert": "^1.1.21",
         "@sirian/common": "^9.3.1",
         "@sirian/decorators": "^2.0.8",
-        "graphql": "^15.5.0",
+        "graphql": "^15.5.1",
         "phone": "^2.4.21"
     },
     "publishConfig": {
