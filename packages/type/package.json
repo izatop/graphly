@@ -25,9 +25,9 @@
     },
     "dependencies": {
         "@graphly/schema": "^0.6.10",
-        "@sirian/common": "^9.3.1",
-        "@sirian/decorators": "^2.0.8",
-        "@sirian/ts-extra-types": "^4.2.1",
+        "@sirian/common": "^9.3.6",
+        "@sirian/decorators": "^2.0.13",
+        "@sirian/ts-extra-types": "^4.2.2",
         "graphql": "^15.5.1"
     },
     "publishConfig": {
