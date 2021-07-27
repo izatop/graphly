@@ -7,13 +7,13 @@ const parse = (value: any) => {
         throw new TypeError(`Value is not a valid phone number: ${value}`);
     }
 
-    const [result] = phone(value);
+    const result = phone(value);
 
-    if (!isString(result)) {
+    if (!result.isValid) {
         throw new TypeError(`Value is not a valid phone number: ${value}`);
     }
 
-    return result;
+    return result.phoneNumber;
 };
 
 export const PhoneNumberType = new GraphQLScalarType({
@@ -24,16 +24,16 @@ export const PhoneNumberType = new GraphQLScalarType({
     parseLiteral: (ast) => {
         if (ast.kind !== Kind.STRING) {
             throw new GraphQLError(
-                `Can only validate strings as a phone number but recieved: ${ast.kind}`,
+                `Can only validate strings as a phone number but received: ${ast.kind}`,
             );
         }
 
-        const [result] = phone(ast.value);
+        const result = phone(ast.value);
 
-        if (!isString(result)) {
-            throw new TypeError(`Value is not a valid phone number: ${result}`);
+        if (!result.isValid) {
+            throw new TypeError(`Value is not a valid phone number: ${ast.value}`);
         }
 
-        return result;
+        return result.phoneNumber;
     },
 });
