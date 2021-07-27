@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.12](https://github.com/graphly/graphly/compare/v0.6.11...v0.6.12) (2021-07-27)
+
+
+### Bug Fixes
+
+* update deps and PhoneNumberType ([d3c6bdd](https://github.com/graphly/graphly/commit/d3c6bdd12ac948d1d38d08a7c8f3aa1db4e04519))
+
+
+
+
+
 ## [0.6.11](https://github.com/graphly/graphly/compare/v0.6.10...v0.6.11) (2021-07-07)
 
 
