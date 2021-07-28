@@ -26,3 +26,10 @@ export function $subscribe<T, D>(iterator: AsyncIterable<$InType<T, D> | $Nullab
 export function $subscribe(iterator: AsyncIterable<any> | Promise<AsyncIterable<any>>) {
     return iterator;
 }
+
+export function $asure<T, D>(data: Promise<$InType<T, D>[]>): Promise<D[]>;
+export function $asure<T, D>(data: Promise<$InType<T, D>>): Promise<D>;
+export function $asure<T, D>(data: Promise<$InType<T, D> | $Nullable>): Promise<Exclude<D, $Nullable>>;
+export function $asure(data: any) {
+    return data;
+}
