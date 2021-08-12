@@ -36,6 +36,7 @@ input TodoSearchInput {
 type TodoMutation {
   add(todo: TodoInput!): Todo!
   delete(id: [Int!]!): [Boolean!]!
+  save(id: Int!, todo: TodoInput!): Todo!
   update(id: Int!, todo: TodoInput!): Todo
 }
 

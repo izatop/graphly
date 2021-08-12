@@ -25,10 +25,10 @@
     },
     "dependencies": {
         "@sirian/assert": "^1.1.21",
-        "@sirian/common": "^9.3.6",
-        "@sirian/decorators": "^2.0.13",
+        "@sirian/common": "^9.5.2",
+        "@sirian/decorators": "^2.1.2",
         "graphql": "^15.5.1",
-        "phone": "^3.1.2"
+        "phone": "^3.1.4"
     },
     "publishConfig": {
         "access": "public"
