@@ -2,7 +2,9 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "ES2019",
-        "lib": ["ES2020"],
+        "lib": [
+            "ES2020"
+        ],
         "declaration": true,
         "sourceMap": true,
         "strict": true,
@@ -15,7 +17,10 @@
         "experimentalDecorators": true,
         "skipLibCheck": true,
         "resolveJsonModule": true,
-        "noEmit": true
+        "noEmit": true,
+        "useUnknownInCatchVariables": false
     },
-    "exclude": ["node_modules"]
+    "exclude": [
+        "node_modules"
+    ]
 }
