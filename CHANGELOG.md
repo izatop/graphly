@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.17](https://github.com/graphly/graphly/compare/v0.6.16...v0.6.17) (2021-10-28)
+
+
+### Bug Fixes
+
+* remove travis ci ([a35fb85](https://github.com/graphly/graphly/commit/a35fb85bcc89396bec7f5120b836d04a77543e91))
+* up jest ([110806f](https://github.com/graphly/graphly/commit/110806ff3115c8bb9fc9bc78673f5ef63f519356))
+* update deps ([762c1c9](https://github.com/graphly/graphly/commit/762c1c95ea4553202e53f273c28b6701168373c7))
+
+
+
+
+
 ## [0.6.16](https://github.com/graphly/graphly/compare/v0.6.15...v0.6.16) (2021-09-06)
 
 
