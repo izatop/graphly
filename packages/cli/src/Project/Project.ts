@@ -84,7 +84,7 @@ export class Project {
 
                 this.info("transform:skip", child.name);
             } catch (error) {
-                this.warn("transform:error", child.name, {message: error.message, stack: error.stack}, child);
+                this.warn("transform:error", child.name, {error}, child);
                 throw error;
             }
         }
