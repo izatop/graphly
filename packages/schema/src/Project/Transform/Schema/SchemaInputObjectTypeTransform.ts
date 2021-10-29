@@ -1,5 +1,5 @@
 import {ok} from "assert";
-import {GraphQLInputFieldConfigMap, GraphQLInputObjectType, GraphQLNonNull, Thunk} from "graphql";
+import {GraphQLInputFieldConfigMap, GraphQLInputObjectType, GraphQLNonNull} from "graphql";
 import * as vm from "vm";
 import {InputType, ITypeObject, PropertyKind, PropertyType} from "../../../Type";
 import {TransformAbstract} from "../TransformAbstract";
@@ -36,7 +36,7 @@ export class SchemaInputObjectTypeTransform extends TransformAbstract<Args, Grap
     }
 
     protected fields(): GraphQLInputFieldConfigMap {
-        const fields: Thunk<GraphQLInputFieldConfigMap> = {};
+        const fields: any = {};
         for (const property of this.type.property) {
             const type = this.schema.input.resolve(this.type, property);
             if (type) {

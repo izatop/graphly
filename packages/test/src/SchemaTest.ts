@@ -92,14 +92,27 @@ describe("Composer", () => {
         const state = {timestamp: Date.now(), authorized: false, session: ""};
         const factory = await scope.create(() => state);
         const {schema, contextValue, rootValue} = await factory(undefined);
-        return graphql(schema, q, rootValue, contextValue, v);
+        return graphql({
+            schema,
+            rootValue,
+            contextValue,
+            variableValues: v,
+            source: q,
+        });
     };
 
     const runSubscribe = async (q: string, v?: Record<string, any>) => {
         const state = {timestamp: Date.now(), authorized: false, session: ""};
         const factory = await scope.create(() => state);
         const {schema, contextValue, rootValue} = await factory(undefined);
-        return subscribe(schema, parse(q), rootValue, contextValue, v);
+
+        return subscribe({
+            schema,
+            rootValue,
+            contextValue,
+            document: parse(q),
+            variableValues: v,
+        });
     };
 
     test("Test Subscribe", async () => {
@@ -112,7 +125,7 @@ describe("Composer", () => {
 
         const repository = new TestRepository(config.dsn);
         const todos = repository.get<ITodo>("todos");
-        const iterator = await runSubscribe(onTodoUpdate);
+        const iterator = await runSubscribe(onTodoUpdate) as AsyncGenerator<any>;
 
         const {id} = await todos.add(todo);
         await todos.update(id, {flag: TodoFlag.PRIVATE});

@@ -69,7 +69,7 @@ export abstract class PropertyResolver<T extends GraphQLOutputType | GraphQLInpu
 
         if (property.reference === TYPE.ARRAY) {
             const type = this.resolve(of, property.parameters[0]);
-            return type ? new GraphQLList(GraphQLNonNull(type)) as T : undefined;
+            return type ? new GraphQLList(new GraphQLNonNull(type)) as any : undefined;
         }
 
         if (this.context.types.has(property.reference)) {

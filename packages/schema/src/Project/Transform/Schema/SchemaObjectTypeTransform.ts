@@ -1,5 +1,5 @@
 import {ok} from "assert";
-import {GraphQLFieldConfigMap, GraphQLObjectType, Thunk} from "graphql";
+import {GraphQLFieldConfigMap, GraphQLObjectType} from "graphql";
 import {ITypeObject, OutputType} from "../../../Type";
 import {TransformAbstract} from "../TransformAbstract";
 import {SchemaObjectFieldTransform} from "./SchemaObjectFieldTransform";
@@ -35,7 +35,7 @@ export class SchemaObjectTypeTransform extends TransformAbstract<Args, GraphQLOb
     }
 
     protected fields(): GraphQLFieldConfigMap<any, any> {
-        const fields: Thunk<GraphQLFieldConfigMap<any, any>> = {};
+        const fields: any = {};
         for (const property of this.type.property) {
             fields[property.name] = new SchemaObjectFieldTransform(this.context, this, property)
                 .transform();
