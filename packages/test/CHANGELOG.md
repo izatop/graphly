@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/izatop/graphly/compare/v0.7.0...v0.7.1) (2021-11-12)
+
+
+### Bug Fixes
+
+* update DateTime ([2873008](https://github.com/izatop/graphly/commit/2873008126c1c92736375fd8a16510ef2749fafd))
+
+
+
+
+
 # [0.7.0](https://github.com/izatop/graphly/compare/v0.6.17...v0.7.0) (2021-10-29)
 
 
