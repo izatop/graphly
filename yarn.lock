@@ -3079,10 +3079,10 @@ graceful-fs@^4.2.4:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
   integrity sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==
 
-graphql@^16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.0.0.tgz#5724f2767aefa543418e83671372117c39408c8f"
-  integrity sha512-n9NxoRfwnpYBZB/WJ7L166gyrShuZ8qYgVaX8oxVyELcJfAwkvwPt6WlYIl90WRlzqDjaNWvLmNOSnKs5llZWQ==
+graphql@^16.0.1:
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.0.1.tgz#93a13cd4e0e38ca8d0832e79614c8578bfd34f10"
+  integrity sha512-oPvCuu6dlLdiz8gZupJ47o1clgb72r1u8NDBcQYjcV6G/iEdmE11B1bBlkhXRvV0LisP/SXRFP7tT6AgaTjpzg==
 
 handlebars@^4.7.6:
   version "4.7.7"
@@ -5104,10 +5104,10 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
-phone@^3.1.6:
-  version "3.1.8"
-  resolved "https://registry.yarnpkg.com/phone/-/phone-3.1.8.tgz#6e348512539c9df81bf07fddb3ed3e2ec7e0c66e"
-  integrity sha512-eyneQKbBwhy6PLYgkioO4CcocMUrFHh4WEfYl1A3PpiQK9tiP0ABKU4yhs7F1URKDbp+oeI8rbJU0+8uMgWfBQ==
+phone@^3.1.9:
+  version "3.1.9"
+  resolved "https://registry.yarnpkg.com/phone/-/phone-3.1.9.tgz#692d70061c0d7391ebcd67f30bee4364b52264e5"
+  integrity sha512-u5jPSlbB4lq9W2ptznEb4eBBKnr3y8xAL4Dsn4uFzUl2gWZE6QiQgxMUMelHq3VUUzFq1QM579SkTxJ+k++igg==
 
 picocolors@^1.0.0:
   version "1.0.0"

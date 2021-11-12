@@ -6,7 +6,9 @@ import {TestContext} from "../TestContext";
 
 export class TodoMutation extends ObjectType {
     public async add(todo: TodoInput, context: TestContext): Returns<Todo> {
-        return $async(context.todos.add(todo));
+        const {deadlineAt, ...added} = await context.todos.add(todo);
+
+        return $async(Promise.resolve({deadlineAt: deadlineAt?.toISOString() as any, ...added}));
     }
 
     public async update(id: TypeInt, todo: TodoInput, context: TestContext): ReturnsNullable<Todo> {

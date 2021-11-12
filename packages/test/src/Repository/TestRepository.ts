@@ -49,7 +49,7 @@ export class TestRepository {
             },
             add(data: Omit<T, "id">) {
                 const id = increment();
-                map.set(id, {id, ...data});
+                map.set(id, {id, createdAt: new Date(), ...data});
                 dispatcher.emit("add", {...map.get(id)});
                 return Promise.resolve(map.get(id)! as T);
             },

@@ -1,19 +1,22 @@
-import {isNumber, isInstanceOf} from "@sirian/common";
+import {isNumber, isInstanceOf, isString, assert} from "@sirian/common";
 import {GraphQLScalarType} from "graphql";
 
-export const DateTimeType = new GraphQLScalarType({
+const validate = (value: unknown): Date => {
+    assert(isString(value) || isNumber(value) || isInstanceOf(value, Date), "Valid DateTime types is string, number and Date");
+
+    const date = new Date(value);
+    assert(date.toDateString() !== "Invalid Date", "Invalid date");
+
+    return date;
+}
+
+export const DateTimeType = new GraphQLScalarType<Date | string | number, number>({
     name: "DateTime",
     description: "The `DateTime` scalar type represents a date in ISO format",
     parseValue: (value: any) => {
         return new Date(value);
     },
     serialize: (value) => {
-        if (isNumber(value)) {
-            return value;
-        }
-
-        if (isInstanceOf(value, Date)) {
-            return value.getTime();
-        }
+        return validate(value).getTime();
     },
 });
