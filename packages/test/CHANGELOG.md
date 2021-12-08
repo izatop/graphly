@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.4](https://github.com/izatop/graphly/compare/v0.7.3...v0.7.4) (2021-12-08)
+
+
+### Bug Fixes
+
+* add eslint, refactor ([7705b37](https://github.com/izatop/graphly/commit/7705b370c77dd0bf2d9dbb217351e55d9dec085a))
+
+
+
+
+
 ## [0.7.3](https://github.com/izatop/graphly/compare/v0.7.2...v0.7.3) (2021-12-08)
 
 **Note:** Version bump only for package @graphly/test
