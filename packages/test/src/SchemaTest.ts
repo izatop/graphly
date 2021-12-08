@@ -1,4 +1,3 @@
-import {Composer} from "@graphly/cli";
 import {TodoStatus} from "@graphly/todo";
 import {Scope} from "@graphly/type";
 import * as assert from "assert";
@@ -88,7 +87,7 @@ describe("Composer", () => {
         config,
     });
 
-    const runQuery = async (q: string, v?: Record<string, any>) => {
+    const runQuery = async (q: string, v?: Record<string, any>): Promise<ExecutionResult> => {
         const state = {timestamp: Date.now(), authorized: false, session: ""};
         const factory = await scope.create(() => state);
         const {schema, contextValue, rootValue} = await factory(undefined);
@@ -101,7 +100,7 @@ describe("Composer", () => {
         });
     };
 
-    const runSubscribe = async (q: string, v?: Record<string, any>) => {
+    const runSubscribe = async (q: string, v?: Record<string, any>): Promise<ExecutionResult | AsyncGenerator> => {
         const state = {timestamp: Date.now(), authorized: false, session: ""};
         const factory = await scope.create(() => state);
         const {schema, contextValue, rootValue} = await factory(undefined);
@@ -134,7 +133,7 @@ describe("Composer", () => {
         assert.ok(isAsyncIterable(iterator));
         for await (const item of iterator) {
             expect(item.errors).toBeUndefined();
-            if (item.errors) break;
+            if (item.errors) {break;}
             if (item.data?.onTodoUpdate.id === id) {
                 items.push(item);
                 break;
@@ -157,7 +156,7 @@ describe("Composer", () => {
     });
 
     test("Schema query", async () => {
-        const query = `query {optional random timestamp hello}`;
+        const query = "query {optional random timestamp hello}";
         const {data} = await runQuery(query);
         expect(data?.optional).toBe(null);
         expect(typeof data?.random).toBe("number");
@@ -178,7 +177,7 @@ describe("Composer", () => {
                 add: {
                     ...todo,
                     id: 1,
-                    deadlineAt: todo.deadlineAt!.getTime(),
+                    deadlineAt: todo.deadlineAt?.getTime(),
                     description: null,
                 },
             },
@@ -209,7 +208,7 @@ describe("Composer", () => {
             todo: {
                 update: {
                     ...updateTodo,
-                    deadlineAt: updateTodo.deadlineAt!.getTime(),
+                    deadlineAt: updateTodo.deadlineAt?.getTime(),
                     id: 1,
                 },
             },

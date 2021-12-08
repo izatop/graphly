@@ -1,7 +1,7 @@
 import {isPromiseLike} from "@sirian/common";
 import {Lookup} from "../Interface";
 
-export const resolve = async <C extends object>(source: C) => {
+export const resolve = async <C extends Record<any, any>>(source: C): Promise<Lookup<C>> => {
     const proto = source.constructor.prototype;
     const properties: Promise<[string, PropertyDescriptor]>[] = [];
     for (const [property, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(source))) {
@@ -24,7 +24,7 @@ export const resolve = async <C extends object>(source: C) => {
             if (isPromiseLike(value)) {
                 descriptors.push(
                     Promise.resolve(value)
-                        .then((solve: any) => [property, {...descriptor, get: () => solve}]),
+                        .then((solve: any) => [property, {...descriptor, get: (): any => solve}]),
                 );
 
                 continue;

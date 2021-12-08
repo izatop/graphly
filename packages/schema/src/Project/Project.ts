@@ -23,6 +23,8 @@ export class Project {
         const basePath = path.dirname(file);
         const baseName = path.basename(file, path.extname(file));
         const typeMapPath = path.resolve(basePath, `${baseName}.json`);
+
+        // eslint-disable-next-line
         return new this(basePath, require(typeMapPath));
     }
 
@@ -32,8 +34,9 @@ export class Project {
             const graphQLTransform = new GQLTransform(this);
             return graphQLTransform.transform();
         } catch (error) {
-            // tslint:disable-next-line:no-console
+            // eslint-disable-next-line
             console.error(error);
+
             throw error;
         }
     }
@@ -44,8 +47,9 @@ export class Project {
             const schemaTransform = new SchemaTransform(this);
             return schemaTransform.transform();
         } catch (error) {
-            // tslint:disable-next-line:no-console
+            // eslint-disable-next-line
             console.error(error);
+
             throw error;
         }
     }

@@ -1,4 +1,4 @@
-// tslint:disable-next-line:no-namespace
+// eslint-disable-next-line
 export namespace TYPE {
     export const ENUM = "Enum";
 

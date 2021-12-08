@@ -40,7 +40,7 @@ export class ComposeCommand extends Command {
             this.log("Schema watching:", watchDirectory);
             watch(watchDirectory, watchOptions, (e, file) => {
                 if (!file) {
-                    return ;
+                    return;
                 }
 
                 const directory = watchDirectory.find((d) => file.startsWith(d));
@@ -57,7 +57,7 @@ export class ComposeCommand extends Command {
 
     public log(...msg: any) {
         if (this.verbose) {
-            // tslint:disable-next-line:no-console
+            // eslint-disable-next-line
             console.log(...msg);
         }
     }

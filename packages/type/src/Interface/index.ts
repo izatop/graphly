@@ -1,3 +1,4 @@
+import {GraphQLArgs} from "graphql";
 import {ResolverFunction} from "./Resolver";
 
 export * from "./Lookup";
@@ -8,7 +9,7 @@ export * from "./IObject";
 
 export type $Nullable = undefined | null;
 
-export type KeyValue<V = any> = { [key: string]: V };
+export type KeyValue<V = any> = {[key: string]: V};
 export type Arrayable<T> = T | T[];
 export type Resolvable<T> = T | ResolverFunction<T>;
 export type Promisable<T> = T | Promise<T>;
@@ -25,4 +26,10 @@ export type $MatchResult<T, D> = {
 
 export type $InType<T, D> = T extends PromiseLike<any> ? never : $MatchResult<T, D>;
 export type $Implement<T, TProtected extends keyof T = never> = |
-    Partial<TProtected extends never ? T : Omit<T, TProtected>>;
+Partial<TProtected extends never ? T : Omit<T, TProtected>>;
+
+export type ScopeFactoryReturnType = Pick<GraphQLArgs, "schema" | "contextValue" | "rootValue">;
+
+export type ScopeFactoryType<T> = {
+    (payload: T, rootValue: unknown): Promise<ScopeFactoryReturnType>;
+};

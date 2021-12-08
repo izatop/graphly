@@ -8,7 +8,7 @@ const validate = (value: unknown): Date => {
     assert(date.toDateString() !== "Invalid Date", "Invalid date");
 
     return date;
-}
+};
 
 export const DateTimeType = new GraphQLScalarType<Date | string | number, number>({
     name: "DateTime",

@@ -17,10 +17,10 @@ type PropertyReflection = Pick<JSONOutput.DeclarationReflection, "flags" | "name
 type AccessorReflection = Pick<JSONOutput.DeclarationReflection, "getSignature" | "flags" | "name" | "type" | "defaultValue">;
 type MethodReflection = Pick<JSONOutput.DeclarationReflection, "signatures" | "flags" | "name" | "type" | "defaultValue">;
 type UnionReflection = Pick<JSONOutput.DeclarationReflection, "flags" | "name" | "defaultValue">
-    & { type: JSONOutput.UnionType };
+& {type: JSONOutput.UnionType};
 
 type ParameterReflection = Pick<JSONOutput.DeclarationReflection, "name" | "flags" | "defaultValue">
-    & { type: JSONOutput.TypeParameterType };
+& {type: JSONOutput.TypeParameterType};
 
 const isScalar = (item: PropertyType): item is IPropertyScalar => item.kind === PropertyKind.SCALAR;
 const isUndefined = (item: PropertyType): item is IPropertyScalar => isScalar(item) && item.type === "undefined";

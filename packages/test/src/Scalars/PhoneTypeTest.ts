@@ -6,7 +6,7 @@ describe("Scalars", () => {
         ["79991231212", false],
     ] as const;
 
-    test.each(phoneNumbers)(`%s equals %s`, (a, expected) => {
+    test.each(phoneNumbers)("%s equals %s", (a, expected) => {
         if (expected) {
             expect(Scalars.PhoneNumberType.parseValue(a)).toBe(expected);
             expect(Scalars.PhoneNumberType.serialize(a)).toBe(expected);

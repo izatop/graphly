@@ -1,5 +1,5 @@
 import {isObject, isString} from "@sirian/common";
-import {GraphQLScalarType, Kind} from "graphql";
+import {GraphQLScalarType} from "graphql";
 
 const parse = (value?: any) => {
     if (isObject(value)) {

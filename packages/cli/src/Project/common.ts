@@ -66,11 +66,11 @@ export function isService(child: JSONOutput.DeclarationReflection) {
         && TypeService.has(getBase(child));
 }
 
-export function hasParents(child: { extendedTypes?: JSONOutput.Type[] }) {
+export function hasParents(child: {extendedTypes?: JSONOutput.Type[]}) {
     return getParents(child).length > 0;
 }
 
-export function getParents({extendedTypes = []}: { extendedTypes?: JSONOutput.Type[] }) {
+export function getParents({extendedTypes = []}: {extendedTypes?: JSONOutput.Type[]}) {
     const parents: string[] = [];
     for (const type of extendedTypes) {
         if (isReference(type)) {
@@ -81,7 +81,7 @@ export function getParents({extendedTypes = []}: { extendedTypes?: JSONOutput.Ty
     return parents;
 }
 
-export function getBase(child: { extendedTypes?: JSONOutput.Type[] }) {
+export function getBase(child: {extendedTypes?: JSONOutput.Type[]}) {
     const parents = getParents(child);
     assert(parents.length > 0, "Type should have parent");
     let tail = parents[parents.length - 1];
@@ -118,7 +118,7 @@ export function hasTypeMapBase(value: ITypeObject, map: Map<string, TypeMap>): b
     return map.has(value.base);
 }
 
-export function getParent(child: { extendedTypes?: JSONOutput.Type[] }) {
+export function getParent(child: {extendedTypes?: JSONOutput.Type[]}) {
     const parents = getParents(child);
     assert(parents.length > 0, "Type should have parent");
     return parents[0];

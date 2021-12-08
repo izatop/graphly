@@ -14,7 +14,7 @@ export class GQLSchemaTransform extends GQLTypeTransform {
             }
 
             if (property.name === "query") {
-                this.error(new Error(`Schema.query field shouldn't be empty`));
+                this.error(new Error("Schema.query field shouldn't be empty"));
             }
         }
 

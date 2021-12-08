@@ -88,7 +88,7 @@ export class SchemaObjectFieldTransform extends TransformAbstract<Args, Returns>
                 return vm.runInContext(`(${defaultValue})`, vm.createContext(this));
             };
 
-            return (parent?: { [key: string]: any }) => {
+            return (parent?: {[key: string]: any}) => {
                 if (!parent || isUndefined(parent[propertyKey])) {
                     return resolverFunction.call(parent || {});
                 }
@@ -114,7 +114,7 @@ export class SchemaObjectFieldTransform extends TransformAbstract<Args, Returns>
     protected createObjectPropertyResolveFunction(property: PropertyType): any {
         if (property.kind === PropertyKind.REFERENCE && this.schema.types.has(property.reference)) {
             const propertyKey = this.property.name;
-            return (parent: { [key: string]: any }) => {
+            return (parent: {[key: string]: any}) => {
                 if (!isUndefined(parent[propertyKey])) {
                     return parent[propertyKey];
                 }

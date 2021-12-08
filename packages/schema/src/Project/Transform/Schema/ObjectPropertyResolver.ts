@@ -17,8 +17,8 @@ export class ObjectPropertyResolver extends PropertyResolver<GraphQLOutputType> 
     }
 
     protected createInterfaceType(of: ITypeObject,
-                                  property: IPropertyReference,
-                                  type: ITypeObject): GraphQLOutputType {
+        property: IPropertyReference,
+        type: ITypeObject): GraphQLOutputType {
         const interfaceName = SchemaInterfaceTypeTransform.getInterfaceName(of, property, type);
         if (!this.cache.has(interfaceName)) {
             this.cache.set(

@@ -22,7 +22,7 @@ export interface ITypeService extends IType<TypeKind.SERVICE> {
 }
 
 export interface ITypeEnum extends IType<TypeKind.ENUM> {
-    property: { [key: string]: string | number };
+    property: {[key: string]: string | number};
 }
 
 export interface IProperty {
@@ -66,9 +66,9 @@ export interface IPropertyFunction extends IProperty {
 
 export type TypeMap = ITypeObject | ITypeEnum | ITypeService;
 export type PropertyType = IPropertyNever
-    | IPropertyScalar
-    | IPropertyReference
-    | IPropertyParameter
-    | IPropertyFunction
-    | IPropertyUnion
+| IPropertyScalar
+| IPropertyReference
+| IPropertyParameter
+| IPropertyFunction
+| IPropertyUnion
     ;

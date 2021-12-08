@@ -26,7 +26,8 @@
     "dependencies": {
         "@graphly/schema": "^0.7.3",
         "@sirian/common": "^9.5.3",
-        "@sirian/decorators": "^2.1.3"
+        "@sirian/decorators": "^2.1.3",
+        "graphql": "^16.1.0"
     },
     "publishConfig": {
         "access": "public"

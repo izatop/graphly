@@ -40,6 +40,7 @@ export class Composer {
         }
 
         const tsconfigRelativePath = path.dirname(options.tsconfig);
+        // eslint-disable-next-line
         const tsconfig = require(options.tsconfig);
         const {compilerOptions = {}} = tsconfig;
         const rootDir = compilerOptions.rootDir ?? compilerOptions.rootDirs?.[0] ?? "src";
@@ -61,7 +62,7 @@ export class Composer {
             throw new Error(`Cannot resolve schema path at ${this.schemaPath}`);
         }
 
-        const extra: { exclude?: string[] } = {};
+        const extra: {exclude?: string[]} = {};
         if (options.exclusive) {
             extra.exclude = [`!${this.sourceRoot}/**/*`];
         }

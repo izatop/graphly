@@ -30,6 +30,7 @@ export class SchemaResolveTransform extends TransformAbstract<Args, Returns> {
 
     public transform(): Returns {
         const file = resolve(this.context.project.root, this.type.file.target);
+        // eslint-disable-next-line
         const module = require(file);
         ok(this.type.name in module, `Cannot find module ${this.type.name} at ${file}`);
 
@@ -77,7 +78,7 @@ export class SchemaResolveTransform extends TransformAbstract<Args, Returns> {
                 `Wrong scalar type ${property.type} of ${ns}`,
             );
 
-            return (args: { [k: string]: any }) => {
+            return (args: {[k: string]: any}) => {
                 return args[name];
             };
         }
@@ -93,7 +94,7 @@ export class SchemaResolveTransform extends TransformAbstract<Args, Returns> {
 
         if (property.kind === PropertyKind.REFERENCE) {
             if (this.schema.input.scalars.has(property.reference)) {
-                return (args: { [k: string]: any }) => {
+                return (args: {[k: string]: any}) => {
                     return args[name];
                 };
             }
@@ -102,27 +103,27 @@ export class SchemaResolveTransform extends TransformAbstract<Args, Returns> {
                 const type = this.schema.types.ensure(property.reference)!;
                 if (type.kind === TypeKind.CLASS) {
                     if (InputType.has(type.base)) {
-                        return (args: { [k: string]: any }) => {
+                        return (args: {[k: string]: any}) => {
                             return args[name];
                         };
                     }
                 }
 
                 if (type.kind === TypeKind.ENUM) {
-                    return (args: { [k: string]: any }) => {
+                    return (args: {[k: string]: any}) => {
                         return args[name];
                     };
                 }
 
                 if (type.kind === TypeKind.SERVICE) {
                     if (type.base === TYPE.CONTEXT) {
-                        return (args: { [k: string]: any }, context: object) => {
+                        return (args: {[k: string]: any}, context: object) => {
                             return context;
                         };
                     }
 
                     if (type.base === TYPE.CONTAINER) {
-                        return (args: { [k: string]: any }, context: object) => {
+                        return (args: {[k: string]: any}, context: object) => {
                             return Reflect.get(context, "container");
                         };
                     }

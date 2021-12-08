@@ -38,14 +38,14 @@ export class TestQuery extends ObjectType {
     /**
      * Getter as a resolver
      */
-    public get timestamp() {
+    public get timestamp(): number {
         return Date.now();
     }
 
     /**
      * Hello World's resolver
      */
-    public hello() {
+    public hello(): string {
         return "Hello world";
     }
 
@@ -53,7 +53,7 @@ export class TestQuery extends ObjectType {
         return this.testProtectedState(ctx.state);
     }
 
-    protected testProtectedState(state: ITestState): boolean {
+    protected testProtectedState(_state: ITestState): boolean {
         return true;
     }
 }
