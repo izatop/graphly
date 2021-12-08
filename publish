@@ -6,3 +6,4 @@ yarn clean \
     && yarn test \
     && yarn lerna publish --conventional-commits --yes
 
+yarn --force
