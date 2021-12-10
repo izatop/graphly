@@ -28,10 +28,15 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
         this.options = options;
     }
 
-    public async create<T = undefined>(hook: RequestHooks<TState, TContainer, T>): Promise<ScopeFactoryType<T>> {
+    public async create<T>(hook: RequestHooks<TState, TContainer, T>): Promise<ScopeFactoryType<TContext, T, never>>;
+    public async create<T, V>(hook: RequestHooks<TState, TContainer, T>, root: V): Promise<ScopeFactoryType<TContext, T, V>>;
+    public async create<T, V>(hook: RequestHooks<TState, TContainer, T>, root?: V)
+        :Promise<ScopeFactoryType<TContext, any, any>> {
         const schema = await this.createSchema();
         const container = await this.createContainer();
-        return async (payload: T, rootValue: any = {}): Promise<ScopeFactoryReturnType> => {
+        const rootValue = root ?? {};
+
+        return async (payload: T): Promise<ScopeFactoryReturnType<TContext, any>> => {
             const state = await hook(payload, container);
             const contextValue = new this.options.context(container, state);
 
@@ -43,7 +48,7 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
         };
     }
 
-    public async createConfig(state: TState, rootValue: any = {}): Promise<ScopeFactoryReturnType> {
+    public async createConfig(state: TState, rootValue: any = {}): Promise<ScopeFactoryReturnType<TContext, any>> {
         const schema = await this.createSchema();
         const container = await this.createContainer();
         const contextValue = new this.options.context(container, state);

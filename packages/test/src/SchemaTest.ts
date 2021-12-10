@@ -91,6 +91,7 @@ describe("Composer", () => {
         const state = {timestamp: Date.now(), authorized: false, session: ""};
         const factory = await scope.create(() => state);
         const {schema, contextValue, rootValue} = await factory(undefined);
+
         return graphql({
             schema,
             rootValue,
@@ -146,8 +147,8 @@ describe("Composer", () => {
 
     test("Test Context", async () => {
         const state = {timestamp: Date.now(), authorized: false, session: ""};
-        const factory = await scope.create(() => state);
-        const {contextValue, rootValue} = await factory(undefined, {test: true});
+        const factory = await scope.create(() => state, {test: true});
+        const {contextValue, rootValue} = await factory(undefined);
         expect(contextValue.container.repository).toBeInstanceOf(TestRepository);
         expect(contextValue.container.config).toMatchObject(config);
         expect(contextValue.container.config).toBe(contextValue.getConfig());

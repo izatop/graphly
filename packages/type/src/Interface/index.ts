@@ -1,4 +1,5 @@
 import {GraphQLArgs} from "graphql";
+import {Context} from "../Scope";
 import {ResolverFunction} from "./Resolver";
 
 export * from "./Lookup";
@@ -28,8 +29,13 @@ export type $InType<T, D> = T extends PromiseLike<any> ? never : $MatchResult<T,
 export type $Implement<T, TProtected extends keyof T = never> = |
 Partial<TProtected extends never ? T : Omit<T, TProtected>>;
 
-export type ScopeFactoryReturnType = Pick<GraphQLArgs, "schema" | "contextValue" | "rootValue">;
+export type ScopeFactoryReturnType<C extends Context<any, any, any>, V> =
+    Pick<GraphQLArgs, "schema">
+    & (V extends never
+        ? {contextValue: C; rootValue: V}
+        : {contextValue: C; rootValue: V}
+    );
 
-export type ScopeFactoryType<T> = {
-    (payload: T, rootValue: unknown): Promise<ScopeFactoryReturnType>;
+export type ScopeFactoryType<C extends Context<any, any, any>, T, V> = {
+    (payload: T): Promise<ScopeFactoryReturnType<C, V>>;
 };
