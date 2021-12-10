@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/graphly/graphly/compare/v0.7.4...v0.8.0) (2021-12-10)
+
+
+### Features
+
+* **breaks:** types ([6432e2b](https://github.com/graphly/graphly/commit/6432e2bc8f6c70736e2e04beb7f792c57b55fa4f))
+
+
+
+
+
 ## [0.7.4](https://github.com/graphly/graphly/compare/v0.7.3...v0.7.4) (2021-12-08)
 
 
