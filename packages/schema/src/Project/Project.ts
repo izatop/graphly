@@ -1,5 +1,4 @@
 import {XMap} from "@sirian/common";
-import {memoize} from "@sirian/decorators";
 import {GraphQLSchema} from "graphql";
 import * as path from "path";
 import {TypeMap} from "../Type";
@@ -19,7 +18,7 @@ export class Project {
         }
     }
 
-    public static from(file: string) {
+    public static from(file: string): Project {
         const basePath = path.dirname(file);
         const baseName = path.basename(file, path.extname(file));
         const typeMapPath = path.resolve(basePath, `${baseName}.json`);
@@ -28,7 +27,6 @@ export class Project {
         return new this(basePath, require(typeMapPath));
     }
 
-    @memoize()
     public toGraphQL(): string {
         try {
             const graphQLTransform = new GQLTransform(this);
@@ -41,7 +39,6 @@ export class Project {
         }
     }
 
-    @memoize()
     public toSchema(): GraphQLSchema {
         try {
             const schemaTransform = new SchemaTransform(this);

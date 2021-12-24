@@ -34,7 +34,7 @@ export class Project {
         }
     }
 
-    public serialize(schema: string, source: string) {
+    public serialize(schema: string, source: string): Map<string, TypeMap> {
         const types = new Map<string, TypeMap>();
         for (const type of this.traverse()) {
             this.info("serialize:success", type.name);
@@ -63,7 +63,7 @@ export class Project {
         return types;
     }
 
-    public* traverse() {
+    public* traverse(): Generator<TypeMap> {
         for (const child of this.types.values()) {
             try {
                 this.info("transform", child.name);
@@ -90,7 +90,7 @@ export class Project {
         }
     }
 
-    protected applyModule(module: JSONOutput.ContainerReflection) {
+    protected applyModule(module: JSONOutput.ContainerReflection): void {
         this.info("module:children", module.name);
         for (const child of module.children ?? []) {
             const name = child.name;
@@ -113,17 +113,17 @@ export class Project {
         }
     }
 
-    protected warn(message: string, ...data: any[]) {
+    protected warn(message: string, ...data: any[]): void {
         this.log(message, ...data);
     }
 
-    protected info(message: string, ...data: any[]) {
+    protected info(message: string, ...data: any[]): void {
         if (this.verbose) {
             this.log(message, ...data);
         }
     }
 
-    protected log(message: string, ...data: any[]) {
+    protected log(message: string, ...data: any[]): void {
         process.stdout.write(
             message
             + ": "
