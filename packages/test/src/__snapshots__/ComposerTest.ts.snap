@@ -28,6 +28,7 @@ input TodoInput {
 }
 
 input TodoSearchInput {
+  fill: Boolean
   limit: Int
   offset: Int
   status: TodoStatus
