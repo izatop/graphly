@@ -4,7 +4,7 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "compose": "graphly-cli compose -x ../todo/src src/TestSchema.ts",
+        "compose": "graphly-cli compose -x ../todo/src --types-dir types/ src/TestSchema.ts",
         "compose:watch": "yarn compose -w"
     },
     "dependencies": {

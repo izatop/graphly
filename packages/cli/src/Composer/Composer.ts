@@ -1,3 +1,4 @@
+import {TypeMap} from "@graphly/schema";
 import {assert} from "@sirian/assert";
 import {existsSync, mkdirSync, writeFileSync} from "fs";
 import * as path from "path";
@@ -88,11 +89,11 @@ export class Composer {
         );
     }
 
-    public compose() {
+    public compose(): Map<string, TypeMap> {
         return this.project.serialize(this.schemaPath, this.sourceRoot);
     }
 
-    public save(savePath?: string) {
+    public save(savePath?: string): string {
         if (!savePath) {
             const basePath = this.targetRoot;
             const baseName = path.basename(this.schemaPath, path.extname(this.schemaPath));
@@ -105,7 +106,6 @@ export class Composer {
         }
 
         writeFileSync(savePath, JSON.stringify([...this.compose().values()]));
-        process.stdout.write(`Schema written to ${savePath}\n`);
 
         return savePath;
     }
@@ -120,13 +120,14 @@ export class Composer {
         return this.resolveTSConfigFile(path.resolve(directory, "../"), name);
     }
 
-    protected resolveExtraTypesPaths(paths?: string[]) {
+    protected resolveExtraTypesPaths(paths?: string[]): string[] {
         if (!paths) {
             return [];
         }
 
         const resolvedPaths = paths.map((p) => path.resolve(p, "index.ts"));
         assert(resolvedPaths.every((p) => existsSync(p)), `Wrong paths ${resolvedPaths.join(", ")}`);
+
         return resolvedPaths;
     }
 }

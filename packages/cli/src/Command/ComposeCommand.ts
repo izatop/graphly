@@ -5,13 +5,14 @@ import {existsSync, mkdirSync, writeFileSync} from "fs";
 import watch from "node-watch";
 import * as path from "path";
 import {Composer} from "../Composer";
+import {format} from "util";
 
 export class ComposeCommand extends Command {
     protected get verbose(): boolean {
         return this.getOption("verbose");
     }
 
-    public static configure(def: CommandDefinition) {
+    public static configure(def: CommandDefinition): void {
         def
             .addArguments([new Argument({name: "file", multiple: true, required: true})])
             .addOptions([
@@ -27,12 +28,13 @@ export class ComposeCommand extends Command {
         process.on("SIGINT", () => process.exit());
     }
 
-    public async execute() {
+    public async execute(): Promise<void> {
         const files: string[] = this.getArgument("file");
         const watchFlag: boolean = this.getOption("watch");
+        const typesDir: string = this.getOption("types-dir") ?? "";
         const base = this.getOption("base");
         const paths = base ? files.map((file) => path.resolve(base, file)) : files;
-        this.compose(paths);
+        this.compose(paths, typesDir);
 
         if (watchFlag) {
             const watchOptions = {recursive: true, filter: /^.+\.(ts|js)$/};
@@ -43,30 +45,34 @@ export class ComposeCommand extends Command {
                     return;
                 }
 
+                this.info("watch(event=%s, file=%s)", e, file);
                 const directory = watchDirectory.find((d) => file.startsWith(d));
-                this.log("Schema", {event: e, directory, file});
                 if (directory) {
                     const schemaFiles = paths.filter((schema) => schema.startsWith(directory));
                     if (schemaFiles.length > 0) {
-                        this.compose(schemaFiles);
+                        this.compose(schemaFiles, typesDir);
                     }
                 }
             });
         }
     }
 
-    public log(...msg: any) {
+    public log(...msg: any): void {
         if (this.verbose) {
             // eslint-disable-next-line
             console.log(...msg);
         }
     }
 
+    public info(...msg: any): void {
+        // eslint-disable-next-line
+        console.info(format(...msg));
+    }
+
     @debounce(1000)
-    protected compose(files: string[]) {
+    protected compose(files: string[], typesDir?: string): void {
         try {
             const tsconfig: string = this.getOption("config");
-            const typesDir: string = this.getOption("types-dir");
             for (const schemaPath of files) {
                 const name = path.basename(schemaPath);
                 const composer = new Composer({
@@ -79,6 +85,8 @@ export class ComposeCommand extends Command {
                 });
 
                 const schemaFile = composer.save();
+                this.info("compose(%s): %s", name, path.basename(schemaFile));
+
                 if (typesDir) {
                     const typesPath = path.resolve(typesDir);
                     const graphqlSchemaFile = `${path.basename(schemaFile, ".json")}.graphql`;
@@ -88,7 +96,11 @@ export class ComposeCommand extends Command {
                     }
 
                     writeFileSync(path.join(typesPath, graphqlSchemaFile), project.toGraphQL());
+
+                    this.info(format("compose(%s): %s", name, graphqlSchemaFile));
                 }
+
+                this.info("compose(%s): done", name);
             }
         } catch (error) {
             this.log(error);

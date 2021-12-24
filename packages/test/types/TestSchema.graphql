@@ -1,0 +1,116 @@
+scalar DateTime
+scalar DomainName
+scalar EmailAddress
+scalar IPv4Address
+scalar Phone
+scalar Object
+
+input TestObjectInput {
+  enabled: Boolean
+  filter: String
+}
+
+input TodoChecklistInput {
+  solved: Boolean
+  text: String!
+}
+
+input TodoInput {
+  checklist: [TodoChecklistInput!]
+  deadlineAt: DateTime
+  description: String
+  flag: TodoFlag
+  status: TodoStatus
+  title: String
+}
+
+input TodoSearchInput {
+  fill: Boolean
+  limit: Int
+  offset: Int
+  status: TodoStatus
+}
+
+type TodoMutation {
+  add(todo: TodoInput!): Todo!
+  delete(id: [Int!]!): [Boolean!]!
+  save(id: Int!, todo: TodoInput!): Todo!
+  update(id: Int!, todo: TodoInput!): Todo
+}
+
+type Todo {
+  checklist: [TodoChecklist!]!
+  deadlineAt: DateTime
+  description: String
+  flag: TodoFlag
+  id: Int!
+  status: TodoStatus!
+  title: String!
+  code: String!
+  timestamp: Int!
+}
+
+type TodoChecklist {
+  solved: Boolean
+  text: String!
+}
+
+enum TodoFlag {
+  NONE
+  PRIVATE
+  PUBLIC
+}
+
+type IPageableTodo {
+  count: Int!
+  limit: Int!
+  node: [Todo!]!
+  offset: Int!
+}
+
+type TodoQuery {
+  count(status: TodoStatus = TodoStatus.DONE): Int!
+  search(filter: TodoSearchInput): IPageableTodo!
+  searchAll(limit: Float = 10, offset: Float = 0): IPageableTodo!
+  todo(id: Int!): Todo
+}
+
+type TestMutation {
+  todo: TodoMutation!
+  test(value: TestObjectInput = {enabled: true, filter: "foo"}): Boolean!
+}
+
+type TestObject {
+  flag: Boolean!
+  n: String
+  selectors: [Int!]!
+}
+
+type TestQuery {
+  domain: DomainName!
+  email: EmailAddress!
+  ipv4: IPv4Address!
+  optional: Float
+  random: Float!
+  todo: TodoQuery!
+  timestamp: Float!
+  config: Boolean!
+  hello: String!
+}
+
+type TestSubscription {
+  onTodoAdded: Todo!
+  onTodoDelete: Todo!
+  onTodoUpdate: Todo!
+}
+
+enum TodoStatus {
+  DONE
+  PENDING
+}
+
+schema {
+  mutation: TestMutation
+  query: TestQuery
+  subscription: TestSubscription
+}

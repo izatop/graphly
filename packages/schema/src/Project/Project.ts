@@ -23,14 +23,19 @@ export class Project {
         const baseName = path.basename(file, path.extname(file));
         const typeMapPath = path.resolve(basePath, `${baseName}.json`);
 
-        // eslint-disable-next-line
-        return new this(basePath, require(typeMapPath));
+        return new this(basePath, this.loadJSON(typeMapPath));
+    }
+
+    public static loadJSON(path: string): any {
+        delete require.cache[path];
+
+        return require(path);
     }
 
     public toGraphQL(): string {
         try {
-            const graphQLTransform = new GQLTransform(this);
-            return graphQLTransform.transform();
+            return new GQLTransform(this)
+                .transform();
         } catch (error) {
             // eslint-disable-next-line
             console.error(error);
