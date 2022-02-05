@@ -28,8 +28,8 @@
         "@sirian/common": "^9.5.3",
         "@sirian/decorators": "^2.1.3",
         "@types/phone": "^2.4.1",
-        "graphql": "^16.2.0",
-        "phone": "^3.1.10"
+        "graphql": "^16.3.0",
+        "phone": "^3.1.12"
     },
     "publishConfig": {
         "access": "public"
