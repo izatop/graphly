@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.3](https://github.com/graphly/graphly/compare/v0.8.2...v0.8.3) (2022-02-05)
+
+
+### Bug Fixes
+
+* resolve function for nullable type ([3e21a6b](https://github.com/graphly/graphly/commit/3e21a6bbdb9d8a10a8a8a2322a858ed4b00171b1))
+* update deps ([6c9491b](https://github.com/graphly/graphly/commit/6c9491b4651c22ee262ff2696b33402945835d6d))
+
+
+
+
+
 ## [0.8.2](https://github.com/graphly/graphly/compare/v0.8.1...v0.8.2) (2021-12-24)
 
 
