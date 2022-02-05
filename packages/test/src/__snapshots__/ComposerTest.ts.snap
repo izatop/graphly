@@ -19,6 +19,7 @@ input TodoChecklistInput {
 }
 
 input TodoInput {
+  check: TodoChecklistInput
   checklist: [TodoChecklistInput!]
   deadlineAt: DateTime
   description: String
@@ -42,6 +43,7 @@ type TodoMutation {
 }
 
 type Todo {
+  check: TodoChecklist
   checklist: [TodoChecklist!]!
   deadlineAt: DateTime
   description: String

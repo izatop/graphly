@@ -16,6 +16,8 @@ export class Todo extends BaseType implements $Implement<ITodo, "createdAt"> {
 
     public readonly checklist: TodoChecklist[] = [];
 
+    public readonly check?: TodoChecklist;
+
     public readonly status: TodoStatus = TodoStatus.PENDING;
 
     public readonly deadlineAt?: Date;

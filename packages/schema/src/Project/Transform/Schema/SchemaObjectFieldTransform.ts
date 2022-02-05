@@ -13,11 +13,11 @@ type Args = [SchemaTransform, SchemaObjectTypeTransform, PropertyType];
 type Returns = GraphQLFieldConfig<any, any, any>;
 
 export class SchemaObjectFieldTransform extends TransformAbstract<Args, Returns> {
-    public get schema() {
+    public get schema(): SchemaTransform {
         return this.args[0];
     }
 
-    public get context() {
+    public get context(): SchemaObjectTypeTransform {
         return this.args[1];
     }
 
@@ -111,15 +111,18 @@ export class SchemaObjectFieldTransform extends TransformAbstract<Args, Returns>
      *
      * @param property
      */
-    protected createObjectPropertyResolveFunction(property: PropertyType): any {
+    protected createObjectPropertyResolveFunction(property: PropertyType)
+        : {(parent: Record<string, any>): unknown} | undefined {
         if (property.kind === PropertyKind.REFERENCE && this.schema.types.has(property.reference)) {
-            const propertyKey = this.property.name;
-            return (parent: {[key: string]: any}) => {
+            const {name: propertyKey, nullable} = this.property;
+            return (parent: Record<string, any>): unknown => {
                 if (!isUndefined(parent[propertyKey])) {
                     return parent[propertyKey];
                 }
 
-                return {};
+                return nullable
+                    ? undefined
+                    : {};
             };
         }
 

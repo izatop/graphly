@@ -14,5 +14,7 @@ export class TodoInput extends InputObjectType {
 
     public readonly checklist: TodoChecklistInput[] = [];
 
+    public readonly check?: TodoChecklistInput;
+
     public readonly flag?: TodoFlag;
 }
