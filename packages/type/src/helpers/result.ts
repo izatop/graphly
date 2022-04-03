@@ -33,3 +33,10 @@ export function $asure<T, D>(data: Promise<$InType<T, D> | $Nullable>): Promise<
 export function $asure(data: any): any {
     return data;
 }
+
+export function $sure<T, D>(data: $InType<T, D>[]): D[];
+export function $sure<T, D>(data: $InType<T, D>): D;
+export function $sure<T, D>(data: $InType<T, D> | $Nullable): Exclude<D, $Nullable>;
+export function $sure(data: any): any {
+    return data;
+}
