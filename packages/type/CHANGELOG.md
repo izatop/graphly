@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.8](https://github.com/graphly/graphly/compare/v0.8.7...v0.8.8) (2022-04-26)
+
+
+### Bug Fixes
+
+* update deps ([65738fd](https://github.com/graphly/graphly/commit/65738fdd59ae3f9b4c95a47140ad96117a35337a))
+
+
+
+
+
 ## [0.8.7](https://github.com/graphly/graphly/compare/v0.8.6...v0.8.7) (2022-04-21)
 
 **Note:** Version bump only for package @graphly/type
