@@ -1,6 +1,6 @@
 {
     "name": "@graphly/test",
-    "version": "0.8.8",
+    "version": "0.8.9",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
@@ -8,10 +8,10 @@
         "compose:watch": "yarn compose -w"
     },
     "dependencies": {
-        "@graphly/cli": "^0.8.8",
-        "@graphly/schema": "^0.8.8",
+        "@graphly/cli": "^0.8.9",
+        "@graphly/schema": "^0.8.9",
         "@graphly/todo": "^0.8.0",
-        "@graphly/type": "^0.8.8",
+        "@graphly/type": "^0.8.9",
         "graphql": "^16.4.0"
     },
     "private": true
