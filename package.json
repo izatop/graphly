@@ -11,7 +11,7 @@
         "clean": "lerna run clean",
         "lint": "eslint 'packages/*/{src,test}/**/*.ts'",
         "build": "tsc -b packages",
-        "postbuild": "yarn test:compose",
+        "postbuild": "lerna run postbuild",
         "watch": "tsc -b packages -w",
         "test": "jest --config jest.json",
         "test:watch": "jest --watch --config jest.json",

@@ -17,14 +17,11 @@
     "files": [
         "dist/"
     ],
-    "description": "Graphly cli utilities",
+    "description": "Graphly CLI utilities",
     "repository": "https://github.com/graphly/graphly",
     "scripts": {
-        "clean": "yarn build:clean",
-        "watch": "yarn build:watch",
-        "build": "yarn build:clean && tsc",
-        "build:clean": "rimraf dist tsconfig.tsbuildinfo",
-        "build:watch": "yarn build --watch"
+        "clean": "rimraf dist tsconfig.tsbuildinfo",
+        "postbuild": "chmod +x dist/cli.js"
     },
     "dependencies": {
         "@graphly/schema": "^0.8.9",

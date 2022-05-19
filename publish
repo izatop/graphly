@@ -3,7 +3,6 @@
 yarn clean \
     && yarn lint \
     && yarn build \
-    && yarn --force \
     && yarn test \
     && yarn lerna publish --conventional-commits --yes
 

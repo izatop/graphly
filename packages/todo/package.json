@@ -17,11 +17,7 @@
     "description": "Graphly Todo",
     "repository": "https://github.com/graphly/graphly",
     "scripts": {
-        "clean": "yarn build:clean",
-        "watch": "yarn build:watch",
-        "build": "yarn build:clean && tsc",
-        "build:clean": "rimraf dist tsconfig.tsbuildinfo",
-        "build:watch": "yarn build --watch"
+        "clean": "rimraf dist tsconfig.tsbuildinfo"
     },
     "private": true
 }
