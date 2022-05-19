@@ -1,6 +1,6 @@
 {
     "name": "@graphly/type",
-    "version": "0.8.9",
+    "version": "0.8.10",
     "keywords": [
         "graphql",
         "typescript"
@@ -20,7 +20,7 @@
         "clean": "rimraf dist tsconfig.tsbuildinfo"
     },
     "dependencies": {
-        "@graphly/schema": "^0.8.9",
+        "@graphly/schema": "^0.8.10",
         "@sirian/common": "^9.5.3",
         "@sirian/decorators": "^2.1.3",
         "graphql": "^16.5.0"
