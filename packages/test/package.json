@@ -12,7 +12,7 @@
         "@graphly/schema": "^0.8.9",
         "@graphly/todo": "^0.8.0",
         "@graphly/type": "^0.8.9",
-        "graphql": "^16.4.0"
+        "graphql": "^16.5.0"
     },
     "private": true
 }

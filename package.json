@@ -11,27 +11,26 @@
         "clean": "lerna run clean",
         "lint": "eslint 'packages/*/{src,test}/**/*.ts'",
         "build": "tsc -b packages",
+        "postbuild": "yarn test:compose",
         "watch": "tsc -b packages -w",
         "test": "jest --config jest.json",
         "test:watch": "jest --watch --config jest.json",
         "test:compose": "lerna run compose --scope=@graphly/test",
-        "test:compose:watch": "lerna run compose:watch --scope=@graphly/test",
-        "bootstrap": "lerna bootstrap && lerna link",
-        "check": "yarn lint && yarn build && yarn test:compose && yarn test"
+        "test:compose:watch": "lerna run compose:watch --scope=@graphly/test"
     },
     "workspaces": [
         "packages/*"
     ],
     "devDependencies": {
-        "@types/jest": "^27.5.0",
-        "@typescript-eslint/eslint-plugin": "^5.22.0",
-        "@typescript-eslint/parser": "^5.22.0",
-        "eslint": "^8.14.0",
+        "@types/jest": "^27.5.1",
+        "@typescript-eslint/eslint-plugin": "^5.25.0",
+        "@typescript-eslint/parser": "^5.25.0",
+        "eslint": "^8.15.0",
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-unused-imports": "^2.0.0",
-        "jest": "^28.0.3",
+        "jest": "^28.1.0",
         "lerna": "^4.0.0",
-        "ts-jest": "^28.0.1",
+        "ts-jest": "^28.0.2",
         "typescript": "4.6.4"
     }
 }
