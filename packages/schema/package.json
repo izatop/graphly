@@ -25,7 +25,7 @@
         "@sirian/decorators": "^2.1.3",
         "@types/phone": "^2.4.1",
         "graphql": "^16.5.0",
-        "phone": "^3.1.18"
+        "phone": "^3.1.19"
     },
     "publishConfig": {
         "access": "public"
