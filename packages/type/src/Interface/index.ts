@@ -10,7 +10,7 @@ export * from "./IObject";
 
 export type $Nullable = undefined | null;
 
-export type KeyValue<V = any> = {[key: string]: V};
+export type KeyValue<V = any> = Record<string, V>;
 export type Arrayable<T> = T | T[];
 export type Resolvable<T> = T | ResolverFunction<T>;
 export type Promisable<T> = T | Promise<T>;
