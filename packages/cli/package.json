@@ -1,6 +1,6 @@
 {
     "name": "@graphly/cli",
-    "version": "0.8.14",
+    "version": "0.8.15",
     "keywords": [
         "graphql",
         "typescript"
@@ -24,7 +24,7 @@
         "postbuild": "chmod +x dist/cli.js"
     },
     "dependencies": {
-        "@graphly/schema": "^0.8.14",
+        "@graphly/schema": "^0.8.15",
         "@sirian/assert": "^1.1.21",
         "@sirian/console": "^7.1.7",
         "@sirian/decorators": "^2.1.3",
