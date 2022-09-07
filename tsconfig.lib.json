@@ -1,8 +1,6 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "ES2019",
-        "lib": ["ES2020"],
         "declaration": true,
         "sourceMap": true,
         "strict": true,
@@ -16,5 +14,7 @@
         "skipLibCheck": true,
         "composite": true
     },
-    "exclude": ["node_modules"]
+    "exclude": [
+        "node_modules"
+    ]
 }
