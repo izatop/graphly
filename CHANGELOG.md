@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.14](https://github.com/graphly/graphly/compare/v0.8.13...v0.8.14) (2022-09-07)
+
+
+### Bug Fixes
+
+* target ([d4de05b](https://github.com/graphly/graphly/commit/d4de05b9e35025cac91e4d096b184d956a07ef5a))
+* update deps ([e187c87](https://github.com/graphly/graphly/commit/e187c879f6451932922e9489558608905628b09b))
+* update deps ([b922810](https://github.com/graphly/graphly/commit/b9228103a30f5b22cdbcfd2eea8a68aac8754d5b))
+* update deps ([0b6ce99](https://github.com/graphly/graphly/commit/0b6ce999c9d4e9ce903f7e79806a239773d44622))
+* update target + inline sources ([56ce362](https://github.com/graphly/graphly/commit/56ce3628b8d56c9eae29b548edb7a8baf03718c2))
+
+
+
+
+
 ## [0.8.13](https://github.com/graphly/graphly/compare/v0.8.12...v0.8.13) (2022-08-29)
 
 
