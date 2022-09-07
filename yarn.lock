@@ -1457,19 +1457,19 @@
     read-package-json-fast "^2.0.3"
     which "^2.0.2"
 
-"@nrwl/cli@14.6.4":
-  version "14.6.4"
-  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-14.6.4.tgz#b2af7d2713c535dd9017def5236fa46e9d27cfbc"
-  integrity sha512-VkS2L3O2MOCgqYg6Fubv7FfJ4D39iKGSKYhTom6ZJLPEcQrPXTvrD1hIzMJ4Cehal5P6DYw7ZEjcJgiTATcSYA==
+"@nrwl/cli@14.6.5":
+  version "14.6.5"
+  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-14.6.5.tgz#6751d7c48fff78095fb19874bda6a1f786e47ce8"
+  integrity sha512-sjT4/oMk1F4+dTpCp08IVE8hfqKsokebUECzC1hTu4pCeFo0oviIi7bQTuCIbG9w4iiHLioa6QmLRXBwVJEr9w==
   dependencies:
-    nx "14.6.4"
+    nx "14.6.5"
 
-"@nrwl/tao@14.6.4":
-  version "14.6.4"
-  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-14.6.4.tgz#fdc2f14d4fac9b0a62a9c32cfc8b98bbf075e642"
-  integrity sha512-xSfcXeU8AyEbmTGiGPCwej2eK+36gU9o6smUQxcK00Yii6vb5I87n8U77jTF5tJ85TkDW0I1VoHm0Nd8f1d9Cw==
+"@nrwl/tao@14.6.5":
+  version "14.6.5"
+  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-14.6.5.tgz#202d9ed3e13cb873dd7f218c0622ba8972ba8cd6"
+  integrity sha512-sSbTSN4Bfh4vQR2iCl9arNzEhJztG6paY2j+k/GwQZdN+QssX9xV32jLWYIC3rDmPJWaZ11uD3TgAyr3X7GXhw==
   dependencies:
-    nx "14.6.4"
+    nx "14.6.5"
 
 "@octokit/auth-token@^3.0.0":
   version "3.0.1"
@@ -1586,9 +1586,9 @@
     node-gyp-build "^4.3.0"
 
 "@sinclair/typebox@^0.24.1":
-  version "0.24.35"
-  resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.24.35.tgz#7b5ca127aefe3ed482bb60f874bebbe3143e82f5"
-  integrity sha512-iN6ehuDndiTiDz2F+Orv/+oHJR+PrGv+38oghCddpsW4YEZl5qyLsWxSwYUWrKEOfjpGtXDFW6scJtjpzSLeSw==
+  version "0.24.38"
+  resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.24.38.tgz#7f68d9c5775c4c2cec0524b3b990263dd009c968"
+  integrity sha512-IbYB6vdhLFmzGEyXXEdFAJKyq7S4/RsivkgxNzs/LzwYuUJHmeNQ0cHkjG/Yqm6VgUzzZDLMZAf0XgeeaZAocA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
@@ -2813,9 +2813,9 @@ duplexer@^0.1.1:
   integrity sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==
 
 electron-to-chromium@^1.4.202:
-  version "1.4.242"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.242.tgz#51284820b0e6f6ce6c60d3945a3c4f9e4bd88f5f"
-  integrity sha512-nPdgMWtjjWGCtreW/2adkrB2jyHjClo9PtVhR6rW+oxa4E4Wom642Tn+5LslHP3XPL5MCpkn5/UEY60EXylNeQ==
+  version "1.4.243"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.243.tgz#9d5f1b10eafd6e434b687a88f1e7b0441dee168a"
+  integrity sha512-BgLD2gBX43OSXwlT01oYRRD5NIB4n3okTRxkzEAC6G0SZG4TTlyrWMjbOo0fajCwqwpRtMHXQNMjtRN6qpNtfw==
 
 emittery@^0.10.2:
   version "0.10.2"
@@ -5160,13 +5160,13 @@ npmlog@^6.0.0, npmlog@^6.0.2:
     gauge "^4.0.3"
     set-blocking "^2.0.0"
 
-nx@14.6.4, "nx@>=14.6.1 < 16":
-  version "14.6.4"
-  resolved "https://registry.yarnpkg.com/nx/-/nx-14.6.4.tgz#471379334efc8258a47ec80db0915667d29aace3"
-  integrity sha512-AbUH3xQVL6faSXSMB7kPFcRtnz+FNUt4xR0UtfBBCqNSItq5kMOlHK10G7aN+VWtw8ScNy7qkWIeQ6VezvUW8A==
+nx@14.6.5, "nx@>=14.6.1 < 16":
+  version "14.6.5"
+  resolved "https://registry.yarnpkg.com/nx/-/nx-14.6.5.tgz#13524e7355803a8247278374063d8e82b845a621"
+  integrity sha512-egV8Zrec+0m+27wTENe9W/JKRMkBDx1N0xaFzKjL0WKj5WIe4asao5uwTJEwqi9iQyiijExxUFVU5MNGuF2c+A==
   dependencies:
-    "@nrwl/cli" "14.6.4"
-    "@nrwl/tao" "14.6.4"
+    "@nrwl/cli" "14.6.5"
+    "@nrwl/tao" "14.6.5"
     "@parcel/watcher" "2.0.4"
     chalk "4.1.0"
     chokidar "^3.5.1"
