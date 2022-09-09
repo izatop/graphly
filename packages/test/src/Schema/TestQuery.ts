@@ -13,7 +13,7 @@ export class TestQuery extends ObjectType {
     /**
      * Subtype ObjectType without
      */
-    public readonly todo: TodoQuery;
+    declare public readonly todo: TodoQuery;
 
     /**
      * Evaluate expression as a resolver
@@ -28,12 +28,12 @@ export class TestQuery extends ObjectType {
     /**
      * Not in a schema
      */
-    protected protectedMember: number;
+    declare protected protectedMember: number;
 
     /**
      * Not in a schema
      */
-    private privateMember: number;
+    declare private privateMember: number;
 
     /**
      * Getter as a resolver

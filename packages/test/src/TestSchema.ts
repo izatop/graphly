@@ -4,13 +4,13 @@ import {TestQuery} from "./Schema/TestQuery";
 import {TestSubscription} from "./Schema/TestSubscription";
 
 export class TestSchema extends Schema {
-    public readonly query: TestQuery;
+    declare public readonly query: TestQuery;
 
-    public readonly mutation: TestMutation;
+    declare public readonly mutation: TestMutation;
 
-    public readonly subscription: TestSubscription;
+    declare public readonly subscription: TestSubscription;
 
-    public static getSchemaLocation() {
+    public static getSchemaLocation(): string {
         return __filename;
     }
 }

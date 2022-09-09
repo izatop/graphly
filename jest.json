@@ -3,7 +3,12 @@
         "<rootDir>/packages/test/src"
     ],
     "transform": {
-        "^.+\\.ts$": "ts-jest"
+        "^.+\\.ts$": [
+            "ts-jest",
+            {
+                "tsconfig": "packages/test/tsconfig.json"
+            }
+        ]
     },
     "testRegex": "/[^/]*Test\\.ts$",
     "testEnvironment": "node",
@@ -14,10 +19,5 @@
         "ts",
         "json",
         "js"
-    ],
-    "globals": {
-        "ts-jest": {
-            "tsconfig": "packages/test/tsconfig.json"
-        }
-    }
+    ]
 }

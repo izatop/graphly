@@ -8,9 +8,9 @@ import {TodoFlag} from "./TodoFlag";
  * Todo type description
  */
 export class Todo extends BaseType implements $Implement<ITodo, "createdAt"> {
-    public readonly id: TypeInt;
+    declare public readonly id: TypeInt;
 
-    public readonly title: string;
+    declare public readonly title: string;
 
     public readonly description?: string;
 
@@ -23,7 +23,7 @@ export class Todo extends BaseType implements $Implement<ITodo, "createdAt"> {
     public readonly deadlineAt?: Date;
     public readonly flag?: TodoFlag;
 
-    protected readonly createdAt: Date;
+    declare protected readonly createdAt: Date;
 
     public get timestamp(): TypeInt {
         return this.createdAt.getTime();
