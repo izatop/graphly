@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.16](https://github.com/graphly/graphly/compare/v0.8.15...v0.8.16) (2022-09-09)
+
+
+### Bug Fixes
+
+* update deps ([1cd5378](https://github.com/graphly/graphly/commit/1cd5378fffe927c7f19bbbcff839bc607c8b9d5b))
+* update ts-jest version ([5502f79](https://github.com/graphly/graphly/commit/5502f79ba28f8062baa851615d14f6579ffa7c31))
+
+
+
+
+
 ## [0.8.14](https://github.com/graphly/graphly/compare/v0.8.13...v0.8.14) (2022-09-07)
 
 
