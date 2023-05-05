@@ -16,8 +16,5 @@
     ],
     "description": "Graphly Todo",
     "repository": "https://github.com/graphly/graphly",
-    "scripts": {
-        "clean": "rimraf dist tsconfig.tsbuildinfo"
-    },
     "private": true
 }

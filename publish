@@ -5,4 +5,3 @@ yarn clean \
     && yarn build \
     && yarn test \
     && yarn lerna publish --conventional-commits --yes
-

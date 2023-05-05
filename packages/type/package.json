@@ -16,9 +16,6 @@
     ],
     "description": "A type library for GraphQL schema generation by TypeScript",
     "repository": "https://github.com/graphly/graphly",
-    "scripts": {
-        "clean": "rimraf dist tsconfig.tsbuildinfo"
-    },
     "dependencies": {
         "@graphly/schema": "^0.8.18",
         "@sirian/common": "^9.5.3",
