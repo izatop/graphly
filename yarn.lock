@@ -477,11 +477,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphly/cli@^0.8.19, @graphly/cli@workspace:packages/cli":
+"@graphly/cli@^0.9.0, @graphly/cli@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "@graphly/cli@workspace:packages/cli"
   dependencies:
-    "@graphly/schema": ^0.8.19
+    "@graphly/schema": ^0.9.0
     "@sirian/assert": ^1.1.21
     "@sirian/console": ^7.1.7
     "@sirian/decorators": ^2.1.3
@@ -492,7 +492,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@graphly/schema@^0.8.19, @graphly/schema@workspace:packages/schema":
+"@graphly/schema@^0.9.0, @graphly/schema@workspace:packages/schema":
   version: 0.0.0-use.local
   resolution: "@graphly/schema@workspace:packages/schema"
   dependencies:
@@ -509,25 +509,25 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@graphly/test@workspace:packages/test"
   dependencies:
-    "@graphly/cli": ^0.8.19
-    "@graphly/schema": ^0.8.19
-    "@graphly/todo": ^0.8.19
-    "@graphly/type": ^0.8.19
+    "@graphly/cli": ^0.9.0
+    "@graphly/schema": ^0.9.0
+    "@graphly/todo": ^0.9.0
+    "@graphly/type": ^0.9.0
     graphql: ^16.6.0
   languageName: unknown
   linkType: soft
 
-"@graphly/todo@^0.8.19, @graphly/todo@workspace:packages/todo":
+"@graphly/todo@^0.9.0, @graphly/todo@workspace:packages/todo":
   version: 0.0.0-use.local
   resolution: "@graphly/todo@workspace:packages/todo"
   languageName: unknown
   linkType: soft
 
-"@graphly/type@^0.8.19, @graphly/type@workspace:packages/type":
+"@graphly/type@^0.9.0, @graphly/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@graphly/type@workspace:packages/type"
   dependencies:
-    "@graphly/schema": ^0.8.19
+    "@graphly/schema": ^0.9.0
     "@sirian/common": ^9.5.3
     "@sirian/decorators": ^2.1.3
     graphql: ^16.6.0
