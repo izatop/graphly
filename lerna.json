@@ -1,9 +1,12 @@
 {
-  "packages": [
-    "packages/*"
-  ],
-  "stream": true,
-  "npmClient": "yarn",
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "useWorkspaces": true,
+  "command": {
+    "version": {
+      "ignoreChanges": [
+        "packages/test"
+      ]
+    }
+  },
   "version": "0.8.19"
 }
