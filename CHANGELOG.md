@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/graphly/graphly/compare/v0.9.0...v0.9.1) (2023-05-30)
+
+
+### Bug Fixes
+
+* lerna.json ([e509d62](https://github.com/graphly/graphly/commit/e509d62647bbd4510f95d43a5c5ec84e9885978d))
+
+
+
+
+
 # [0.9.0](https://github.com/graphly/graphly/compare/v0.8.19...v0.9.0) (2023-05-30)
 
 
