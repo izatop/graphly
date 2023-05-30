@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/graphly/graphly/compare/v0.8.19...v0.10.0) (2023-05-30)
+
+
+### Features
+
+* github actions ([a8c42d2](https://github.com/graphly/graphly/commit/a8c42d2a2c44d3327d8d2f50c48e8e1bd4c3019e))
+
+
+
+
+
 ## [0.9.1](https://github.com/graphly/graphly/compare/v0.9.0...v0.9.1) (2023-05-30)
 
 **Note:** Version bump only for package @graphly/type
