@@ -16,7 +16,7 @@ const sAddrSpec = sLocalPart + "\\x40" + sDomain; // complete RFC822 email addre
 const sValidEmail = "^" + sAddrSpec + "$"; // as whole string
 const validator = new RegExp(sValidEmail);
 
-const parse = (value: any) => {
+const parse = (value: any): string => {
     if (!isString(value) || !validator.test(value)) {
         throw new TypeError(`Value is not a valid email address: ${value}`);
     }
@@ -29,7 +29,7 @@ export const EmailAddressType = new GraphQLScalarType({
     description: "The `Email` scalar type represents an email address as specified by RFC822.",
     serialize: parse,
     parseValue: parse,
-    parseLiteral: (ast) => {
+    parseLiteral: (ast): string => {
         if (ast.kind !== Kind.STRING) {
             throw new GraphQLError(
                 `Can only validate strings as email addresses but recieved: ${ast.kind}`,

@@ -9,6 +9,7 @@
         "sourceMap": true,
         "inlineSources": true,
         "strict": true,
+        "alwaysStrict": true,
         "strictNullChecks": true,
         "forceConsistentCasingInFileNames": true,
         "noImplicitThis": true,
@@ -16,10 +17,10 @@
         "strictPropertyInitialization": true,
         "strictFunctionTypes": true,
         "experimentalDecorators": true,
-        "skipLibCheck": true,
         "resolveJsonModule": true,
-        "noEmit": true,
-        "useUnknownInCatchVariables": false
+        "useUnknownInCatchVariables": false,
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true
     },
     "exclude": [
         "node_modules"

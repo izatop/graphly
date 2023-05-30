@@ -1,4 +1,4 @@
-export function* getPrototypeChain(target: ObjectConstructor) {
+export function* getPrototypeChain(target: ObjectConstructor): Generator<any> {
     let prototype = target.prototype;
 
     while (prototype) {
@@ -7,7 +7,8 @@ export function* getPrototypeChain(target: ObjectConstructor) {
     }
 }
 
-export function getPropertyDescriptor(target: ObjectConstructor, property: string | symbol) {
+export function getPropertyDescriptor(target: ObjectConstructor, property: string | symbol)
+    : TypedPropertyDescriptor<any> | undefined {
     for (const prototype of getPrototypeChain(target)) {
         const descriptor = Reflect.getOwnPropertyDescriptor(prototype, property);
         if (descriptor) {

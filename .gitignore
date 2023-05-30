@@ -1,12 +1,25 @@
-.idea/
-node_modules/
-node.env
-coverage/
-secrets/
+# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# dist
 dist/
-db/
+
+# common
+*.tsbuildinfo
+node_modules/
+coverage/
+
+# auto-generated files
 yarn-*.log
 lerna-*.log
 npm-*.log
 .DS_Store
-tsconfig.tsbuildinfo
+
+# local
+.local/

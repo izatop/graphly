@@ -3,7 +3,7 @@ import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
 
 const validator = /^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/;
 
-const parse = (value: any) => {
+const parse = (value: any): string => {
     if (!isString(value) || !validator.test(value)) {
         throw new TypeError(`Value is not a valid IPv4 address: ${value}`);
     }
@@ -16,7 +16,7 @@ export const IPv4AddressType = new GraphQLScalarType({
     description: "The `IPv4Type` scalar type represents the IPv4 format",
     parseValue: parse,
     serialize: parse,
-    parseLiteral: (ast) => {
+    parseLiteral: (ast): string => {
         if (ast.kind !== Kind.STRING) {
             throw new GraphQLError(
                 `Can only validate strings as IPv4 but recieved: ${ast.kind}`,

@@ -2,7 +2,7 @@ import {isString} from "@sirian/common";
 import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
 import phone from "phone";
 
-const parse = (value: any) => {
+const parse = (value: any): string => {
     if (!isString(value)) {
         throw new TypeError(`Value is not a valid phone number: ${value}`);
     }
@@ -21,7 +21,7 @@ export const PhoneNumberType = new GraphQLScalarType({
     description: "The `Phone` scalar type represents the phone number",
     parseValue: parse,
     serialize: parse,
-    parseLiteral: (ast) => {
+    parseLiteral: (ast): string => {
         if (ast.kind !== Kind.STRING) {
             throw new GraphQLError(
                 `Can only validate strings as a phone number but received: ${ast.kind}`,

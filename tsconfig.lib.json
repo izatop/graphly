@@ -1,21 +1,9 @@
 {
+    "extends": "./tsconfig.json",
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "ES2022",
-        "lib": [
-            "ES2022"
-        ],
         "declaration": true,
-        "sourceMap": true,
-        "strict": true,
-        "strictNullChecks": true,
-        "forceConsistentCasingInFileNames": true,
-        "noImplicitThis": true,
-        "noImplicitAny": true,
-        "strictPropertyInitialization": true,
-        "strictFunctionTypes": true,
-        "experimentalDecorators": true,
-        "skipLibCheck": true,
+        "declarationMap": true,
+        "incremental": true,
         "composite": true
     },
     "exclude": [

@@ -28,8 +28,10 @@ export class Scope<TContext extends Context<TContainer, TConfig, TState>,
         this.options = options;
     }
 
-    public async create<T>(hook: RequestHooks<TState, TContainer, T>): Promise<ScopeFactoryType<TContext, T, never>>;
-    public async create<T, V>(hook: RequestHooks<TState, TContainer, T>, root: V): Promise<ScopeFactoryType<TContext, T, V>>;
+    public async create<T>(hook: RequestHooks<TState, TContainer, T>)
+    : Promise<ScopeFactoryType<TContext, T, never>>;
+    public async create<T, V>(hook: RequestHooks<TState, TContainer, T>, root: V)
+    : Promise<ScopeFactoryType<TContext, T, V>>;
     public async create<T, V>(hook: RequestHooks<TState, TContainer, T>, root?: V)
         :Promise<ScopeFactoryType<TContext, any, any>> {
         const schema = await this.createSchema();

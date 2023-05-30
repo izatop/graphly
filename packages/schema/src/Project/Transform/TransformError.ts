@@ -14,7 +14,7 @@ export class TransformError extends Error {
         }
     }
 
-    public get diagnostic() {
+    public get diagnostic(): any {
         return diagnostics.get(this);
     }
 }
