@@ -1,6 +1,6 @@
 {
     "name": "@graphly/type",
-    "version": "0.10.0",
+    "version": "0.10.1",
     "keywords": [
         "graphql",
         "typescript"
@@ -17,7 +17,7 @@
     "description": "A type library for GraphQL schema generation by TypeScript",
     "repository": "https://github.com/graphly/graphly",
     "dependencies": {
-        "@graphly/schema": "^0.10.0",
+        "@graphly/schema": "^0.10.1",
         "@sirian/common": "^9.5.3",
         "@sirian/decorators": "^2.1.3",
         "graphql": "^16.7.0"

@@ -1,6 +1,6 @@
 {
     "name": "@graphly/cli",
-    "version": "0.10.0",
+    "version": "0.10.1",
     "keywords": [
         "graphql",
         "typescript"
@@ -21,7 +21,7 @@
     "description": "Graphly CLI utilities",
     "repository": "https://github.com/graphly/graphly",
     "dependencies": {
-        "@graphly/schema": "^0.10.0",
+        "@graphly/schema": "^0.10.1",
         "@sirian/assert": "^1.1.21",
         "@sirian/console": "^7.1.7",
         "@sirian/decorators": "^2.1.3",
